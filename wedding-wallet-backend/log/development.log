@@ -1,0 +1,81 @@
+  [1m[35m (533.7ms)[0m  [1m[35mCREATE DATABASE "wedding_wallet_backend_development" ENCODING = 'unicode'[0m
+  [1m[35m (155.4ms)[0m  [1m[35mCREATE DATABASE "wedding_wallet_backend_test" ENCODING = 'unicode'[0m
+  [1m[35m (113.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (30.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (3.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8209971394809778020)[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20210719221054)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (147.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "username" character varying, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210719221054"]]
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateBudgets (20210719222034)
+  [1m[36mTRANSACTION (6.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (38.7ms)[0m  [1m[35mCREATE TABLE "budgets" ("id" bigserial primary key, "amount" decimal, "user_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_e708f32fd8"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE INDEX "index_budgets_on_user_id" ON "budgets" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (3.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210719222034"]]
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCategories (20210719222727)
+  [1m[36mTRANSACTION (6.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (21.9ms)[0m  [1m[35mCREATE TABLE "categories" ("id" bigserial primary key, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210719222727"]]
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateExpenses (20210719222956)
+  [1m[36mTRANSACTION (5.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (20.5ms)[0m  [1m[35mCREATE TABLE "expenses" ("id" bigserial primary key, "category_id" bigint NOT NULL, "user_id" bigint NOT NULL, "amount" decimal, "name" character varying, "notes" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_06966d0da0"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+, CONSTRAINT "fk_rails_c3ee69df61"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE INDEX "index_expenses_on_category_id" ON "expenses" ("category_id")[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE INDEX "index_expenses_on_user_id" ON "expenses" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210719222956"]]
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (6.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2021-07-19 22:36:06.850071"], ["updated_at", "2021-07-19 22:36:06.850071"]]
+  [1m[36mTRANSACTION (2.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(8209971394809778020)[0m
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mBudget Load (1.0ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (4.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["username", "test"], ["password_digest", "test"], ["created_at", "2021-07-19 22:37:11.637569"], ["updated_at", "2021-07-19 22:37:11.637569"]]
+  [1m[36mTRANSACTION (7.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mBudget Load (0.2ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBudget Create (30.7ms)[0m  [1m[32mINSERT INTO "budgets" ("amount", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["amount", "100.0"], ["user_id", 1], ["created_at", "2021-07-19 22:38:02.475301"], ["updated_at", "2021-07-19 22:38:02.475301"]]
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBudget Load (0.4ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" ORDER BY "budgets"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (15.7ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "test cat"], ["created_at", "2021-07-19 22:39:05.005629"], ["updated_at", "2021-07-19 22:39:05.005629"]]
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mExpense Create (5.0ms)[0m  [1m[32mINSERT INTO "expenses" ("category_id", "user_id", "amount", "name", "notes", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category_id", 1], ["user_id", 1], ["amount", "10.0"], ["name", "venue"], ["notes", "lets rent a venue"], ["created_at", "2021-07-19 22:40:59.764503"], ["updated_at", "2021-07-19 22:40:59.764503"]]
+  [1m[36mTRANSACTION (5.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mExpense Create (1.3ms)[0m  [1m[32mINSERT INTO "expenses" ("category_id", "user_id", "amount", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["category_id", 1], ["user_id", 1], ["amount", "3.0"], ["name", "lounge"], ["created_at", "2021-07-19 22:42:13.981171"], ["updated_at", "2021-07-19 22:42:13.981171"]]
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mExpense Load (0.6ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1 /* loading for inspect */ LIMIT $2[0m  [["user_id", 1], ["LIMIT", 11]]
+  [1m[36mExpense Load (0.4ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mExpense Load (0.6ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."category_id" = $1 /* loading for inspect */ LIMIT $2[0m  [["category_id", 1], ["LIMIT", 11]]
+  [1m[36mUser Destroy (5.8ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mBudget Load (1.0ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mBudget Destroy (11.1ms)[0m  [1m[31mDELETE FROM "budgets"[0m
+  [1m[36mBudget Load (0.5ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mExpense Destroy (2.5ms)[0m  [1m[31mDELETE FROM "expenses"[0m
+  [1m[36mExpense Load (0.9ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mCategory Destroy (1.8ms)[0m  [1m[31mDELETE FROM "categories"[0m
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mUser Destroy (2.6ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
