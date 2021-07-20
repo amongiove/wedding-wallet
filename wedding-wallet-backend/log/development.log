@@ -79,3 +79,45 @@ FOREIGN KEY ("user_id")
   [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
   [1m[36mUser Destroy (2.6ms)[0m  [1m[31mDELETE FROM "users"[0m
   [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+Started GET "/" for ::1 at 2021-07-20 09:07:48 -0500
+  [1m[35m (6.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/railties-6.1.4/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/railties-6.1.4/lib/rails/templates/rails/welcome/index.html.erb (Duration: 16.0ms | Allocations: 480)
+Completed 200 OK in 61ms (Views: 27.8ms | ActiveRecord: 0.0ms | Allocations: 4151)
+
+
+Started GET "/api/v1/pictures" for ::1 at 2021-07-20 09:07:59 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/api/v1/pictures"):
+  
+Started GET "/api/v1/users" for ::1 at 2021-07-20 09:08:01 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/api/v1/users"):
+  
+Started GET "/routes" for ::1 at 2021-07-20 09:08:19 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/routes"):
+  
+Started GET "/rails/info/routes" for ::1 at 2021-07-20 09:08:33 -0500
+Processing by Rails::InfoController#routes as HTML
+  Rendering layout /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/railties-6.1.4/lib/rails/templates/layouts/application.html.erb
+  Rendering /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/railties-6.1.4/lib/rails/templates/rails/info/routes.html.erb within layouts/application
+  Rendered collection of /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/actionpack-6.1.4/lib/action_dispatch/middleware/templates/routes/_route.html.erb [25 times] (Duration: 11.4ms | Allocations: 2931)
+  Rendered /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/actionpack-6.1.4/lib/action_dispatch/middleware/templates/routes/_table.html.erb (Duration: 1.5ms | Allocations: 690)
+  Rendered /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/railties-6.1.4/lib/rails/templates/rails/info/routes.html.erb within layouts/application (Duration: 19.0ms | Allocations: 5502)
+  Rendered layout /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/railties-6.1.4/lib/rails/templates/layouts/application.html.erb (Duration: 23.2ms | Allocations: 5741)
+Completed 200 OK in 34ms (Views: 31.5ms | ActiveRecord: 0.0ms | Allocations: 6811)
+
+
+Started GET "/rails/info/routes" for ::1 at 2021-07-20 09:38:00 -0500
+Processing by Rails::InfoController#routes as HTML
+  Rendering layout /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/railties-6.1.4/lib/rails/templates/layouts/application.html.erb
+  Rendering /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/railties-6.1.4/lib/rails/templates/rails/info/routes.html.erb within layouts/application
+  Rendered collection of /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/actionpack-6.1.4/lib/action_dispatch/middleware/templates/routes/_route.html.erb [26 times] (Duration: 9.2ms | Allocations: 3044)
+  Rendered /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/actionpack-6.1.4/lib/action_dispatch/middleware/templates/routes/_table.html.erb (Duration: 2.7ms | Allocations: 690)
+  Rendered /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/railties-6.1.4/lib/rails/templates/rails/info/routes.html.erb within layouts/application (Duration: 128.9ms | Allocations: 5661)
+  Rendered layout /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/railties-6.1.4/lib/rails/templates/layouts/application.html.erb (Duration: 131.9ms | Allocations: 5894)
+Completed 200 OK in 207ms (Views: 166.9ms | Allocations: 6803)
+
+
