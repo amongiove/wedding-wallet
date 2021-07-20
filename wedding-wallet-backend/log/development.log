@@ -121,3 +121,190 @@ Processing by Rails::InfoController#routes as HTML
 Completed 200 OK in 207ms (Views: 166.9ms | Allocations: 6803)
 
 
+Started POST "/api/v1/users" for ::1 at 2021-07-20 12:12:31 -0500
+  [1m[35m (2.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (uninitialized constant Api):
+  
+Started GET "/rails/info/routes" for ::1 at 2021-07-20 12:12:55 -0500
+Processing by Rails::InfoController#routes as HTML
+  Rendering layout /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/railties-6.1.4/lib/rails/templates/layouts/application.html.erb
+  Rendering /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/railties-6.1.4/lib/rails/templates/rails/info/routes.html.erb within layouts/application
+  Rendered collection of /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/actionpack-6.1.4/lib/action_dispatch/middleware/templates/routes/_route.html.erb [26 times] (Duration: 14.1ms | Allocations: 3070)
+  Rendered /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/actionpack-6.1.4/lib/action_dispatch/middleware/templates/routes/_table.html.erb (Duration: 6.7ms | Allocations: 916)
+  Rendered /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/railties-6.1.4/lib/rails/templates/rails/info/routes.html.erb within layouts/application (Duration: 34.6ms | Allocations: 6361)
+  Rendered layout /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/railties-6.1.4/lib/rails/templates/layouts/application.html.erb (Duration: 37.3ms | Allocations: 6606)
+Completed 200 OK in 67ms (Views: 46.2ms | ActiveRecord: 0.0ms | Allocations: 9144)
+
+
+Started POST "/api/v1/users?Content-Type=application/json&Accept=application/json" for ::1 at 2021-07-20 12:16:37 -0500
+  
+ActionController::RoutingError (uninitialized constant Api):
+  
+Started POST "/api/v1/users?Content-Type=application/json&Accept=application/json" for ::1 at 2021-07-20 12:31:51 -0500
+  [1m[35m (2.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (uninitialized constant Api):
+  
+Started GET "/rails/info/routes" for ::1 at 2021-07-20 12:34:23 -0500
+  [1m[35m (5.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::InfoController#routes as HTML
+  Rendering layout /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/railties-6.1.4/lib/rails/templates/layouts/application.html.erb
+  Rendering /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/railties-6.1.4/lib/rails/templates/rails/info/routes.html.erb within layouts/application
+  Rendered collection of /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/actionpack-6.1.4/lib/action_dispatch/middleware/templates/routes/_route.html.erb [26 times] (Duration: 10.0ms | Allocations: 3069)
+  Rendered /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/actionpack-6.1.4/lib/action_dispatch/middleware/templates/routes/_table.html.erb (Duration: 3.8ms | Allocations: 917)
+  Rendered /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/railties-6.1.4/lib/rails/templates/rails/info/routes.html.erb within layouts/application (Duration: 29.9ms | Allocations: 6361)
+  Rendered layout /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/railties-6.1.4/lib/rails/templates/layouts/application.html.erb (Duration: 34.5ms | Allocations: 6606)
+Completed 200 OK in 101ms (Views: 41.2ms | ActiveRecord: 0.0ms | Allocations: 9143)
+
+
+Started POST "/api/v1/users?Content-Type=application/json&Accept=application/json" for ::1 at 2021-07-20 12:34:30 -0500
+  
+NameError (uninitialized constant Api):
+  
+app/controllers/users_controller.rb:1:in `<main>'
+Started POST "/api/v1/users" for ::1 at 2021-07-20 12:38:10 -0500
+  
+NameError (uninitialized constant Api):
+  
+app/controllers/users_controller.rb:1:in `<main>'
+Started POST "/api/v1/users?Content-Type=application/json&Accept=application/json" for ::1 at 2021-07-20 12:40:17 -0500
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (uninitialized constant Api::V1):
+  
+Started POST "/api/v1/users?Content-Type=application/json&Accept=application/json" for ::1 at 2021-07-20 12:40:55 -0500
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"user"=>{"username"=>"AmandaTest", "password"=>"[FILTERED]"}, "Content-Type"=>"application/json", "Accept"=>"application/json"}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/users_controller.rb:4:in `create'
+  [1m[36mUser Exists? (3.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER($1) LIMIT $2[0m  [["username", "AmandaTest"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:4:in `create'
+  [1m[36mUser Create (16.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["username", "AmandaTest"], ["password_digest", "$2a$12$Ltk5p9BaL4Bcd03ChspotOsiMh4qwSQczXaHc6ywXZgmOu6M2RgUW"], ["created_at", "2021-07-20 17:40:56.793605"], ["updated_at", "2021-07-20 17:40:56.793605"]]
+  ↳ app/controllers/api/v1/users_controller.rb:4:in `create'
+  [1m[36mTRANSACTION (11.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/users_controller.rb:4:in `create'
+  [1m[36mUser Exists? (5.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER($1) AND "users"."id" != $2 LIMIT $3[0m  [["username", "AmandaTest"], ["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:5:in `create'
+Completed 500 Internal Server Error in 769ms (ActiveRecord: 227.3ms | Allocations: 11302)
+
+
+  
+NameError (uninitialized constant UserSerializer::FastJsonapi):
+  
+app/serializers/user_serializer.rb:2:in `<class:UserSerializer>'
+app/serializers/user_serializer.rb:1:in `<main>'
+app/controllers/api/v1/users_controller.rb:6:in `create'
+Started POST "/api/v1/users" for ::1 at 2021-07-20 12:42:23 -0500
+Processing by Api::V1::UsersController#create as JSON
+  Parameters: {"user"=>{"username"=>"AmandaTest", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/users_controller.rb:4:in `create'
+  [1m[36mUser Exists? (22.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER($1) LIMIT $2[0m  [["username", "AmandaTest"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:4:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/v1/users_controller.rb:4:in `create'
+  [1m[36mUser Exists? (2.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER($1) LIMIT $2[0m  [["username", "AmandaTest"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:5:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.76ms)
+Completed 406 Not Acceptable in 507ms (Views: 7.1ms | ActiveRecord: 37.9ms | Allocations: 6136)
+
+
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+Started POST "/api/v1/users" for ::1 at 2021-07-20 12:43:34 -0500
+Processing by Api::V1::UsersController#create as JSON
+  Parameters: {"user"=>{"username"=>"AmandaTest2", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/users_controller.rb:4:in `create'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER($1) LIMIT $2[0m  [["username", "AmandaTest2"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:4:in `create'
+  [1m[36mUser Create (1.9ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["username", "AmandaTest2"], ["password_digest", "$2a$12$9YD.NB7eRSrgmuEPwnprf.82jE.axoJJL.hXh0eHmLAk17RK14eDa"], ["created_at", "2021-07-20 17:43:34.708503"], ["updated_at", "2021-07-20 17:43:34.708503"]]
+  ↳ app/controllers/api/v1/users_controller.rb:4:in `create'
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/users_controller.rb:4:in `create'
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER($1) AND "users"."id" != $2 LIMIT $3[0m  [["username", "AmandaTest2"], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:5:in `create'
+Completed 500 Internal Server Error in 528ms (ActiveRecord: 4.5ms | Allocations: 6070)
+
+
+  
+NameError (uninitialized constant UserSerializer::FastJsonapi):
+  
+app/serializers/user_serializer.rb:2:in `<class:UserSerializer>'
+app/serializers/user_serializer.rb:1:in `<main>'
+app/controllers/api/v1/users_controller.rb:6:in `create'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+Started GET "/api/v1/users" for ::1 at 2021-07-20 12:49:21 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/api/v1/users"):
+  
+Started POST "/api/v1/users" for ::1 at 2021-07-20 12:55:16 -0500
+  [1m[35m (17.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::V1::UsersController#create as JSON
+  Parameters: {"user"=>{"username"=>"AmandaTest3", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/users_controller.rb:4:in `create'
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER($1) LIMIT $2[0m  [["username", "AmandaTest3"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:4:in `create'
+  [1m[36mUser Create (7.1ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["username", "AmandaTest3"], ["password_digest", "$2a$12$LgwHj8WUCIYU3yR8ZBH3Yub1LXc7C8g48SR4yv9DYbJgzHriGwvve"], ["created_at", "2021-07-20 17:55:17.496854"], ["updated_at", "2021-07-20 17:55:17.496854"]]
+  ↳ app/controllers/api/v1/users_controller.rb:4:in `create'
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/users_controller.rb:4:in `create'
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER($1) AND "users"."id" != $2 LIMIT $3[0m  [["username", "AmandaTest3"], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:5:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.44ms)
+Completed 201 Created in 563ms (Views: 6.5ms | ActiveRecord: 78.3ms | Allocations: 10780)
+
+
+Started GET "/rails/info/routes" for ::1 at 2021-07-20 13:27:40 -0500
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::InfoController#routes as HTML
+  Rendering layout /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/railties-6.1.4/lib/rails/templates/layouts/application.html.erb
+  Rendering /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/railties-6.1.4/lib/rails/templates/rails/info/routes.html.erb within layouts/application
+  Rendered collection of /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/actionpack-6.1.4/lib/action_dispatch/middleware/templates/routes/_route.html.erb [26 times] (Duration: 26.4ms | Allocations: 3070)
+  Rendered /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/actionpack-6.1.4/lib/action_dispatch/middleware/templates/routes/_table.html.erb (Duration: 5.7ms | Allocations: 922)
+  Rendered /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/railties-6.1.4/lib/rails/templates/rails/info/routes.html.erb within layouts/application (Duration: 44.4ms | Allocations: 6367)
+  Rendered layout /Users/amandamongiove/.rvm/gems/ruby-2.6.1/gems/railties-6.1.4/lib/rails/templates/layouts/application.html.erb (Duration: 46.3ms | Allocations: 6612)
+Completed 200 OK in 80ms (Views: 54.4ms | ActiveRecord: 0.0ms | Allocations: 9149)
+
+
+  [1m[36mUser Load (5.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Destroy (70.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 2]]
+  [1m[36mTRANSACTION (3.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (3.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Destroy (13.5ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 3]]
+  [1m[36mTRANSACTION (7.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (4.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Destroy (49.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 4]]
+  [1m[36mTRANSACTION (21.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+Started POST "/api/v1/users" for ::1 at 2021-07-20 13:30:10 -0500
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::V1::UsersController#create as JSON
+  Parameters: {"user"=>{"username"=>"AmandaTest", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/users_controller.rb:5:in `create'
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER($1) LIMIT $2[0m  [["username", "AmandaTest"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:5:in `create'
+  [1m[36mUser Create (2.1ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["username", "AmandaTest"], ["password_digest", "$2a$12$UvH9Apsc/TrtWV0N82No5eNGlmUxLjSxZ9hcq1Szcgu0.vDkfg7s."], ["created_at", "2021-07-20 18:30:12.198227"], ["updated_at", "2021-07-20 18:30:12.198227"]]
+  ↳ app/controllers/api/v1/users_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (8.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/users_controller.rb:5:in `create'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER($1) AND "users"."id" != $2 LIMIT $3[0m  [["username", "AmandaTest"], ["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:6:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.94ms)
+Completed 201 Created in 630ms (Views: 6.4ms | ActiveRecord: 67.5ms | Allocations: 10902)
+
+
+Started POST "/api/v1/login" for ::1 at 2021-07-20 13:43:58 -0500
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::V1::AuthController#create as JSON
+  Parameters: {"user"=>{"username"=>"AmandaTest", "password"=>"[FILTERED]"}, "auth"=>{"user"=>{"username"=>"AmandaTest", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "AmandaTest"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/auth_controller.rb:5:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.44ms)
+Completed 202 Accepted in 351ms (Views: 4.0ms | ActiveRecord: 13.9ms | Allocations: 9895)
+
+
