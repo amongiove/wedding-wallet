@@ -6,7 +6,7 @@ Rails.application.routes.draw do
         resources :users, only: [:create]
         post '/login', to: 'auth#create'
         get '/profile', to: 'users#profile'
-        resources :budget, only: [:create]
+        resources :budgets, only: [:create]
         # resources :categories, only: [:index, :create]
         # resources :expenses, only: [:index, :create, :patch]
       end
