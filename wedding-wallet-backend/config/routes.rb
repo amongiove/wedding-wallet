@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   Rails.application.routes.draw do
     namespace :api do
       namespace :v1 do
-        # resources :users, only: [:create]
+        resources :users, only: [:create]
         resources :budget, only: [:create]
         # resources :categories, only: [:index, :create]
         # resources :expenses, only: [:index, :create, :patch]
