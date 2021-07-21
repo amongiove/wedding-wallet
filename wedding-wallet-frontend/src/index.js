@@ -13,14 +13,14 @@ function checkIfLoggedIn(){
     // is there a case where the first part is accessed?
     const token = localStorage.jwt_token
     if (token) {
-        storeCurrentUser();
+        updateCurrentUser();
         renderUserProfile();
     } else {
         promptUserLogIn();
     }
 }
 
-function storeCurrentUser(){
+function updateCurrentUser(){
     currentUser = JSON.parse(localStorage.getItem('current_user'))   
 }
 
@@ -102,7 +102,7 @@ function signupFetch(username, password) {
     .then(json => {
         localStorage.setItem('jwt_token', json.jwt)
         localStorage.setItem("current_user", JSON.stringify(json.user.data))
-        storeCurrentUser()
+        updateCurrentUser()
         json.jwt ? createUserContainer.innerHTML = "" : null;
         renderNewUserProfile()
     })
@@ -128,7 +128,7 @@ function loginFetch(username, password) {
     .then(json => {
         localStorage.setItem('jwt_token', json.jwt)
         localStorage.setItem("current_user", JSON.stringify(json.user.data))
-        storeCurrentUser()
+        updateCurrentUser()
         json.jwt ? createUserContainer.innerHTML = "" : null;
         renderUserProfile()
     })
@@ -137,6 +137,7 @@ function loginFetch(username, password) {
 //render profiles (these are essentially the same... can we make them one method??)
 function renderNewUserProfile() {
     renderedProfile.removeAttribute("hidden")
+    //user data fetch
     fetch('http://localhost:3000/api/v1/profile', {
         method: 'GET',
         headers: {
@@ -151,7 +152,7 @@ function renderNewUserProfile() {
 
 function renderUserProfile() {
     renderedProfile.removeAttribute("hidden")
-    !currentUser.attributes.budget ? renderBudgetForm() : displayBudget();
+    //user data fetch
     fetch('http://localhost:3000/api/v1/profile', {
         method: 'GET',
         headers: {
@@ -160,7 +161,9 @@ function renderUserProfile() {
     })
     .then(response => response.json())
     .then(json => {
+        console.log(json)
         json.user ? alert(`Welcome back ${json.user.data.attributes.username}`) : alert("Incorrect username or password.");
+        !json.user.data.attributes.budget ? renderBudgetForm() : displayBudget();
     })
     
 }
@@ -168,9 +171,10 @@ function renderUserProfile() {
 //budget
 function renderBudgetForm(){
     createBudgetForm = document.createElement("div")
+    createBudgetForm.id = "create-budget-form-container"
     createBudgetForm.innerHTML = `
         <form id="create-budget-form">
-            <h4>Desired Budget</h4>
+            <h4>Enter your desired wedding budget.</h4>
             <input id='budget-amount' type="number" step=.01 name="budget-amount" value="" placeholder="Enter desired budget.">
             <input id= 'budget-submit' type="submit" name="submit" value="Save Budget" class="submit"><br><br>
         </form>`
@@ -185,7 +189,7 @@ function createBudgetHandler(e){
     createBudgetFetch(budgetAmount)
 }
 
-function createBudgetFetch(amount){  
+function createBudgetFetch(amount){ 
     const bodyData = {amount}
     fetch("http://localhost:3000/api/v1/budgets", {
       method: "POST",
@@ -196,23 +200,24 @@ function createBudgetFetch(amount){
       body: JSON.stringify(bodyData)
     })
     .then(response => response.json())
-    .then(budget => {
-        console.log(budget)
-    //   displayBudget();
+    .then(json => {
+        budget = json.data.attributes.amount
+        //is there a more graceful way to do this??
+        document.querySelector("#create-budget-form-container").style.visibility="hidden"     
+        displayBudget();
     })
-
-    function displayBudget(){
-        const displayBudgetContainer = document.querySelector("#display-budget-container");
-        
-        const budgetDisplay = document.createElement("div")
-        budgetDisplay.innerHTML = `
-            <tr>
-                <th>Total Budget: $ ${currentUser.attributes.budget.amount}</th>
-                <th>Spent: ~total for expenses~ </th>
-                <th>Remaining Budget: ~budget - spent~</th>
-            </tr>
-        `
-        displayBudgetContainer.appendChild(budgetDisplay)
-    }
 }
+
+function displayBudget(){
+    const budgetDisplay = document.createElement("div")
+    budgetDisplay.id = "budget-display"
+    budgetDisplay.innerHTML = `
+        <tr>
+            <th>Total Budget: $ ${currentUser.attributes.budget.amount}</th>
+            <th>Spent: ~total for expenses~ </th>
+            <th>Remaining Budget: ~budget - spent~</th>
+        </tr>`
+    renderedProfile.appendChild(budgetDisplay)
+}
+
 
