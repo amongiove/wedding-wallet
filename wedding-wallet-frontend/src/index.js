@@ -1,25 +1,100 @@
+const loginForm = document.querySelector("#login-form")
+const signupForm = document.querySelector("#signup-form")
+const createUserContainer = document.querySelector("#login-or-signup-container").parentElement;
+
+//DOM loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // checkIfLoggedIn();
+    checkIfLoggedIn();
 
-    const loginForm = document.querySelector("#login-form")
-    loginForm.addEventListener("submit", (e) => 
-    loginFormHandler(e))
+    
+    // loginForm.addEventListener("submit", (e) => 
+    // loginFormHandler(e))
 
-    const signupForm = document.querySelector("#signup-form")
-    signupForm.addEventListener("submit", (e) => 
-    signupFormHandler(e))
+    // signupForm.addEventListener("submit", (e) => 
+    // signupFormHandler(e))
 
     // const budgetForm = document.querySelector("#create-budget-form")
     // budgetForm.addEventListener("submit", (e) => createBudgetHandler(e))
 })
+//check if user logged in
+function checkIfLoggedIn(){
+    const token = localStorage.token
+    if (token) {
+        console.log("there is a token")
+        renderUserProfile()
+    } else {
+        console.log("no token -- need to prompt login")
+        promptUserLogIn();
+    }
+}
 
-//login (need to add sign up and figure out how to hide everything until this is completed)
+function promptUserLogIn() {
+    
+
+    const loginButton = createUserContainer.firstElementChild.cloneNode(true);
+    loginButton.innerText = "Login"
+    const signupButton = createUserContainer.firstElementChild.cloneNode(true);
+    signupButton.innerText = "Sign Up"
+
+    createUserContainer.firstElementChild.append(loginButton, signupButton)
+
+    loginButton.addEventListener("click", launchLoginForm)
+    signupButton.addEventListener("click", launchSignupForm)
+}
+  
+function launchLoginForm() {
+    console.log("log in form launch")
+    createUserContainer.innerHTML = `
+        <div style="text-align:center" id="login-form-container">
+            <form id="login-form">
+            <h4>Log In</h4>
+            <div class="form-group">
+                <h5>Username</h5>
+                <input type="text" class="form-control" id="login-username">
+            </div>
+            <div class="form-group">
+                <h5>Password</h5>
+                <input type="password" class="form-control" id="login-password">
+            </div>
+            <input id= 'login-submit' type="submit" name="submit" value="Log In" class="submit">
+            </form><br><br>
+            <p class="go-sign-up">Don't have an account? Sign Up Here</p>
+        </div>`
+    createUserContainer.querySelector(".go-sign-up").addEventListener("click", (e) =>
+    launchSignupForm(e))
+    createUserContainer.querySelector("#login-form").addEventListener("submit", (e) => 
+    loginFormHandler(e))
+}
+
+function launchSignupForm(){
+    console.log("sign up form launch")
+    createUserContainer.innerHTML = `
+        <div style="text-align:center" id="signup-form-container">
+            <form id="signup-form">
+            <h4>Signup</h4>
+            <div class="form-group">
+                <h5>Username</h5>
+                <input type="text" class="form-control" id="signup-username">
+            </div>
+            <div class="form-group">
+                <h5>Password</h5>
+                <input type="password" class="form-control" id="signup-password">
+            </div>
+            <input id='signup-submit' type="submit" name="submit" value="Sign Up" class="submit">
+            </form><br><br>
+            <p class="go-log-in">Already have an account? Log In Here</p>
+        </div>`
+    createUserContainer.querySelector(".go-log-in").addEventListener("click", (e) =>
+    launchLoginForm(e))
+    createUserContainer.querySelector("#signup-form").addEventListener("submit", (e) => 
+    signupFormHandler(e))
+}
+
+//signup
 function signupFormHandler(e) {
     e.preventDefault()
     const usernameInput = e.target.querySelector("#signup-username").value
     const passwordInput = e.target.querySelector("#signup-password").value
-    console.log("signup form")
-    console.log(usernameInput, passwordInput)
     signupFetch(usernameInput, passwordInput)
 }
   
@@ -34,11 +109,11 @@ function signupFetch(username, password) {
     .then(response => response.json())
     .then(json => {
       localStorage.setItem('jwt_token', json.jwt)
-      console.log("end signup fetch")
     renderNewUserProfile()
     })
 }
 
+//login
 function loginFormHandler(e) {
     e.preventDefault()
     const usernameInput = e.target.querySelector("#login-username").value
@@ -61,6 +136,7 @@ function loginFetch(username, password) {
     })
 }
 
+//render profiles (these are essentially the same... can we make them one method??)
 function renderNewUserProfile() {
     fetch('http://localhost:3000/api/v1/profile', {
         method: 'GET',
@@ -88,32 +164,9 @@ function renderUserProfile() {
     })
 }
 
-// function checkIfLoggedIn(){
-//     const token = localStorage.token
-//     if (token) {
-//         console.log("there is a token")
-//         renderUserProfile()
-//     } else {
-//         console.log("no token")
-//         promptUserLogIn();
-//     }
-//   }
-// function promptUserLogIn() {
-//     const loginParent = document.querySelector("#login-container").parentElement;
-  
-//     const loginButton = loginParent.firstElementChild.cloneNode(true);
-//     loginButton.innerText = "Login"
-  
-//     loginParent.firstElementChild.replaceWith(loginButton)
-  
-//     loginButton.addEventListener("click", launchLoginForm)
-// }
-  
-// function launchLoginForm() {console.log("log in form launch")}
 
 
 //budget
-
 // function createBudgetHandler(e){
 //     e.preventDefault()
 //     const budgetAmount = e.target.querySelector("#budget-amount").value
