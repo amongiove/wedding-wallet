@@ -212,6 +212,7 @@ function displayBudget(){
     const budgetDisplay = document.createElement("div")
     budgetDisplay.id = "budget-display"
     budgetDisplay.innerHTML = `
+        <button id="edit-budget" type="button" onclick="editBudget()">Edit Budget</button>
         <tr>
             <th>Total Budget: $ ${currentUser.attributes.budget.amount}</th>
             <th>Spent: ~total for expenses~ </th>
@@ -220,4 +221,8 @@ function displayBudget(){
     renderedProfile.appendChild(budgetDisplay)
 }
 
+function editBudget(){
+    console.log("edit budget")
+    //here want pop up form to input new budget value and edit budget
+}
 
