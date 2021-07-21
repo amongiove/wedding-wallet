@@ -1,29 +1,20 @@
-const loginForm = document.querySelector("#login-form")
-const signupForm = document.querySelector("#signup-form")
-const createUserContainer = document.querySelector("#login-or-signup-container").parentElement;
+const createUserContainer = document.querySelector("#login-or-signup-form").parentElement;
 
 //DOM loaded
 document.addEventListener('DOMContentLoaded', () => {
+
     checkIfLoggedIn();
-
-    
-    // loginForm.addEventListener("submit", (e) => 
-    // loginFormHandler(e))
-
-    // signupForm.addEventListener("submit", (e) => 
-    // signupFormHandler(e))
 
     // const budgetForm = document.querySelector("#create-budget-form")
     // budgetForm.addEventListener("submit", (e) => createBudgetHandler(e))
 })
 //check if user logged in
 function checkIfLoggedIn(){
+    // is there a case where the first part is accessed?
     const token = localStorage.token
     if (token) {
-        console.log("there is a token")
         renderUserProfile()
     } else {
-        console.log("no token -- need to prompt login")
         promptUserLogIn();
     }
 }
@@ -43,7 +34,6 @@ function promptUserLogIn() {
 }
   
 function launchLoginForm() {
-    console.log("log in form launch")
     createUserContainer.innerHTML = `
         <div style="text-align:center" id="login-form-container">
             <form id="login-form">
@@ -67,7 +57,6 @@ function launchLoginForm() {
 }
 
 function launchSignupForm(){
-    console.log("sign up form launch")
     createUserContainer.innerHTML = `
         <div style="text-align:center" id="signup-form-container">
             <form id="signup-form">
@@ -108,8 +97,9 @@ function signupFetch(username, password) {
     })
     .then(response => response.json())
     .then(json => {
-      localStorage.setItem('jwt_token', json.jwt)
-    renderNewUserProfile()
+        localStorage.setItem('jwt_token', json.jwt)
+        json.jwt ? createUserContainer.innerHTML = "" : null;
+        renderNewUserProfile()
     })
 }
 
@@ -131,8 +121,10 @@ function loginFetch(username, password) {
     })
     .then(response => response.json())
     .then(json => {
-      localStorage.setItem('jwt_token', json.jwt)
-    renderUserProfile()
+        console.log(json);
+        localStorage.setItem('jwt_token', json.jwt)
+        json.jwt ? createUserContainer.innerHTML = "" : null;
+        renderUserProfile()
     })
 }
 
@@ -146,7 +138,7 @@ function renderNewUserProfile() {
     })
     .then(response => response.json())
     .then(json => {
-        alert(`Welcome ${json.user.data.attributes.username}`)
+        json.user ? alert(`Welcome ${json.user.data.attributes.username}`) : alert("Unable to create account. Please try again.");
     })
 }
 
@@ -159,8 +151,7 @@ function renderUserProfile() {
     })
     .then(response => response.json())
     .then(json => {
-        console.log(json)
-        alert(`Welcome back ${json.user.data.attributes.username}`)
+        json.user ? alert(`Welcome back ${json.user.data.attributes.username}`) : alert("Incorrect username or password.");
     })
 }
 

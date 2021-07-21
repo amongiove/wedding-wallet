@@ -7,6 +7,7 @@ class Api::V1::AuthController < ApplicationController
             token = encode_token({ user_id: @user.id })
             render json: { user: UserSerializer.new(@user), jwt: token }, status: :accepted
         else
+            #need error message
             render json: { message: 'Invalid username or password' }, status: :unauthorized
         end
     end
