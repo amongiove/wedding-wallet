@@ -11,16 +11,18 @@
       </div>
     </div>
 
-    <div id="user-rendered-container">
-      <h5> USER PROFILE </h5>
+    <div id="user-rendered-container" hidden >
+      <h3> Your Wedding Wallet </h3>
+      <h5 class="text-muted"> Keep track of your budget and spending throughout the planning process. </h5>
+
+      <div id="budget-container">
+        <form id="create-budget-form">
+          <h4>Desired Budget</h4>
+          <input id='budget-amount' type="number" step=.01 name="budget-amount" value="" placeholder="Enter desired budget.">
+          <input id= 'budget-submit' type="submit" name="submit" value="Save Budget" class="submit"><br><br>
+      </div>
+
     </div>
-    
-    <!-- <div id="budget-container">
-      <form id="create-budget-form">
-        <input id='budget-amount' type="number" step=.01 name="budget-amount" value="" placeholder="Enter desired budget.">
-        <input id= 'budget-submit' type="submit" name="submit" value="Submit" class="submit"><br><br>
-    </div> -->
-    
   </body>
 </html>
 

@@ -2,12 +2,13 @@ const createUserContainer = document.querySelector("#login-or-signup-form").pare
 
 //DOM loaded
 document.addEventListener('DOMContentLoaded', () => {
-
+    renderedProfile = document.querySelector("#user-rendered-container");
     checkIfLoggedIn();
 
-    // const budgetForm = document.querySelector("#create-budget-form")
-    // budgetForm.addEventListener("submit", (e) => createBudgetHandler(e))
+    createBudgetForm = document.querySelector("#create-budget-form").addEventListener("submit", (e) => createBudgetHandler(e))
+
 })
+
 //check if user logged in
 function checkIfLoggedIn(){
     // is there a case where the first part is accessed?
@@ -20,8 +21,6 @@ function checkIfLoggedIn(){
 }
 
 function promptUserLogIn() {
-    
-
     const loginButton = createUserContainer.firstElementChild.cloneNode(true);
     loginButton.innerText = "Login"
     const signupButton = createUserContainer.firstElementChild.cloneNode(true);
@@ -99,6 +98,7 @@ function signupFetch(username, password) {
     .then(json => {
         localStorage.setItem('jwt_token', json.jwt)
         json.jwt ? createUserContainer.innerHTML = "" : null;
+        renderedProfile.removeAttribute("hidden")
         renderNewUserProfile()
     })
 }
@@ -124,6 +124,7 @@ function loginFetch(username, password) {
         console.log(json);
         localStorage.setItem('jwt_token', json.jwt)
         json.jwt ? createUserContainer.innerHTML = "" : null;
+        renderedProfile.removeAttribute("hidden")
         renderUserProfile()
     })
 }
@@ -153,28 +154,32 @@ function renderUserProfile() {
     .then(json => {
         json.user ? alert(`Welcome back ${json.user.data.attributes.username}`) : alert("Incorrect username or password.");
     })
+    
 }
 
-
-
 //budget
-// function createBudgetHandler(e){
-//     e.preventDefault()
-//     const budgetAmount = e.target.querySelector("#budget-amount").value
-//     console.log(budgetAmount)
-//     createBudgetFetch(budgetAmount)
-// }
+function createBudgetHandler(e){
+    e.preventDefault()
+    const budgetAmount = e.target.querySelector("#budget-amount").value
+    console.log(budgetAmount)
+    console.log(localStorage)
+    // console.log(current_user)
+    createBudgetFetch(budgetAmount)
+}
 
-// function createBudgetFetch(amount){  
-//     const bodyData = {amount}
-//     fetch("http://localhost:3000/api/v1/budgets", {
-//       method: "POST",
-//       headers: {"Content-Type": "application/json"},
-//       body: JSON.stringify(bodyData)
-//     })
-//     .then(response => response.json())
-//     .then(budget => {
-//       console.log(budget);
-//     })
-// }
+function createBudgetFetch(amount){  
+    const bodyData = {amount}
+    fetch("http://localhost:3000/api/v1/budgets", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem('jwt_token')}`
+    },
+      body: JSON.stringify(bodyData)
+    })
+    .then(response => response.json())
+    .then(budget => {
+      console.log(budget);
+    })
+}
 
