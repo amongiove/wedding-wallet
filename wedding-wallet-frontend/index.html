@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+
     <meta charset="utf-8">
     <title>Wedding Wallet</title>
-    
+  
   </head>
   <body>
     <div id="login-or-signup-container">
@@ -13,14 +14,27 @@
 
     <div id="user-rendered-container" hidden >
       <h3> Your Wedding Wallet </h3>
-      <h5 class="text-muted"> Keep track of your budget and spending throughout the planning process. </h5>
+      <h5 class="text-muted"> Keep track of your budget and spending as you plan the wedding of your dreams. </h5>
 
-      <div id="budget-container">
-        <form id="create-budget-form">
-          <h4>Desired Budget</h4>
-          <input id='budget-amount' type="number" step=.01 name="budget-amount" value="" placeholder="Enter desired budget.">
-          <input id= 'budget-submit' type="submit" name="submit" value="Save Budget" class="submit"><br><br>
-      </div>
+      <!-- <div id="budget-container">
+
+        <div id="budget-form">
+          
+        </div>
+
+        <div id="display-budget-container">
+          <tr>
+            <th>Total Budget: $ <script>`${currentUser.attributes.budget.amount}`</script> </th>
+            <th>Spent: ~total for expenses~ </th>
+            <th>Remaining Budget: ~budget - spent~</th>
+          </tr>
+        </div>
+
+      </div> -->
+
+      <!-- <div id="expense-tracker-container">
+
+      </div> -->
 
     </div>
   </body>

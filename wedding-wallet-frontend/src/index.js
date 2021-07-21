@@ -2,22 +2,26 @@ const createUserContainer = document.querySelector("#login-or-signup-form").pare
 
 //DOM loaded
 document.addEventListener('DOMContentLoaded', () => {
+    let currentUser = " "
     renderedProfile = document.querySelector("#user-rendered-container");
     checkIfLoggedIn();
-
-    createBudgetForm = document.querySelector("#create-budget-form").addEventListener("submit", (e) => createBudgetHandler(e))
 
 })
 
 //check if user logged in
 function checkIfLoggedIn(){
     // is there a case where the first part is accessed?
-    const token = localStorage.token
+    const token = localStorage.jwt_token
     if (token) {
-        renderUserProfile()
+        storeCurrentUser();
+        renderUserProfile();
     } else {
         promptUserLogIn();
     }
+}
+
+function storeCurrentUser(){
+    currentUser = JSON.parse(localStorage.getItem('current_user'))   
 }
 
 function promptUserLogIn() {
@@ -97,8 +101,9 @@ function signupFetch(username, password) {
     .then(response => response.json())
     .then(json => {
         localStorage.setItem('jwt_token', json.jwt)
+        localStorage.setItem("current_user", JSON.stringify(json.user.data))
+        storeCurrentUser()
         json.jwt ? createUserContainer.innerHTML = "" : null;
-        renderedProfile.removeAttribute("hidden")
         renderNewUserProfile()
     })
 }
@@ -121,16 +126,17 @@ function loginFetch(username, password) {
     })
     .then(response => response.json())
     .then(json => {
-        console.log(json);
         localStorage.setItem('jwt_token', json.jwt)
+        localStorage.setItem("current_user", JSON.stringify(json.user.data))
+        storeCurrentUser()
         json.jwt ? createUserContainer.innerHTML = "" : null;
-        renderedProfile.removeAttribute("hidden")
         renderUserProfile()
     })
 }
 
 //render profiles (these are essentially the same... can we make them one method??)
 function renderNewUserProfile() {
+    renderedProfile.removeAttribute("hidden")
     fetch('http://localhost:3000/api/v1/profile', {
         method: 'GET',
         headers: {
@@ -144,6 +150,8 @@ function renderNewUserProfile() {
 }
 
 function renderUserProfile() {
+    renderedProfile.removeAttribute("hidden")
+    !currentUser.attributes.budget ? renderBudgetForm() : displayBudget();
     fetch('http://localhost:3000/api/v1/profile', {
         method: 'GET',
         headers: {
@@ -158,12 +166,22 @@ function renderUserProfile() {
 }
 
 //budget
+function renderBudgetForm(){
+    createBudgetForm = document.createElement("div")
+    createBudgetForm.innerHTML = `
+        <form id="create-budget-form">
+            <h4>Desired Budget</h4>
+            <input id='budget-amount' type="number" step=.01 name="budget-amount" value="" placeholder="Enter desired budget.">
+            <input id= 'budget-submit' type="submit" name="submit" value="Save Budget" class="submit"><br><br>
+        </form>`
+    renderedProfile.appendChild(createBudgetForm)
+    document.querySelector("#create-budget-form").addEventListener("submit", (e) => createBudgetHandler(e))
+
+}
+
 function createBudgetHandler(e){
     e.preventDefault()
     const budgetAmount = e.target.querySelector("#budget-amount").value
-    console.log(budgetAmount)
-    console.log(localStorage)
-    // console.log(current_user)
     createBudgetFetch(budgetAmount)
 }
 
@@ -179,7 +197,22 @@ function createBudgetFetch(amount){
     })
     .then(response => response.json())
     .then(budget => {
-      console.log(budget);
+        console.log(budget)
+    //   displayBudget();
     })
+
+    function displayBudget(){
+        const displayBudgetContainer = document.querySelector("#display-budget-container");
+        
+        const budgetDisplay = document.createElement("div")
+        budgetDisplay.innerHTML = `
+            <tr>
+                <th>Total Budget: $ ${currentUser.attributes.budget.amount}</th>
+                <th>Spent: ~total for expenses~ </th>
+                <th>Remaining Budget: ~budget - spent~</th>
+            </tr>
+        `
+        displayBudgetContainer.appendChild(budgetDisplay)
+    }
 }
 

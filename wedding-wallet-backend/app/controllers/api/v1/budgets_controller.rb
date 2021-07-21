@@ -1,14 +1,11 @@
 class Api::V1::BudgetsController < ApplicationController
     
     def create
-        puts "BUDGET CREATE"
+        #user should only have one budget -- check if present and if so edit?
         budget = Budget.create(user: current_user, amount: params[:amount])
         if budget.save
-            puts "SAVE SUCCESS"
             render json: BudgetSerializer.new(budget), status: :accepted
         else
-            puts "BOO NO BUDGET SAVE"
-            puts budget.errors.full_messages
             render json: {errors: budget.errors.full_messages}, status: :unprocessible_entity
         end
     end
