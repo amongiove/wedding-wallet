@@ -161,9 +161,9 @@ function renderUserProfile() {
     })
     .then(response => response.json())
     .then(json => {
-        console.log(json)
-        json.user ? alert(`Welcome back ${json.user.data.attributes.username}`) : alert("Incorrect username or password.");
         !json.user.data.attributes.budget ? renderBudgetForm() : displayBudget();
+        json.user ? alert(`Welcome back ${json.user.data.attributes.username}`) : alert("Incorrect username or password.");
+        
     })
     
 }
@@ -223,6 +223,22 @@ function displayBudget(){
 
 function editBudget(){
     console.log("edit budget")
-    //here want pop up form to input new budget value and edit budget
+    const editBudgetForm = document.createElement("div")
+    editBudgetForm.id = "edit-budget-form"
+    //this should be a modal
+    editBudgetForm.html = `
+        <form id="edit-budget-form">
+            <h4>Enter new budget.</h4>
+            <input id='budget-amount' type="number" step=.01 name="budget-amount" value="" placeholder="Enter desired budget.">
+            <input id= 'budget-submit' type="submit" name="submit" value="Update Budget" class="submit"><br><br>
+        </form>
+    `
+    console.log(editBudgetForm)
+    editBudgetForm.addEventListener("submit", (e) => editBudgetFetch(e))
+}
+
+function editBudgetFetch(e){
+    //TBD - make modal first
+    console.log("edit fetch")
 }
 
