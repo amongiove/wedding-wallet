@@ -11,30 +11,20 @@ const getUser =
     .then(json => {
         return json.user})
 
-
 //DOM loaded
 document.addEventListener('DOMContentLoaded', () => {
-    let currentUser = " "
     renderedProfile = document.querySelector("#user-rendered-container");
     checkIfLoggedIn();
-
 })
 
 //user 
 function checkIfLoggedIn(){
-    // is there a case where the first part is accessed?
     const token = localStorage.jwt_token
     if (token) {
-        updateCurrentUser();
         renderUserProfile();
     } else {
         promptUserLogIn();
     }
-}
-
-//can i combine this with getUser from above
-function updateCurrentUser(){
-    currentUser = JSON.parse(localStorage.getItem('current_user'))   
 }
 
 function promptUserLogIn() {
@@ -114,8 +104,6 @@ function signupFetch(username, password) {
     .then(response => response.json())
     .then(json => {
         localStorage.setItem('jwt_token', json.jwt)
-        localStorage.setItem("current_user", JSON.stringify(json.user.data))
-        updateCurrentUser()
         json.jwt ? createUserContainer.innerHTML = "" : null;
         renderNewUserProfile()
     })
@@ -140,8 +128,6 @@ function loginFetch(username, password) {
     .then(response => response.json())
     .then(json => {
         localStorage.setItem('jwt_token', json.jwt)
-        localStorage.setItem("current_user", JSON.stringify(json.user.data))
-        updateCurrentUser()
         json.jwt ? createUserContainer.innerHTML = "" : null;
         renderUserProfile()
     })
@@ -210,19 +196,23 @@ function createBudgetFetch(amount){
 }
 
 function displayBudget(){
-    const budgetDisplay = document.createElement("div")
-    budgetDisplay.id = "budget-display"
-    budgetDisplay.innerHTML = `
-        <button id="edit-budget" type="button" onclick="editBudget()">Edit Budget</button>
-        <tr>
-            <th>Total Budget: $ ${currentUser.attributes.budget.amount}</th>
-            <th>Spent: ~total for expenses~ </th>
-            <th>Remaining Budget: ~budget - spent~</th>
-        </tr>`
-    renderedProfile.appendChild(budgetDisplay)
-    //need to update total budget so that it takes the const instead of current user (for edit updates)
-    //need to put in calculations
+    getUser.then((user) => {
+        console.log(user)
+        const budget = user.data.attributes.budget.amount
+
+        const budgetDisplay = document.createElement("div")
+        budgetDisplay.id = "budget-display"
+        budgetDisplay.innerHTML = `
+            <button id="edit-budget" type="button" onclick="editBudget()">Edit Budget</button>
+            <tr>
+                <th>Total Budget: $${budget}</th>
+                <th>Spent: ~total for expenses~ </th>
+                <th>Remaining Budget: ~budget - spent~</th>
+            </tr>`
+        renderedProfile.appendChild(budgetDisplay)
+    })
 }
+
 
 function editBudget(){
     const budgetDisplay = document.querySelector("#budget-display")
@@ -242,28 +232,27 @@ function editBudget(){
 
 function editBudgetHandler(e){
     e.preventDefault()
-    const budgetAmount = e.target.querySelector("#budget-amount").value
-    editBudgetFetch(budgetAmount)
+    const newAmount = e.target.querySelector("#budget-amount").value
+    editBudgetFetch(newAmount)
 }
 
 function editBudgetFetch(newAmount){
-    editUserBudget = () => {
-        getUser.then((user) => {
-            const budgetId = user.data.attributes.budget.id;
-            bodyData = {newAmount}
-            fetch(`http://localhost:3000/api/v1/budgets/${budgetId}`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem('jwt_token')}`
-            },
-            body: JSON.stringify(bodyData)
-            })
-            .then(response => response.json())
-            .then(json => {
-                newBudget = json.data.attributes.amount;
-                return newBudget
-            })
-        });
-    }
+    getUser.then((user) => {
+        const budgetId = user.data.attributes.budget.id;
+        bodyData = {newAmount}
+        fetch(`http://localhost:3000/api/v1/budgets/${budgetId}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem('jwt_token')}`
+        },
+        body: JSON.stringify(bodyData)
+        })
+        .then(response => response.json())
+        .then(json => {
+            newBudget = json.data.attributes.amount;
+            return newBudget
+        })
+    }); 
+    //need to reload budget display to reflect new value
 }

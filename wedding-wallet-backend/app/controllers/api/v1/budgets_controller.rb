@@ -11,6 +11,7 @@ class Api::V1::BudgetsController < ApplicationController
     end
 
     def update
+        puts "inside budget update"
         puts params
         budget = Budget.find(params[:id])
         puts budget.amount
