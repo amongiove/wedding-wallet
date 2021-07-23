@@ -1,4 +1,7 @@
 const createUserContainer = document.querySelector("#login-or-signup-form").parentElement;
+let budgetAmount = document.getElementById("budget-amount");
+let expenseAmount = document.getElementById("expense-amount");
+let balanceAmount = document.getElementById("balance-amount");
 
 const getUser = 
     fetch('http://localhost:3000/api/v1/profile', {
@@ -136,23 +139,17 @@ function loginFetch(username, password) {
 //render profiles (these are essentially the same... can we make them one method??)
 function renderNewUserProfile() {
     renderedProfile.removeAttribute("hidden")
-    renderNewUserPage = () => {
-        getUser.then((user) => {
-            user ? alert(`Welcome ${user.data.attributes.username}`) : alert("Unable to create account. Please try again.");
-        })
-    }
-    renderNewUserPage()
+    getUser.then((user) => {
+        user ? alert(`Welcome ${user.data.attributes.username}`) : alert("Unable to create account. Please try again.");
+    })
 }
 
 function renderUserProfile() {
     renderedProfile.removeAttribute("hidden")
-    renderUserPage = () => {
-        getUser.then((user) => {
-            !user.data.attributes.budget ? renderBudgetForm() : displayBudget();
-            user ? alert(`Welcome back ${user.data.attributes.username}`) : alert("Incorrect username or password.");
-        })
-    }
-    renderUserPage()
+    getUser.then((user) => {
+        !user.data.attributes.budget ? renderBudgetForm() : displayBudget();
+        user ? alert(`Welcome back ${user.data.attributes.username}`) : alert("Incorrect username or password.");
+    })
 }
 
 //budget
@@ -161,7 +158,7 @@ function renderBudgetForm(){
     createBudgetForm.id = "create-budget-form-container"
     createBudgetForm.innerHTML = `
         <form id="create-budget-form">
-            <h4>Enter your desired wedding budget.</h4>
+            <h4>Please Enter Your Budget.</h4>
             <input id='budget-amount' type="number" step=.01 name="budget-amount" value="" placeholder="Enter desired budget.">
             <input id= 'budget-submit' type="submit" name="submit" value="Save Budget" class="submit"><br><br>
         </form>`
@@ -173,6 +170,18 @@ function renderBudgetForm(){
 function createBudgetHandler(e){
     e.preventDefault()
     const budgetAmount = e.target.querySelector("#budget-amount").value
+    //account for empty submit here
+    //   if(budgetAmount === '' || budgetAmount < 0){
+    //     this.budgetFeedback.classList.add('showItem');
+    //     this.budgetFeedback.innerHTML = `<p>value cannot be empty or negative</p>`;
+    //     const self = this;
+    //     setTimeout(function(){
+    //       self.budgetFeedback.classList.remove('showItem');
+    //     }, 3000);
+    //   } else {
+    //     this.budgetAmount.textContent = value;
+    //     this.budgetInput.value = '';
+    //     this.showBalance();
     createBudgetFetch(budgetAmount)
 }
 
@@ -191,25 +200,17 @@ function createBudgetFetch(amount){
         budget = json.data.attributes.amount
         //is there a more graceful way to do this??
         document.querySelector("#create-budget-form-container").style.visibility="hidden"     
+        budgetAmount.textContent = budget;
         displayBudget();
     })
 }
 
 function displayBudget(){
+    const budgetDisplay = document.querySelector("#budget-display")
+    budgetDisplay.removeAttribute("hidden")
+    //updateBalance()
     getUser.then((user) => {
-        console.log(user)
-        const budget = user.data.attributes.budget.amount
-
-        const budgetDisplay = document.createElement("div")
-        budgetDisplay.id = "budget-display"
-        budgetDisplay.innerHTML = `
-            <button id="edit-budget" type="button" onclick="editBudget()">Edit Budget</button>
-            <tr>
-                <th>Total Budget: $${budget}</th>
-                <th>Spent: ~total for expenses~ </th>
-                <th>Remaining Budget: ~budget - spent~</th>
-            </tr>`
-        renderedProfile.appendChild(budgetDisplay)
+       
     })
 }
 
@@ -221,9 +222,9 @@ function editBudget(){
     //this should be a modal
     editBudgetForm.innerHTML = `
         <form id="edit-budget-form">
-            <h4>Enter new budget.</h4>
+            <h4>Please Enter Your New Budget.</h4>
             <input id='budget-amount' type="number" step=.01 name="budget-amount" value="" placeholder="Enter desired budget.">
-            <input id= 'budget-submit' type="submit" name="submit" value="Update Budget" class="submit"><br><br>
+            <input id= 'budget-submit' type="submit" name="submit" value="Save" class="submit"><br><br>
         </form>
     `
     budgetDisplay.insertAdjacentElement("afterbegin", editBudgetForm)
@@ -251,7 +252,11 @@ function editBudgetFetch(newAmount){
         .then(response => response.json())
         .then(json => {
             newBudget = json.data.attributes.amount;
-            return newBudget
+
+            const display = document.querySelector("#budget-display")
+            display.removeChild(display.firstElementChild)
+
+            budgetAmount.textContent = newBudget;
         })
     }); 
     //need to reload budget display to reflect new value

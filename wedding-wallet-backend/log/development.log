@@ -6845,3 +6845,694 @@ Processing by Api::V1::UsersController#profile as */*
 Completed 202 Accepted in 37ms (Views: 19.4ms | ActiveRecord: 7.9ms | Allocations: 3780)
 
 
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 09:21:23 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (4.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (0.4ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (5.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (19.44ms)
+Completed 202 Accepted in 50ms (Views: 17.3ms | ActiveRecord: 9.9ms | Allocations: 3780)
+
+
+Started PATCH "/api/v1/budgets/40" for ::1 at 2021-07-23 09:21:28 -0500
+Processing by Api::V1::BudgetsController#update as */*
+  Parameters: {"newAmount"=>"600000", "id"=>"40", "budget"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mBudget Load (7.9ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."id" = $1 LIMIT $2[0m  [["id", 40], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/budgets_controller.rb:16:in `update'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/budgets_controller.rb:18:in `update'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/budgets_controller.rb:18:in `update'
+  [1m[36mBudget Update (6.4ms)[0m  [1m[33mUPDATE "budgets" SET "amount" = $1, "updated_at" = $2 WHERE "budgets"."id" = $3[0m  [["amount", "600000.0"], ["updated_at", "2021-07-23 14:21:28.395751"], ["id", 40]]
+  ↳ app/controllers/api/v1/budgets_controller.rb:18:in `update'
+  [1m[36mTRANSACTION (8.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/budgets_controller.rb:18:in `update'
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with BudgetSerializer (4.33ms)
+Completed 202 Accepted in 68ms (Views: 11.5ms | ActiveRecord: 24.8ms | Allocations: 4383)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 09:21:39 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (5.7ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (0.6ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (28.31ms)
+Completed 202 Accepted in 53ms (Views: 34.2ms | ActiveRecord: 7.3ms | Allocations: 3780)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 09:23:13 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (1.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (0.5ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (16.49ms)
+Completed 202 Accepted in 34ms (Views: 22.8ms | ActiveRecord: 2.2ms | Allocations: 3780)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 10:04:55 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (8.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (15.5ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (22.8ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (105.88ms)
+Completed 202 Accepted in 361ms (Views: 78.2ms | ActiveRecord: 151.3ms | Allocations: 13829)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 10:06:27 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (6.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (6.4ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (0.4ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (26.46ms)
+Completed 202 Accepted in 73ms (Views: 27.6ms | ActiveRecord: 13.0ms | Allocations: 3780)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 10:16:59 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (20.4ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (12.6ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (131.39ms)
+Completed 202 Accepted in 421ms (Views: 115.1ms | ActiveRecord: 87.3ms | Allocations: 5865)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 10:17:49 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (4.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (0.6ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (0.4ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (44.74ms)
+Completed 202 Accepted in 85ms (Views: 56.5ms | ActiveRecord: 5.6ms | Allocations: 3780)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 10:19:23 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (3.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (0.4ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (4.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (41.0ms)
+Completed 202 Accepted in 92ms (Views: 47.2ms | ActiveRecord: 8.4ms | Allocations: 3780)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 10:23:53 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (13.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (0.5ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (0.4ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (36.71ms)
+Completed 202 Accepted in 155ms (Views: 53.0ms | ActiveRecord: 14.7ms | Allocations: 3781)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 10:25:28 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (7.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (2.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (2.6ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (43.74ms)
+Completed 202 Accepted in 123ms (Views: 56.1ms | ActiveRecord: 11.8ms | Allocations: 3780)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 10:25:47 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (8.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (2.0ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (0.4ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (31.99ms)
+Completed 202 Accepted in 88ms (Views: 46.3ms | ActiveRecord: 10.4ms | Allocations: 3780)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 10:26:37 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (12.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (0.3ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (2.1ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (40.44ms)
+Completed 202 Accepted in 102ms (Views: 52.9ms | ActiveRecord: 15.2ms | Allocations: 3780)
+
+
+  [1m[36mBudget Load (7.5ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBudget Destroy (94.4ms)[0m  [1m[31mDELETE FROM "budgets" WHERE "budgets"."id" = $1[0m  [["id", 40]]
+  [1m[36mTRANSACTION (43.5ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 10:27:13 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (33.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (7.2ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (0.7ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (61.81ms)
+Completed 202 Accepted in 286ms (Views: 79.9ms | ActiveRecord: 41.8ms | Allocations: 3682)
+
+
+Started POST "/api/v1/budgets" for ::1 at 2021-07-23 10:27:18 -0500
+Processing by Api::V1::BudgetsController#create as */*
+  Parameters: {"amount"=>"60000", "budget"=>{"amount"=>"60000"}}
+  [1m[36mUser Load (2.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/budgets_controller.rb:5:in `create'
+  [1m[36mBudget Create (102.0ms)[0m  [1m[32mINSERT INTO "budgets" ("amount", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["amount", "60000.0"], ["user_id", 11], ["created_at", "2021-07-23 15:27:19.175569"], ["updated_at", "2021-07-23 15:27:19.175569"]]
+  ↳ app/controllers/api/v1/budgets_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (6.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/budgets_controller.rb:5:in `create'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with BudgetSerializer (6.08ms)
+Completed 202 Accepted in 365ms (Views: 23.7ms | ActiveRecord: 112.1ms | Allocations: 4229)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 10:30:09 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (2.5ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (0.5ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (46.57ms)
+Completed 202 Accepted in 69ms (Views: 47.6ms | ActiveRecord: 3.4ms | Allocations: 3780)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 10:31:38 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (2.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (0.8ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (27.34ms)
+Completed 202 Accepted in 61ms (Views: 32.8ms | ActiveRecord: 3.6ms | Allocations: 3780)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 10:33:18 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (12.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (0.4ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (5.7ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (764.86ms)
+Completed 202 Accepted in 812ms (Views: 771.5ms | ActiveRecord: 18.7ms | Allocations: 3781)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 10:41:35 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (0.6ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (0.6ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (27.78ms)
+Completed 202 Accepted in 532ms (Views: 37.7ms | ActiveRecord: 135.0ms | Allocations: 5918)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 10:41:51 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (0.7ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (0.5ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (30.67ms)
+Completed 202 Accepted in 76ms (Views: 35.3ms | ActiveRecord: 1.8ms | Allocations: 3780)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 10:43:36 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (7.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (7.6ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (33.42ms)
+Completed 202 Accepted in 96ms (Views: 46.0ms | ActiveRecord: 15.5ms | Allocations: 3782)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 10:43:43 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (3.7ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (7.8ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (35.65ms)
+Completed 202 Accepted in 153ms (Views: 35.7ms | ActiveRecord: 12.7ms | Allocations: 3780)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 11:00:32 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (16.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (11.3ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (0.7ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (108.93ms)
+Completed 202 Accepted in 1195ms (Views: 140.6ms | ActiveRecord: 615.4ms | Allocations: 5869)
+
+
+  [1m[36mBudget Load (1.6ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBudget Destroy (7.4ms)[0m  [1m[31mDELETE FROM "budgets" WHERE "budgets"."id" = $1[0m  [["id", 41]]
+  [1m[36mTRANSACTION (22.8ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 11:01:53 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (6.0ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (8.0ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (67.36ms)
+Completed 202 Accepted in 146ms (Views: 72.5ms | ActiveRecord: 14.7ms | Allocations: 3682)
+
+
+Started POST "/api/v1/budgets" for ::1 at 2021-07-23 11:01:58 -0500
+Processing by Api::V1::BudgetsController#create as */*
+  Parameters: {"amount"=>"100000", "budget"=>{"amount"=>"100000"}}
+  [1m[36mUser Load (4.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/budgets_controller.rb:5:in `create'
+  [1m[36mBudget Create (26.0ms)[0m  [1m[32mINSERT INTO "budgets" ("amount", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["amount", "100000.0"], ["user_id", 11], ["created_at", "2021-07-23 16:01:58.488947"], ["updated_at", "2021-07-23 16:01:58.488947"]]
+  ↳ app/controllers/api/v1/budgets_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (8.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/budgets_controller.rb:5:in `create'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with BudgetSerializer (6.38ms)
+Completed 202 Accepted in 224ms (Views: 19.3ms | ActiveRecord: 39.4ms | Allocations: 3896)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 11:03:04 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (0.5ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (14.7ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (78.57ms)
+Completed 202 Accepted in 154ms (Views: 88.8ms | ActiveRecord: 15.8ms | Allocations: 3780)
+
+
+Started PATCH "/api/v1/budgets/42" for ::1 at 2021-07-23 11:03:39 -0500
+Processing by Api::V1::BudgetsController#update as */*
+  Parameters: {"newAmount"=>"100", "id"=>"42", "budget"=>{}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mBudget Load (0.3ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."id" = $1 LIMIT $2[0m  [["id", 42], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/budgets_controller.rb:14:in `update'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/budgets_controller.rb:15:in `update'
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/budgets_controller.rb:15:in `update'
+  [1m[36mBudget Update (1.3ms)[0m  [1m[33mUPDATE "budgets" SET "amount" = $1, "updated_at" = $2 WHERE "budgets"."id" = $3[0m  [["amount", "100.0"], ["updated_at", "2021-07-23 16:03:40.076544"], ["id", 42]]
+  ↳ app/controllers/api/v1/budgets_controller.rb:15:in `update'
+  [1m[36mTRANSACTION (7.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/budgets_controller.rb:15:in `update'
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with BudgetSerializer (1.02ms)
+Completed 202 Accepted in 338ms (Views: 19.9ms | ActiveRecord: 12.4ms | Allocations: 4618)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 11:05:13 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (1.6ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (7.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (42.68ms)
+Completed 202 Accepted in 110ms (Views: 43.5ms | ActiveRecord: 9.6ms | Allocations: 3780)
+
+
+Started PATCH "/api/v1/budgets/42" for ::1 at 2021-07-23 11:05:17 -0500
+Processing by Api::V1::BudgetsController#update as */*
+  Parameters: {"newAmount"=>"100", "id"=>"42", "budget"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mBudget Load (2.4ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."id" = $1 LIMIT $2[0m  [["id", 42], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/budgets_controller.rb:14:in `update'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/budgets_controller.rb:15:in `update'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with BudgetSerializer (4.13ms)
+Completed 202 Accepted in 55ms (Views: 14.5ms | ActiveRecord: 2.7ms | Allocations: 2836)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 11:05:52 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (5.7ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (12.0ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (66.76ms)
+Completed 202 Accepted in 105ms (Views: 64.2ms | ActiveRecord: 19.4ms | Allocations: 3782)
+
+
+Started PATCH "/api/v1/budgets/42" for ::1 at 2021-07-23 11:05:56 -0500
+Processing by Api::V1::BudgetsController#update as */*
+  Parameters: {"newAmount"=>"600", "id"=>"42", "budget"=>{}}
+  [1m[36mUser Load (4.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mBudget Load (0.4ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."id" = $1 LIMIT $2[0m  [["id", 42], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/budgets_controller.rb:14:in `update'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/budgets_controller.rb:15:in `update'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/budgets_controller.rb:15:in `update'
+  [1m[36mBudget Update (6.7ms)[0m  [1m[33mUPDATE "budgets" SET "amount" = $1, "updated_at" = $2 WHERE "budgets"."id" = $3[0m  [["amount", "600.0"], ["updated_at", "2021-07-23 16:05:56.866134"], ["id", 42]]
+  ↳ app/controllers/api/v1/budgets_controller.rb:15:in `update'
+  [1m[36mTRANSACTION (6.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/budgets_controller.rb:15:in `update'
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with BudgetSerializer (2.8ms)
+Completed 202 Accepted in 127ms (Views: 25.2ms | ActiveRecord: 20.2ms | Allocations: 4359)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 11:07:08 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (9.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (0.6ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (0.4ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (29.42ms)
+Completed 202 Accepted in 126ms (Views: 44.1ms | ActiveRecord: 10.9ms | Allocations: 3780)
+
+
+Started PATCH "/api/v1/budgets/42" for ::1 at 2021-07-23 11:07:12 -0500
+Processing by Api::V1::BudgetsController#update as */*
+  Parameters: {"newAmount"=>"600", "id"=>"42", "budget"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mBudget Load (0.5ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."id" = $1 LIMIT $2[0m  [["id", 42], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/budgets_controller.rb:14:in `update'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/budgets_controller.rb:15:in `update'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with BudgetSerializer (1.66ms)
+Completed 202 Accepted in 58ms (Views: 15.6ms | ActiveRecord: 0.8ms | Allocations: 2835)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 11:07:28 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (4.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (48.61ms)
+Completed 202 Accepted in 79ms (Views: 56.7ms | ActiveRecord: 4.8ms | Allocations: 3782)
+
+
+Started PATCH "/api/v1/budgets/42" for ::1 at 2021-07-23 11:07:32 -0500
+Processing by Api::V1::BudgetsController#update as */*
+  Parameters: {"newAmount"=>"600", "id"=>"42", "budget"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mBudget Load (2.0ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."id" = $1 LIMIT $2[0m  [["id", 42], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/budgets_controller.rb:14:in `update'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/budgets_controller.rb:15:in `update'
+  [1m[36mCACHE User Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with BudgetSerializer (0.35ms)
+Completed 202 Accepted in 716ms (Views: 7.8ms | ActiveRecord: 3.0ms | Allocations: 2833)
+
+
+Started PATCH "/api/v1/budgets/42" for ::1 at 2021-07-23 11:07:33 -0500
+Processing by Api::V1::BudgetsController#update as */*
+  Parameters: {"newAmount"=>"600", "id"=>"42", "budget"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mBudget Load (0.3ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."id" = $1 LIMIT $2[0m  [["id", 42], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/budgets_controller.rb:14:in `update'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/budgets_controller.rb:15:in `update'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with BudgetSerializer (0.39ms)
+Completed 202 Accepted in 17ms (Views: 5.3ms | ActiveRecord: 0.5ms | Allocations: 2834)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 11:07:58 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (3.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (3.6ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (3.8ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (15.69ms)
+Completed 202 Accepted in 58ms (Views: 10.7ms | ActiveRecord: 10.6ms | Allocations: 3782)
+
+
+Started PATCH "/api/v1/budgets/42" for ::1 at 2021-07-23 11:08:03 -0500
+Processing by Api::V1::BudgetsController#update as */*
+  Parameters: {"newAmount"=>"800", "id"=>"42", "budget"=>{}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mBudget Load (0.9ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."id" = $1 LIMIT $2[0m  [["id", 42], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/budgets_controller.rb:14:in `update'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/budgets_controller.rb:15:in `update'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/budgets_controller.rb:15:in `update'
+  [1m[36mBudget Update (13.5ms)[0m  [1m[33mUPDATE "budgets" SET "amount" = $1, "updated_at" = $2 WHERE "budgets"."id" = $3[0m  [["amount", "800.0"], ["updated_at", "2021-07-23 16:08:03.072459"], ["id", 42]]
+  ↳ app/controllers/api/v1/budgets_controller.rb:15:in `update'
+  [1m[36mTRANSACTION (6.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/budgets_controller.rb:15:in `update'
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with BudgetSerializer (0.47ms)
+Completed 202 Accepted in 43ms (Views: 3.1ms | ActiveRecord: 24.6ms | Allocations: 4360)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 11:10:29 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (1.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (1.0ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (25.12ms)
+Completed 202 Accepted in 58ms (Views: 29.2ms | ActiveRecord: 2.4ms | Allocations: 3781)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-23 11:14:17 -0500
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (7.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (6.3ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (7.6ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (51.83ms)
+Completed 202 Accepted in 119ms (Views: 53.6ms | ActiveRecord: 20.9ms | Allocations: 3780)
+
+
+Started PATCH "/api/v1/budgets/42" for ::1 at 2021-07-23 11:14:21 -0500
+Processing by Api::V1::BudgetsController#update as */*
+  Parameters: {"newAmount"=>"100", "id"=>"42", "budget"=>{}}
+  [1m[36mUser Load (5.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mBudget Load (0.4ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."id" = $1 LIMIT $2[0m  [["id", 42], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/budgets_controller.rb:14:in `update'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/budgets_controller.rb:15:in `update'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/budgets_controller.rb:15:in `update'
+  [1m[36mBudget Update (7.4ms)[0m  [1m[33mUPDATE "budgets" SET "amount" = $1, "updated_at" = $2 WHERE "budgets"."id" = $3[0m  [["amount", "100.0"], ["updated_at", "2021-07-23 16:14:21.756166"], ["id", 42]]
+  ↳ app/controllers/api/v1/budgets_controller.rb:15:in `update'
+  [1m[36mTRANSACTION (7.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/budgets_controller.rb:15:in `update'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with BudgetSerializer (2.38ms)
+Completed 202 Accepted in 61ms (Views: 6.5ms | ActiveRecord: 22.1ms | Allocations: 4359)
+
+
