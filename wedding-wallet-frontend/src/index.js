@@ -150,6 +150,7 @@ function renderUserProfile() {
         !user.data.attributes.budget ? renderBudgetForm() : displayBudget();
         user ? alert(`Welcome back ${user.data.attributes.username}`) : alert("Incorrect username or password.");
     })
+    
 }
 
 //budget
@@ -208,9 +209,9 @@ function createBudgetFetch(amount){
 function displayBudget(){
     const budgetDisplay = document.querySelector("#budget-display")
     budgetDisplay.removeAttribute("hidden")
-    //updateBalance()
     getUser.then((user) => {
-       
+        budget = user.data.attributes.budget.amount
+        budgetAmount.textContent = budget;
     })
 }
 
