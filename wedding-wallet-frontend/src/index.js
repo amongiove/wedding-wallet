@@ -1,5 +1,17 @@
 const createUserContainer = document.querySelector("#login-or-signup-form").parentElement;
 
+const getUser = 
+    fetch('http://localhost:3000/api/v1/profile', {
+        method: 'GET',
+        headers: {
+        Authorization: `Bearer ${localStorage.getItem('jwt_token')}`
+        }
+    })
+    .then(response => response.json())
+    .then(json => {
+        return json.user})
+
+
 //DOM loaded
 document.addEventListener('DOMContentLoaded', () => {
     let currentUser = " "
@@ -23,6 +35,19 @@ function checkIfLoggedIn(){
 function updateCurrentUser(){
     currentUser = JSON.parse(localStorage.getItem('current_user'))   
 }
+
+//returns user object(up to date)
+// function currentUserFetch(){
+//     fetch('http://localhost:3000/api/v1/profile', {
+//         method: 'GET',
+//         headers: {
+//         Authorization: `Bearer ${localStorage.getItem('jwt_token')}`
+//         }
+//     })
+//     .then(response => response.json())
+//     .then(json => {
+//         return json.user})
+// }
 
 function promptUserLogIn() {
     const loginButton = createUserContainer.firstElementChild.cloneNode(true);
@@ -223,7 +248,6 @@ function displayBudget(){
 }
 
 function editBudget(){
-    console.log("edit budget")
     const budgetDisplay = document.querySelector("#budget-display")
     const editBudgetForm = document.createElement("div")
     editBudgetForm.id = "edit-budget-form"
@@ -236,12 +260,37 @@ function editBudget(){
         </form>
     `
     budgetDisplay.insertAdjacentElement("afterbegin", editBudgetForm)
-    editBudgetForm.addEventListener("submit", (e) => editBudgetFetch(e))
+    editBudgetForm.addEventListener("submit", (e) => editBudgetHandler(e))
 }
 
-function editBudgetFetch(e){
+function editBudgetHandler(e){
+    e.preventDefault()
+    const budgetAmount = e.target.querySelector("#budget-amount").value
+    editBudgetFetch(budgetAmount)
+}
+
+function editBudgetFetch(newAmount){
     console.log("edit fetch")
+    
+    currentUser = () => {
+        getUser.then((user) => {
+            const budgetId = user.data.attributes.budget.id;
+            console.log(budgetId)
+            // fetch budget by user.data.attributes.budget.id
+            bodyData = {newAmount}
+            fetch(`http://localhost:3000/api/v1/budgets/${budgetId}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem('jwt_token')}`
+            },
+            body: JSON.stringify(bodyData)
+            })
+            .then(response => response.json())
+            .then(json => {
+                newBudget = json.data.attributes.amount;
+                return newBudget
+            })
+        });
+    }
 }
-
-
-

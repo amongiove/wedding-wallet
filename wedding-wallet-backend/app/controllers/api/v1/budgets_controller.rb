@@ -10,7 +10,14 @@ class Api::V1::BudgetsController < ApplicationController
         end
     end
 
-    def show
+    def update
+        puts params
+        budget = Budget.find(params[:id])
+        puts budget.amount
+        budget.update(amount: params[:newAmount])
+        puts "bew budget"
+        puts budget.amount
+        render json: BudgetSerializer.new(budget), status: :accepted
     end
 
     private
