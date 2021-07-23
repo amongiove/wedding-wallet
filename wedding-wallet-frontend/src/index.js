@@ -32,22 +32,10 @@ function checkIfLoggedIn(){
     }
 }
 
+//can i combine this with getUser from above
 function updateCurrentUser(){
     currentUser = JSON.parse(localStorage.getItem('current_user'))   
 }
-
-//returns user object(up to date)
-// function currentUserFetch(){
-//     fetch('http://localhost:3000/api/v1/profile', {
-//         method: 'GET',
-//         headers: {
-//         Authorization: `Bearer ${localStorage.getItem('jwt_token')}`
-//         }
-//     })
-//     .then(response => response.json())
-//     .then(json => {
-//         return json.user})
-// }
 
 function promptUserLogIn() {
     const loginButton = createUserContainer.firstElementChild.cloneNode(true);
@@ -162,35 +150,23 @@ function loginFetch(username, password) {
 //render profiles (these are essentially the same... can we make them one method??)
 function renderNewUserProfile() {
     renderedProfile.removeAttribute("hidden")
-    //user data fetch
-    fetch('http://localhost:3000/api/v1/profile', {
-        method: 'GET',
-        headers: {
-        Authorization: `Bearer ${localStorage.getItem('jwt_token')}`
-        }
-    })
-    .then(response => response.json())
-    .then(json => {
-        json.user ? alert(`Welcome ${json.user.data.attributes.username}`) : alert("Unable to create account. Please try again.");
-    })
+    renderNewUserPage = () => {
+        getUser.then((user) => {
+            user ? alert(`Welcome ${user.data.attributes.username}`) : alert("Unable to create account. Please try again.");
+        })
+    }
+    renderNewUserPage()
 }
 
 function renderUserProfile() {
     renderedProfile.removeAttribute("hidden")
-    //user data fetch
-    fetch('http://localhost:3000/api/v1/profile', {
-        method: 'GET',
-        headers: {
-        Authorization: `Bearer ${localStorage.getItem('jwt_token')}`
-        }
-    })
-    .then(response => response.json())
-    .then(json => {
-        !json.user.data.attributes.budget ? renderBudgetForm() : displayBudget();
-        json.user ? alert(`Welcome back ${json.user.data.attributes.username}`) : alert("Incorrect username or password.");
-        
-    })
-    
+    renderUserPage = () => {
+        getUser.then((user) => {
+            !user.data.attributes.budget ? renderBudgetForm() : displayBudget();
+            user ? alert(`Welcome back ${user.data.attributes.username}`) : alert("Incorrect username or password.");
+        })
+    }
+    renderUserPage()
 }
 
 //budget
@@ -244,6 +220,7 @@ function displayBudget(){
             <th>Remaining Budget: ~budget - spent~</th>
         </tr>`
     renderedProfile.appendChild(budgetDisplay)
+    //need to update total budget so that it takes the const instead of current user (for edit updates)
     //need to put in calculations
 }
 
@@ -270,13 +247,9 @@ function editBudgetHandler(e){
 }
 
 function editBudgetFetch(newAmount){
-    console.log("edit fetch")
-    
-    currentUser = () => {
+    editUserBudget = () => {
         getUser.then((user) => {
             const budgetId = user.data.attributes.budget.id;
-            console.log(budgetId)
-            // fetch budget by user.data.attributes.budget.id
             bodyData = {newAmount}
             fetch(`http://localhost:3000/api/v1/budgets/${budgetId}`, {
             method: "PATCH",
