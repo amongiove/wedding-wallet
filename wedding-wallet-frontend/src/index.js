@@ -5,17 +5,6 @@ let balanceAmount = document.getElementById("balance-amount");
 
 let getUser
 
-// const getUser = 
-//     fetch('http://localhost:3000/api/v1/profile', {
-//         method: 'GET',
-//         headers: {
-//         Authorization: `Bearer ${localStorage.getItem('jwt_token')}`
-//         }
-//     })
-//     .then(response => response.json())
-//     .then(json => {
-//         return json.user})
-
 //DOM loaded
 document.addEventListener('DOMContentLoaded', () => {
     renderedProfile = document.querySelector("#user-rendered-container");
