@@ -3,7 +3,32 @@ let budgetAmount = document.getElementById("budget-amount");
 let expenseAmount = document.getElementById("expense-amount");
 let balanceAmount = document.getElementById("balance-amount");
 
-const getUser = 
+let getUser
+
+// const getUser = 
+//     fetch('http://localhost:3000/api/v1/profile', {
+//         method: 'GET',
+//         headers: {
+//         Authorization: `Bearer ${localStorage.getItem('jwt_token')}`
+//         }
+//     })
+//     .then(response => response.json())
+//     .then(json => {
+//         return json.user})
+
+//DOM loaded
+document.addEventListener('DOMContentLoaded', () => {
+    renderedProfile = document.querySelector("#user-rendered-container");
+    checkIfLoggedIn();
+})
+
+//user data
+function getUserData() {
+    if (getUser !== undefined) {
+        return getUser
+    }
+
+    getUser = 
     fetch('http://localhost:3000/api/v1/profile', {
         method: 'GET',
         headers: {
@@ -11,14 +36,9 @@ const getUser =
         }
     })
     .then(response => response.json())
-    .then(json => {
-        return json.user})
-
-//DOM loaded
-document.addEventListener('DOMContentLoaded', () => {
-    renderedProfile = document.querySelector("#user-rendered-container");
-    checkIfLoggedIn();
-})
+    .then(json => { return json.user})
+    return getUser
+}
 
 //user 
 function checkIfLoggedIn(){
@@ -132,29 +152,29 @@ function loginFetch(username, password) {
     .then(json => {
         localStorage.setItem('jwt_token', json.jwt)
         json.jwt ? createUserContainer.innerHTML = "" : null;
-        renderUserProfile()
+        renderUserProfile();
     })
 }
 
 //render profiles (these are essentially the same... can we make them one method??)
 function renderNewUserProfile() {
     renderedProfile.removeAttribute("hidden")
-    getUser.then((user) => {
+    getUserData().then((user) => {
         user ? alert(`Welcome ${user.data.attributes.username}`) : alert("Unable to create account. Please try again.");
     })
 }
 
 function renderUserProfile() {
     renderedProfile.removeAttribute("hidden")
-    getUser.then((user) => {
+    getUserData().then((user) => {
         !user.data.attributes.budget ? renderBudgetForm() : displayBudget();
         user ? alert(`Welcome back ${user.data.attributes.username}`) : alert("Incorrect username or password.");
     })
-    
 }
 
 //budget
 function renderBudgetForm(){
+    //modal?
     createBudgetForm = document.createElement("div")
     createBudgetForm.id = "create-budget-form-container"
     createBudgetForm.innerHTML = `
@@ -165,7 +185,6 @@ function renderBudgetForm(){
         </form>`
     renderedProfile.appendChild(createBudgetForm)
     document.querySelector("#create-budget-form").addEventListener("submit", (e) => createBudgetHandler(e))
-
 }
 
 function createBudgetHandler(e){
@@ -260,5 +279,4 @@ function editBudgetFetch(newAmount){
             budgetAmount.textContent = newBudget;
         })
     }); 
-    //need to reload budget display to reflect new value
 }
