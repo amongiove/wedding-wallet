@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 })
 
-//check if user logged in
+//user 
 function checkIfLoggedIn(){
     // is there a case where the first part is accessed?
     const token = localStorage.jwt_token
@@ -219,26 +219,29 @@ function displayBudget(){
             <th>Remaining Budget: ~budget - spent~</th>
         </tr>`
     renderedProfile.appendChild(budgetDisplay)
+    //need to put in calculations
 }
 
 function editBudget(){
     console.log("edit budget")
+    const budgetDisplay = document.querySelector("#budget-display")
     const editBudgetForm = document.createElement("div")
     editBudgetForm.id = "edit-budget-form"
     //this should be a modal
-    editBudgetForm.html = `
+    editBudgetForm.innerHTML = `
         <form id="edit-budget-form">
             <h4>Enter new budget.</h4>
             <input id='budget-amount' type="number" step=.01 name="budget-amount" value="" placeholder="Enter desired budget.">
             <input id= 'budget-submit' type="submit" name="submit" value="Update Budget" class="submit"><br><br>
         </form>
     `
-    console.log(editBudgetForm)
+    budgetDisplay.insertAdjacentElement("afterbegin", editBudgetForm)
     editBudgetForm.addEventListener("submit", (e) => editBudgetFetch(e))
 }
 
 function editBudgetFetch(e){
-    //TBD - make modal first
     console.log("edit fetch")
 }
+
+
 
