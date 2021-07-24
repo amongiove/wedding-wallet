@@ -305,8 +305,20 @@ function displayCategories(){
     });
 }
 
+//potential for dynamically coding categories into form
+function addCategories(){
+    categories = getCategories()
+    const select = document.querySelector("#expense-category")
+    categories.forEach (category => {
+        let option = document.createElement('option');
+        option.text = option.value = category;
+        select.add(option, 0); 
+    })    
+}
+
 //expense
 function addExpense(){
+    categories = getCategories();
     const showExpense = document.querySelector("#show-expense")
     const addExpenseForm = document.createElement("div")
     addExpenseForm.id = "add-expense-form"
@@ -314,17 +326,36 @@ function addExpense(){
     //need option to x out of form
     addExpenseForm.innerHTML = `
         <form id="add-expense-form">
-            <h4>Please Enter Your Expense.</h4>
-            <select id="expense-category" name= "category-dropdown">
-                <option value = "value 1" selected>value 1</option>
-                <option value = "value 2">Javvalue 2a</option>
-                <option value = "value 3">value 3</option>
-            </select>
+            <h4>Please Enter Your Expense Details.</h4>
+            <select id="expense-category" name= "category-dropdown" palceholder="Select A Category.">
+                <option value="" disabled selected hidden>Select A Category</option>
+                <option value="0">Accomodation</option>
+                <option value="1">Attire</option>
+                <option value="2" Party">Bachelor/Bachelorette Party</option>
+                <option value="3">Ceremony</option>
+                <option value="4">Entertainment</option>
+                <option value="5">Favors & Gifts</option>
+                <option value="6">Florals</option>
+                <option value="7">Food & Drink</option>
+                <option value="8">Honeymoon</option>
+                <option value="9">Photography & Videography</option>
+                <option value="10">Rehersal Dinner</option>
+                <option value="11">Rentals & Decor</option>
+                <option value="12">Stationary</option>
+                <option value="13">Transportation</option>
+                <option value="14">Venue</option>
+                <option value="15">Wedding Morning</option>
+                <option value="16">Additional Expenses</option>
+            </select><br>
             <input id= 'expense-item' type="text" name="expense-item" value="" placeholder="Enter expense item."><br>
             <input id= 'expense-amount' type="number" step=.01 name="expense-amount" value="" placeholder="Enter expense amount."><br>
-            <input id= 'budget-submit' type="submit" name="submit" value="Add Expense" class="submit"><br><br>
+            <textarea rows="4" cols="50" id="expense-notes" name="expense-notes" form="add-expense-form">Notes...</textarea><br>
+            <input id= 'budget-submit' type="submit" name="submit" value="Save" class="submit"><br><br>
         </form>
+        
     `
-    showExpense.insertAdjacentElement("afterend", addExpenseForm)
+    showExpense.insertAdjacentElement("afterend", addExpenseForm);
+    // addCategories();  -can i use this to dynamically code categories?
+    
     // addExpenseForm.addEventListener("submit", (e) => addExpenseHandler(e))
 }
