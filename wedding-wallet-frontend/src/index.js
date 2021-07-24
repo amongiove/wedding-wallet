@@ -386,7 +386,15 @@ function createExpenseFetch(category, name, amount, notes){
     })
     .then(response => response.json())
     .then(json => {
-        console.log(json)
-    })
+        expenseCategory = json.data.attributes.category.name;
+        expenseName = json.data.attributes.name;
+        expenseAmount = json.data.attributes.amount;
+        expenseNotes = json.data.attributes.notes;
+        displayExpense(expenseCategory, expenseName, expenseAmount, expenseNotes)
+    });
+}
+
+function displayExpense(category, name, amount, notes){
+    console.log("display expense")
 }
 
