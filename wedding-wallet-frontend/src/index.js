@@ -331,33 +331,34 @@ function addExpense(){
     addExpenseForm.innerHTML = `
         <form id="add-expense-form">
             <h4>Please Enter Your Expense Details.</h4>
-            <select id="expense-category" name= "category-dropdown" palceholder="Select A Category.">
-                <option value="" disabled selected hidden>Select Item Category</option>
-                <option value="0">Accomodation</option>
-                <option value="1">Attire</option>
-                <option value="2" Party">Bachelor/Bachelorette Party</option>
-                <option value="3">Ceremony</option>
-                <option value="4">Entertainment</option>
-                <option value="5">Favors & Gifts</option>
-                <option value="6">Florals</option>
-                <option value="7">Food & Drink</option>
-                <option value="8">Honeymoon</option>
-                <option value="9">Photography & Videography</option>
-                <option value="10">Rehersal Dinner</option>
-                <option value="11">Rentals & Decor</option>
-                <option value="12">Stationary</option>
-                <option value="13">Transportation</option>
-                <option value="14">Venue</option>
-                <option value="15">Wedding Morning</option>
-                <option value="16">Additional Expenses</option>
+            <select id="expense-category" name= "category-dropdown required" palceholder="Select A Category.">
+                <option disabled selected value="">--Select Item Category--</option>
+                <option value="Accomodation">Accomodation</option>
+                <option value="Attire">Attire</option>
+                <option value="Bachelor/Bachelorette Party">Bachelor/Bachelorette Party</option>
+                <option value="Ceremony">Ceremony</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Favors & Gifts">Favors & Gifts</option>
+                <option value="Florals">Florals</option>
+                <option value="Food & Drink">Food & Drink</option>
+                <option value="Honeymoon">Honeymoon</option>
+                <option value="Photography & Videography">Photography & Videography</option>
+                <option value="Rehersal Dinner">Rehersal Dinner</option>
+                <option value="Rentals & Decor">Rentals & Decor</option>
+                <option value="Stationary">Stationary</option>
+                <option value="Transportation">Transportation</option>
+                <option value="Venue">Venue</option>
+                <option value="Wedding Morning">Wedding Morning</option>
+                <option value="Additional Expenses">Additional Expenses</option>
             </select><br>
-            <input id= 'expense-item' type="text" name="expense-item" value="" placeholder="Item name"><br>
-            <input id= 'expense-amount' type="number" step=.01 name="expense-amount" value="" placeholder="Item amount"><br>
+            <input id= 'expense-item' type="text" name="expense-item" value="" placeholder="Item name" required><br>
+            <input id= 'expense-amount' type="number" step=.01 name="expense-amount" value="" placeholder="Item amount" required><br>
             <textarea rows="4" cols="50" id="expense-notes" name="expense-notes" form="add-expense-form" onclick="clearField(this)">Add notes about payments, dates, options, etc.</textarea><br>
             <input id= 'budget-submit' type="submit" name="submit" value="Save Expense" class="submit"><br><br>
         </form>
         
     `
+    //fix click to clear notes (clear every time)
     showExpense.insertAdjacentElement("afterend", addExpenseForm);
     // addCategories();  -can i use this to dynamically code categories?
     addExpenseForm.addEventListener("submit", (e) => addExpenseHandler(e))
@@ -365,6 +366,27 @@ function addExpense(){
 
 function addExpenseHandler(e){
     e.preventDefault()
-    console.log(e)
-    console.log(e.target)
+    const expenseCategoryId = e.target[0].value
+    const expenseName = e.target[1].value 
+    const expenseAmount = e.target[2].value
+    const expenseNotes = e.target.childNodes[12].value
+
+    createExpenseFetch(expenseCategoryId, expenseName, expenseAmount, expenseNotes)
 }
+
+function createExpenseFetch(category, name, amount, notes){ 
+    const bodyData = {category, name, amount, notes}
+    fetch("http://localhost:3000/api/v1/expenses", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem('jwt_token')}`
+    },
+      body: JSON.stringify(bodyData)
+    })
+    .then(response => response.json())
+    .then(json => {
+        console.log(json)
+    })
+}
+
