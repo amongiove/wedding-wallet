@@ -328,7 +328,7 @@ function addExpense(){
         <form id="add-expense-form">
             <h4>Please Enter Your Expense Details.</h4>
             <select id="expense-category" name= "category-dropdown" palceholder="Select A Category.">
-                <option value="" disabled selected hidden>Select A Category</option>
+                <option value="" disabled selected hidden>Select Item Category</option>
                 <option value="0">Accomodation</option>
                 <option value="1">Attire</option>
                 <option value="2" Party">Bachelor/Bachelorette Party</option>
@@ -347,10 +347,10 @@ function addExpense(){
                 <option value="15">Wedding Morning</option>
                 <option value="16">Additional Expenses</option>
             </select><br>
-            <input id= 'expense-item' type="text" name="expense-item" value="" placeholder="Enter expense item."><br>
-            <input id= 'expense-amount' type="number" step=.01 name="expense-amount" value="" placeholder="Enter expense amount."><br>
-            <textarea rows="4" cols="50" id="expense-notes" name="expense-notes" form="add-expense-form">Notes...</textarea><br>
-            <input id= 'budget-submit' type="submit" name="submit" value="Save" class="submit"><br><br>
+            <input id= 'expense-item' type="text" name="expense-item" value="" placeholder="Item name"><br>
+            <input id= 'expense-amount' type="number" step=.01 name="expense-amount" value="" placeholder="Item amount"><br>
+            <textarea rows="4" cols="50" id="expense-notes" name="expense-notes" form="add-expense-form">Add notes about payments, dates, options, etc.</textarea><br>
+            <input id= 'budget-submit' type="submit" name="submit" value="Save Expense" class="submit"><br><br>
         </form>
         
     `

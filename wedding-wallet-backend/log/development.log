@@ -12430,3 +12430,209 @@ Processing by Api::V1::CategoriesController#index as */*
 Completed 202 Accepted in 7ms (Views: 5.4ms | ActiveRecord: 0.8ms | Allocations: 2805)
 
 
+Started GET "/api/v1/profile" for ::1 at 2021-07-24 14:30:31 -0500
+Started GET "/api/v1/categories" for ::1 at 2021-07-24 14:30:31 -0500
+Processing by Api::V1::UsersController#profile as */*
+Processing by Api::V1::CategoriesController#index as */*
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mUser Load (6.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mCategory Load (1.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+[active_model_serializers]   ↳ app/controllers/api/v1/categories_controller.rb:6:in `index'
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (15.36ms)
+Completed 202 Accepted in 57ms (Views: 55.2ms | ActiveRecord: 22.2ms | Allocations: 8496)
+
+
+[active_model_serializers]   [1m[36mBudget Load (10.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (0.5ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (24.28ms)
+Completed 202 Accepted in 84ms (Views: 20.2ms | ActiveRecord: 30.1ms | Allocations: 11323)
+
+
+Started GET "/api/v1/categories" for ::1 at 2021-07-24 14:30:34 -0500
+Processing by Api::V1::CategoriesController#index as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mCategory Load (1.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+[active_model_serializers]   ↳ app/controllers/api/v1/categories_controller.rb:6:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (4.52ms)
+Completed 202 Accepted in 8ms (Views: 6.2ms | ActiveRecord: 1.3ms | Allocations: 2805)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-24 14:30:55 -0500
+Processing by Api::V1::UsersController#profile as */*
+Started GET "/api/v1/categories" for ::1 at 2021-07-24 14:30:55 -0500
+Processing by Api::V1::CategoriesController#index as */*
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mCategory Load (1.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+[active_model_serializers]   ↳ app/controllers/api/v1/categories_controller.rb:6:in `index'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (10.1ms)
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+Completed 202 Accepted in 29ms (Views: 25.3ms | ActiveRecord: 2.9ms | Allocations: 4444)
+
+
+[active_model_serializers]   [1m[36mBudget Load (3.2ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (2.6ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (13.2ms)
+Completed 202 Accepted in 48ms (Views: 16.0ms | ActiveRecord: 7.1ms | Allocations: 7166)
+
+
+Started GET "/api/v1/categories" for ::1 at 2021-07-24 14:30:57 -0500
+Processing by Api::V1::CategoriesController#index as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+[active_model_serializers]   ↳ app/controllers/api/v1/categories_controller.rb:6:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (4.43ms)
+Completed 202 Accepted in 8ms (Views: 6.6ms | ActiveRecord: 0.7ms | Allocations: 2805)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-24 14:31:25 -0500
+Processing by Api::V1::UsersController#profile as */*
+Started GET "/api/v1/categories" for ::1 at 2021-07-24 14:31:25 -0500
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+Processing by Api::V1::CategoriesController#index as */*
+[active_model_serializers]   [1m[36mBudget Load (5.3ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (0.7ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (10.52ms)
+Completed 202 Accepted in 20ms (Views: 8.0ms | ActiveRecord: 7.1ms | Allocations: 4862)
+
+
+  [1m[36mUser Load (4.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+[active_model_serializers]   ↳ app/controllers/api/v1/categories_controller.rb:6:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (7.36ms)
+Completed 202 Accepted in 31ms (Views: 23.7ms | ActiveRecord: 5.3ms | Allocations: 4765)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-24 14:31:28 -0500
+Processing by Api::V1::UsersController#profile as */*
+Started GET "/api/v1/categories" for ::1 at 2021-07-24 14:31:28 -0500
+Processing by Api::V1::CategoriesController#index as */*
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mCategory Load (3.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+[active_model_serializers]   ↳ app/controllers/api/v1/categories_controller.rb:6:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (10.32ms)
+Completed 202 Accepted in 18ms (Views: 12.2ms | ActiveRecord: 4.9ms | Allocations: 3595)
+
+
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (1.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   [1m[36mExpense Load (1.1ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (17.46ms)
+Completed 202 Accepted in 51ms (Views: 19.8ms | ActiveRecord: 2.9ms | Allocations: 7608)
+
+
+Started GET "/api/v1/categories" for ::1 at 2021-07-24 14:31:30 -0500
+Processing by Api::V1::CategoriesController#index as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+[active_model_serializers]   ↳ app/controllers/api/v1/categories_controller.rb:6:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (4.34ms)
+Completed 202 Accepted in 10ms (Views: 9.0ms | ActiveRecord: 0.7ms | Allocations: 2805)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-24 14:31:50 -0500
+Started GET "/api/v1/categories" for ::1 at 2021-07-24 14:31:50 -0500
+Processing by Api::V1::UsersController#profile as */*
+Processing by Api::V1::CategoriesController#index as */*
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mUser Load (14.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mBudget Load (5.4ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mExpense Load (5.1ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   [1m[36mCategory Load (4.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers]   ↳ app/controllers/api/v1/categories_controller.rb:6:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (22.76ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (12.36ms)
+Completed 202 Accepted in 40ms (Views: 21.6ms | ActiveRecord: 18.1ms | Allocations: 6389)
+
+
+Completed 202 Accepted in 46ms (Views: 17.5ms | ActiveRecord: 12.9ms | Allocations: 6858)
+
+
+Started GET "/api/v1/categories" for ::1 at 2021-07-24 14:31:52 -0500
+Processing by Api::V1::CategoriesController#index as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+[active_model_serializers]   ↳ app/controllers/api/v1/categories_controller.rb:6:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (3.98ms)
+Completed 202 Accepted in 7ms (Views: 6.2ms | ActiveRecord: 0.8ms | Allocations: 2805)
+
+
+Started GET "/api/v1/profile" for ::1 at 2021-07-24 14:32:19 -0500
+Started GET "/api/v1/categories" for ::1 at 2021-07-24 14:32:19 -0500
+Processing by Api::V1::CategoriesController#index as */*
+Processing by Api::V1::UsersController#profile as */*
+  [1m[36mUser Load (4.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mBudget Load (6.8ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."user_id" = $1 LIMIT $2[0m  [["user_id", 11], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+  [1m[36mUser Load (2.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mExpense Load (3.4ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1[0m  [["user_id", 11]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:5:in `profile'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (17.05ms)
+Completed 202 Accepted in 44ms (Views: 8.8ms | ActiveRecord: 14.7ms | Allocations: 4317)
+
+
+[active_model_serializers]   [1m[36mCategory Load (5.8ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+[active_model_serializers]   ↳ app/controllers/api/v1/categories_controller.rb:6:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (8.55ms)
+Completed 202 Accepted in 51ms (Views: 42.2ms | ActiveRecord: 8.5ms | Allocations: 7032)
+
+
+Started GET "/api/v1/categories" for ::1 at 2021-07-24 14:32:21 -0500
+Processing by Api::V1::CategoriesController#index as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:27:in `current_user'
+[active_model_serializers]   [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+[active_model_serializers]   ↳ app/controllers/api/v1/categories_controller.rb:6:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (2.95ms)
+Completed 202 Accepted in 7ms (Views: 5.7ms | ActiveRecord: 0.6ms | Allocations: 2805)
+
+
