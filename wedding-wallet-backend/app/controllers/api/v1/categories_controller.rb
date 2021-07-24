@@ -1,9 +1,10 @@
 class Api::V1::CategoriesController < ApplicationController
-    
-    def create
-    end
+    skip_before_action :authorized, only: [:index]
 
-   
+    def index
+        categories = Category.all
+        render json: { category: CategorySerializer.new(categories) }, status: :accepted
+    end
 
     private
     

@@ -2,13 +2,15 @@ const createUserContainer = document.querySelector("#login-or-signup-form").pare
 let budgetAmount = document.getElementById("budget-amount");
 let expenseAmount = document.getElementById("expense-amount");
 let balanceAmount = document.getElementById("balance-amount");
-
 let getUser
+let categories=[]
 
 //DOM loaded
 document.addEventListener('DOMContentLoaded', () => {
     renderedProfile = document.querySelector("#user-rendered-container");
     checkIfLoggedIn();
+    categories = getCategories();
+    
 })
 
 //user data
@@ -147,18 +149,18 @@ function loginFetch(username, password) {
 
 //render profiles (these are essentially the same... can we make them one method??)
 function renderNewUserProfile() {
-    renderedProfile.removeAttribute("hidden")
+    renderedProfile.removeAttribute("hidden");
     getUserData().then((user) => {
         user ? alert(`Welcome ${user.data.attributes.username}`) : alert("Unable to create account. Please try again.");
-    })
+    });
 }
 
 function renderUserProfile() {
-    renderedProfile.removeAttribute("hidden")
+    renderedProfile.removeAttribute("hidden");
     getUserData().then((user) => {
         !user.data.attributes.budget ? renderBudgetForm() : displayBudget();
         user ? alert(`Welcome back ${user.data.attributes.username}`) : alert("Incorrect username or password.");
-    })
+    });
 }
 
 //budget
@@ -216,11 +218,12 @@ function createBudgetFetch(amount){
 
 function displayBudget(){
     const budgetDisplay = document.querySelector("#budget-display")
-    budgetDisplay.removeAttribute("hidden")
-    getUser.then((user) => {
+    budgetDisplay.removeAttribute("hidden");
+    displayCategories();
+    getUserData().then((user) => {
         budget = user.data.attributes.budget.amount
         budgetAmount.textContent = budget;
-    })
+    });
 }
 
 
@@ -229,6 +232,7 @@ function editBudget(){
     const editBudgetForm = document.createElement("div")
     editBudgetForm.id = "edit-budget-form"
     //this should be a modal
+    //need option to x out of form
     editBudgetForm.innerHTML = `
         <form id="edit-budget-form">
             <h4>Please Enter Your New Budget.</h4>
@@ -242,6 +246,7 @@ function editBudget(){
 
 function editBudgetHandler(e){
     e.preventDefault()
+    //need catch for if submitted without value
     const newAmount = e.target.querySelector("#budget-amount").value
     editBudgetFetch(newAmount)
 }
@@ -268,4 +273,58 @@ function editBudgetFetch(newAmount){
             budgetAmount.textContent = newBudget;
         })
     }); 
+}
+
+//categories
+function getCategories(){
+    let categories = []
+    listCategories = fetch('http://localhost:3000/api/v1/categories', {
+        method: 'GET',
+        headers: {
+        Authorization: `Bearer ${localStorage.getItem('jwt_token')}`
+        }
+    })
+    .then(response => response.json())
+    .then(json => {return json.category.data})
+    
+    listCategories.then((list) => {
+        list.forEach(category => {
+            categories.push(category.attributes.name)
+        })
+        return categories
+    })  
+    return categories
+}
+
+function displayCategories(){
+    categoryList = document.querySelector('#expense-list-categories');
+    categories.forEach( (category) => {
+        let ul = document.createElement('ul');
+        categoryList.appendChild(ul);
+        ul.innerHTML += `${category}`;
+    });
+}
+
+//expense
+function addExpense(){
+    const showExpense = document.querySelector("#show-expense")
+    const addExpenseForm = document.createElement("div")
+    addExpenseForm.id = "add-expense-form"
+    //this should be a modal
+    //need option to x out of form
+    addExpenseForm.innerHTML = `
+        <form id="add-expense-form">
+            <h4>Please Enter Your Expense.</h4>
+            <select id="expense-category" name= "category-dropdown">
+                <option value = "value 1" selected>value 1</option>
+                <option value = "value 2">Javvalue 2a</option>
+                <option value = "value 3">value 3</option>
+            </select>
+            <input id= 'expense-item' type="text" name="expense-item" value="" placeholder="Enter expense item."><br>
+            <input id= 'expense-amount' type="number" step=.01 name="expense-amount" value="" placeholder="Enter expense amount."><br>
+            <input id= 'budget-submit' type="submit" name="submit" value="Add Expense" class="submit"><br><br>
+        </form>
+    `
+    showExpense.insertAdjacentElement("afterend", addExpenseForm)
+    // addExpenseForm.addEventListener("submit", (e) => addExpenseHandler(e))
 }
