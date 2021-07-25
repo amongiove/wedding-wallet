@@ -13,52 +13,41 @@
       </div>
     </div>
 
-    <!-- page title -->
+    <!-- page title and start rendered page -->
     <div id="user-rendered-container" hidden >
       <h3> Your Wedding Wallet </h3>
       <h5 class="text-muted"> Keep track of your budget and spending as you plan the wedding of your dreams. </h5>
 
       <!-- budget balances -->
       <div id="budget-display" hidden>
-        <div class="col-md-7">
+        <table style="width:100%" class="col-md-7">
           <div class="row my-3">
-              <div id="show-budget" class="col-4 text-center mb-2">
+            <tr>
+              <th id="show-budget" class="col-4 text-center mb-2">
                   <h5>budget</h5>
                   <h4 id="budget"><span>$ </span><span id="budget-amount">0</span></h4>
                   <button id="edit-budget" type="button" onclick="editBudget()">Edit Budget</button>
-              </div>
-              <div id="show-expense" class="col-4 text-center">
+              </th>
+              <th id="show-expense" class="col-4 text-center">
                   <h5>expenses</h5>
                   <h4 id="expense"><span>$ </span><span id="expense-amount">0</span></h4>
                   <button id="add-expense" type="button" onclick="addExpense()">Add Expense</button>
-              </div>
-              <div id="show-balance" class="col-4 text-center">
+              </th>
+              <th id="show-balance" class="col-4 text-center">
                   <h5>balance</h5>
                   <h4 id="balance"> <span>$ </span><span id="balance-amount">0</span></h4>
-              </div>
+              </th>
+            </tr>
           </div>
-        </div>
+        </table>
       </div>
 
-      <!-- expense list -->
-      <div class="col-md-7 my-3">
-        <div class="expense-list" id="expense-list">
-          <div class="expense-list-headers">
-            <h5 class="list-item">expense item</h5>
-            <h5 class="list-item">expense value</h5>
-            <h5 class="list-item"></h5>
-          </div>
-          <div id="expense-list-categories">
-          <!-- want section for each category -- when add expense will populate in appropriate section  -->
-          </div>
-          </div>
-        </div>
+      <!--expense list-->
+      <div id="expense-list-categories">
+        <h4>Your Expenses</h4>
       </div>
-
       
-      
-     
-
+      <!--end user form render-->
     </div>
   </body>
 </html>

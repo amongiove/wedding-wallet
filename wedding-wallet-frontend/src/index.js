@@ -307,12 +307,13 @@ function displayCategories(){
         table.id = `${category}-expense-table`
         table.style = "width:100%"
         table.innerHTML = `
-            <caption>${category}</caption>
+            <caption style="text-align:left">${category}</caption>
             <tr>
-            <th>name</th>
-            <th>amount</th>
-            <th>edit/delete buttons</th>
-            </tr><br>
+                <th style="width:35%">name</th>
+                <th style="width:35%">cost</th>
+                <th style="width:20%">buttons</th>
+            </tr
+            ><br>
         `
         categoryList.appendChild(table);
     });        
