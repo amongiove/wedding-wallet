@@ -1,6 +1,6 @@
 const createUserContainer = document.querySelector("#login-or-signup-form").parentElement;
-let budgetAmount = document.getElementById("budget-amount");
-let expenseAmount = document.getElementById("expense-amount");
+let budgetAmount = document.getElementById("display-budget-amount");
+let expenseAmount = document.getElementById("display-expense-amount");
 let balanceAmount = document.getElementById("balance-amount");
 let getUser
 let categories=[]
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     checkIfLoggedIn();
     categories = getCategories();
     document.querySelector("#add-expense-form").addEventListener("submit", (e) => addExpenseHandler(e));
-    
+    document.querySelector("#edit-budget-form").addEventListener("submit", (e) => editBudgetHandler(e));
 })
 
 function clearField(element){
@@ -222,38 +222,40 @@ function createBudgetFetch(amount){
 }
 
 function displayBudget(){
-    const budgetDisplay = document.querySelector("#budget-display")
+    const budgetDisplay = document.querySelector("#budget-display");
     budgetDisplay.removeAttribute("hidden");
     displayCategories();
     getExpenses();
     getUserData().then((user) => {
         budget = user.data.attributes.budget.amount
+        console.log(budget)
         budgetAmount.textContent = budget;
     });
-    document.querySelector("#expense-header").removeAttribute("hidden")
+    document.querySelector("#expense-header").removeAttribute("hidden");
 }
 
-function editBudget(){
-    const budgetDisplay = document.querySelector("#budget-display")
-    const editBudgetForm = document.createElement("div")
-    editBudgetForm.id = "edit-budget-form"
-    //this should be a modal
-    //need option to x out of form
-    editBudgetForm.innerHTML = `
-        <form id="edit-budget-form">
-            <h4>Please Enter Your New Budget.</h4>
-            <input id='budget-amount' type="number" step=.01 name="budget-amount" value="" placeholder="Enter desired budget.">
-            <input id= 'budget-submit' type="submit" name="submit" value="Save" class="submit"><br><br>
-        </form>
-    `
-    budgetDisplay.insertAdjacentElement("afterbegin", editBudgetForm)
-    editBudgetForm.addEventListener("submit", (e) => editBudgetHandler(e))
-}
+// function editBudget(){
+//     const budgetDisplay = document.querySelector("#budget-display")
+//     const editBudgetForm = document.createElement("div")
+//     editBudgetForm.id = "edit-budget-form"
+//     //this should be a modal
+//     //need option to x out of form
+//     editBudgetForm.innerHTML = `
+//         <form id="edit-budget-form">
+//             <h4>Please Enter Your New Budget.</h4>
+//             <input id='budget-amount' type="number" step=.01 name="budget-amount" value="" placeholder="Enter desired budget.">
+//             <input id= 'budget-submit' type="submit" name="submit" value="Save" class="submit"><br><br>
+//         </form>
+//     `
+//     budgetDisplay.insertAdjacentElement("afterbegin", editBudgetForm)
+//     editBudgetForm.addEventListener("submit", (e) => editBudgetHandler(e))
+// }
 
 function editBudgetHandler(e){
     e.preventDefault()
+    console.log(e.target)
     //need catch for if submitted without value
-    const newAmount = e.target.querySelector("#budget-amount").value
+    const newAmount = e.target[0].value
     editBudgetFetch(newAmount)
 }
 
@@ -272,10 +274,8 @@ function editBudgetFetch(newAmount){
         .then(response => response.json())
         .then(json => {
             newBudget = json.data.attributes.amount;
-
-            const display = document.querySelector("#budget-display")
-            display.removeChild(display.firstElementChild)
-
+            // const display = document.querySelector("#budget-display")
+            // display.removeChild(display.firstElementChild)
             budgetAmount.textContent = newBudget;
         })
     }); 
@@ -310,13 +310,12 @@ function displayCategories(){
         table.id = `${id}`
         table.style = "width:100%"
         table.innerHTML = `
-            <caption style="text-align:left">${category}</caption>
+            <caption style="text-align:left"><b><i>${category}</b></i></caption>
             <tr>
-                <th style="width:35%">name</th>
-                <th style="width:35%">cost</th>
-                <th style="width:20%">buttons</th>
+                <th style="width:35%">Expense Item</th>
+                <th style="width:35%">Expense Cost</th>
+                <th style="width:20%"></th>
             </tr
-            ><br>
         `
         categoryList.appendChild(table);
     });        
@@ -360,15 +359,6 @@ function getExpenses(){
             })
         })
     })
-}
-
-function addExpense(){
-    // categories = getCategories();
-    
-    // //fix click to clear notes (clear every time)
-    // showExpense.insertAdjacentElement("afterend", addExpenseForm);
-    // // addCategories();  -can i use this to dynamically code categories?
-    // 
 }
 
 function addExpenseHandler(e){
