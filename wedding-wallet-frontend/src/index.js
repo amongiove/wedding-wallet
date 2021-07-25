@@ -303,10 +303,19 @@ function getCategories(){
 function displayCategories(){
     categoryList = document.querySelector('#expense-list-categories');
     categories.forEach( (category) => {
-        let ul = document.createElement('ul');
-        categoryList.appendChild(ul);
-        ul.innerHTML += `${category}`;
-    });
+        let table = document.createElement('table');
+        table.id = `${category}-expense-table`
+        table.style = "width:100%"
+        table.innerHTML = `
+            <caption>${category}</caption>
+            <tr>
+            <th>name</th>
+            <th>amount</th>
+            <th>edit/delete buttons</th>
+            </tr><br>
+        `
+        categoryList.appendChild(table);
+    });        
 }
 
 //potential for dynamically coding categories into form
@@ -396,5 +405,9 @@ function createExpenseFetch(category, name, amount, notes){
 
 function displayExpense(category, name, amount, notes){
     console.log("display expense")
+    list = document.querySelector(`#${category}-expense-list`)
+    const expenseLi = document.addElement("li")
+    expenseLi.innerHTML = ``
+
 }
 
