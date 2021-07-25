@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderedProfile = document.querySelector("#user-rendered-container");
     checkIfLoggedIn();
     categories = getCategories();
+    document.querySelector("#add-expense-form").addEventListener("submit", (e) => addExpenseHandler(e));
     
 })
 
@@ -361,47 +362,14 @@ function getExpenses(){
     })
 }
 
-// function addExpense(){
+function addExpense(){
     // categories = getCategories();
-    // const showExpense = document.querySelector("#show-expense")
-    // const addExpenseForm = document.createElement("div")
-    // addExpenseForm.id = "add-expense-form"
-    // //this should be a modal
-    // //need option to x out of form
-    // addExpenseForm.innerHTML = `
-    //     <form id="add-expense-form">
-    //         <h4>Please Enter Your Expense Details.</h4>
-    //         <select id="expense-category" name= "category-dropdown required" palceholder="Select A Category.">
-    //             <option disabled selected value="">--Select Item Category--</option>
-    //             <option value="Accomodation">Accomodation</option>
-    //             <option value="Attire">Attire</option>
-    //             <option value="Bachelor/Bachelorette Party">Bachelor/Bachelorette Party</option>
-    //             <option value="Ceremony">Ceremony</option>
-    //             <option value="Entertainment">Entertainment</option>
-    //             <option value="Favors & Gifts">Favors & Gifts</option>
-    //             <option value="Florals">Florals</option>
-    //             <option value="Food & Drink">Food & Drink</option>
-    //             <option value="Honeymoon">Honeymoon</option>
-    //             <option value="Photography & Videography">Photography & Videography</option>
-    //             <option value="Rehersal Dinner">Rehersal Dinner</option>
-    //             <option value="Rentals & Decor">Rentals & Decor</option>
-    //             <option value="Stationary">Stationary</option>
-    //             <option value="Transportation">Transportation</option>
-    //             <option value="Venue">Venue</option>
-    //             <option value="Wedding Morning">Wedding Morning</option>
-    //             <option value="Additional Expenses">Additional Expenses</option>
-    //         </select><br>
-    //         <input id= 'expense-item' type="text" name="expense-item" value="" placeholder="Item name" required><br>
-    //         <input id= 'expense-amount' type="number" step=.01 name="expense-amount" value="" placeholder="Item amount" required><br>
-    //         <textarea rows="4" cols="50" id="expense-notes" name="expense-notes" form="add-expense-form" onclick="clearField(this)">Add notes about payments, dates, options, etc.</textarea><br>
-    //         <input id= 'budget-submit' type="submit" name="submit" value="Save Expense" class="submit"><br><br>
-    //     </form>
-    // `
+    
     // //fix click to clear notes (clear every time)
     // showExpense.insertAdjacentElement("afterend", addExpenseForm);
     // // addCategories();  -can i use this to dynamically code categories?
-    // addExpenseForm.addEventListener("submit", (e) => addExpenseHandler(e))
-// }
+    // 
+}
 
 function addExpenseHandler(e){
     e.preventDefault()
