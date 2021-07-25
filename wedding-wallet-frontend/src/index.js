@@ -224,12 +224,13 @@ function displayBudget(){
     const budgetDisplay = document.querySelector("#budget-display")
     budgetDisplay.removeAttribute("hidden");
     displayCategories();
+    getExpenses();
     getUserData().then((user) => {
         budget = user.data.attributes.budget.amount
         budgetAmount.textContent = budget;
     });
+    document.querySelector("#expense-header").removeAttribute("hidden")
 }
-
 
 function editBudget(){
     const budgetDisplay = document.querySelector("#budget-display")

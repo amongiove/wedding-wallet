@@ -15,7 +15,7 @@
 
     <!-- page title and start rendered page -->
     <div id="user-rendered-container" hidden >
-      <h3> Your Wedding Wallet </h3>
+      <h2> Your Wedding Wallet </h2>
       <h5 class="text-muted"> Keep track of your budget and spending as you plan the wedding of your dreams. </h5>
 
       <!-- budget balances -->
@@ -36,7 +36,7 @@
                   <button id="add-expense" type="button" onclick="document.getElementById('add-expense-form').style.display='block'">Add Expense</button>
 
                   <!--add expense modal-->
-                  <div id="add-expense-form" class="modal" dispay="none">
+                  <div id="add-expense-form" class="modal" style="display:none">
                     <div class="modal-content">
                       <div class="modal-container">
                         <span onclick="document.getElementById('add-expense-form').style.display='none'" class="button display-topright">&times;</span>
@@ -84,7 +84,7 @@
 
       <!--expense list-->
       <div id="expense-list-categories">
-        <h4>Your Expenses</h4>
+        <h3 id="expense-header" hidden>Your Expenses</h3>
       </div>
       
       <!--end user form render-->
