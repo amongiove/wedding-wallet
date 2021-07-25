@@ -304,7 +304,8 @@ function displayCategories(){
     categoryList = document.querySelector('#expense-list-categories');
     categories.forEach( (category) => {
         let table = document.createElement('table');
-        table.id = `${category}-expense-table`
+        id = category.replace(/[^A-Z0-9]/ig, "")
+        table.id = `${id}`
         table.style = "width:100%"
         table.innerHTML = `
             <caption style="text-align:left">${category}</caption>
@@ -376,12 +377,12 @@ function addExpense(){
 
 function addExpenseHandler(e){
     e.preventDefault()
-    const expenseCategoryId = e.target[0].value
+    const expenseCategory = e.target[0].value
     const expenseName = e.target[1].value 
     const expenseAmount = e.target[2].value
     const expenseNotes = e.target.childNodes[12].value
 
-    createExpenseFetch(expenseCategoryId, expenseName, expenseAmount, expenseNotes)
+    createExpenseFetch(expenseCategory, expenseName, expenseAmount, expenseNotes)
 }
 
 function createExpenseFetch(category, name, amount, notes){ 
@@ -406,9 +407,14 @@ function createExpenseFetch(category, name, amount, notes){
 
 function displayExpense(category, name, amount, notes){
     console.log("display expense")
-    list = document.querySelector(`#${category}-expense-list`)
-    const expenseLi = document.addElement("li")
-    expenseLi.innerHTML = ``
-
+    categoryId = category.replace(/[^A-Z0-9]/ig, "")
+    table = document.querySelector(`#${categoryId}`)
+    const expenseRow = document.createElement("tr")
+    expenseRow.innerHTML = `
+        <td>${name}</td> 
+        <td>${amount}</td> 
+        <td>edit/delete icons</td>    
+    `
+    table.appendChild(expenseRow);
 }
 
