@@ -1,6 +1,8 @@
 class Api::V1::ExpensesController < ApplicationController
     
     def index
+        # expenses = Expense.all
+        # render json: { expense: ExpenseSerializer.new(expenses) }, status: :accepted
     end
 
     def create

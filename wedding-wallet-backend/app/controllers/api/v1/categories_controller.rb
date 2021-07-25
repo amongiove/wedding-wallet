@@ -6,6 +6,11 @@ class Api::V1::CategoriesController < ApplicationController
         render json: { category: CategorySerializer.new(categories) }, status: :accepted
     end
 
+    def show
+        category = Category.find(params[:id])
+        render json: { category: CategorySerializer.new(category) }, status: :accepted
+    end
+
     private
     
     def category_params
