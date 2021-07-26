@@ -1,9 +1,4 @@
 class Api::V1::ExpensesController < ApplicationController
-    
-    def index
-        # expenses = Expense.all
-        # render json: { expense: ExpenseSerializer.new(expenses) }, status: :accepted
-    end
 
     def create
         category = Category.find_by(name: params[:category])
@@ -16,6 +11,14 @@ class Api::V1::ExpensesController < ApplicationController
     end
 
     def update
+    end
+    
+    def destroy
+        puts "inside destroy"
+        puts params
+        puts params[:id]
+        expense = Expense.find(params[:id])
+        expense.destroy
     end
 
     private

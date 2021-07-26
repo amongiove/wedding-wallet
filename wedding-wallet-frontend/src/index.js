@@ -339,8 +339,8 @@ function getExpenses(){
                 expenseRow.innerHTML = `
                     <td>${expense.name}</td> 
                     <td>${expense.amount}</td> 
-                    <td>edit/delete icons</td>    
-                `
+                    <td><button class="edit-expense" data-id="${expense.id}" type="button">Edit</button> <button class="delete-expense" data-id="${expense.id}" type="button" onclick="return confirm('Are you sure you want to delete?')?deleteExpense(${expense.id}):''">Delete</button></td>    
+    `
                 table.appendChild(expenseRow);
             })
         })
@@ -369,22 +369,24 @@ function createExpenseFetch(category, name, amount, notes){
     })
     .then(response => response.json())
     .then(json => {
+        // debugger
+        expenseId = json.data.id
         expenseCategory = json.data.attributes.category.name;
         expenseName = json.data.attributes.name;
         expenseAmount = json.data.attributes.amount;
         expenseNotes = json.data.attributes.notes;
-        displayExpense(expenseCategory, expenseName, expenseAmount, expenseNotes)
+        displayExpense(expenseCategory, expenseName, expenseAmount, expenseNotes, expenseId)
     });
 }
 
-function displayExpense(category, name, amount, notes){
+function displayExpense(category, name, amount, notes, id){
     categoryId = category.replace(/[^A-Z0-9]/ig, "")
     table = document.querySelector(`#${categoryId}`)
     const expenseRow = document.createElement("tr")
     expenseRow.innerHTML = `
         <td>${name}</td> 
         <td>${amount}</td> 
-        <td>edit/delete icons</td>    
+        <td><button class="edit-expense" data-id="${id}" type="button">Edit</button> <button class="delete-expense" data-id="${id}" type="button" onclick="return confirm('Are you sure you want to delete?')?deleteExpense(${id}):''">Delete</button></td>    
     `
     table.appendChild(expenseRow);
     totalExpense();
@@ -392,11 +394,9 @@ function displayExpense(category, name, amount, notes){
 }
 
 function totalExpense(){
-    console.log("total Expense")
     let total = 0;
     getUserData().then((user) => {
         expenses = user.data.attributes.expenses;
-        console.log(expenses)
         if(expenses.length >0){
             total = expenses.reduce(function(acc,curr){
                 acc += parseInt(curr.amount);
@@ -408,14 +408,31 @@ function totalExpense(){
     })
 }
 
-//balance
+function deleteExpense(id){
+    console.log("delete")
+    console.log(id)
+    bodyData = {id}
+    fetch(`http://localhost:3000/api/v1/expenses/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem('jwt_token')}`
+        },
+        body: JSON.stringify(bodyData)
+        })
+        .then(response => response.json())
+        .then(json => {
+            console.log(json)
+        })
+    
+}
 
+//balance
 function showBalance(){
     //why doesnt this work? can we make it work when calling totalExpense() ???
     // const expenseTotal = totalExpense();
     getUserData().then((user) => {
         expenses = user.data.attributes.expenses;
-        console.log(expenses)
         if(expenses.length >0){
             expenseTotal = expenses.reduce(function(acc,curr){
                 acc += parseInt(curr.amount);
@@ -423,7 +440,6 @@ function showBalance(){
             }, 0)
         }
         budget = parseInt(user.data.attributes.budget.amount)
-        console.log(budget)
         const total = budget - expenseTotal
         balanceAmount.textContent = total;
         return total;
