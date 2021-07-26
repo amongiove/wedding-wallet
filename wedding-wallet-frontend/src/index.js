@@ -48,9 +48,9 @@ function checkIfLoggedIn(){
 
 function promptUserLogIn() {
     const loginButton = createUserContainer.firstElementChild.cloneNode(true);
-    loginButton.innerText = "Login"
+    loginButton.innerHTML = '<button class="btn btn-outline-secondary btn-lg" style="text-align:center">Login</button><br><br>'
     const signupButton = createUserContainer.firstElementChild.cloneNode(true);
-    signupButton.innerText = "Sign Up"
+    signupButton.innerHTML = '<button class="btn btn-outline-secondary btn-lg" style="text-align:center">Sign Up</button><br>'
 
     createUserContainer.firstElementChild.append(loginButton, signupButton)
 
@@ -60,17 +60,18 @@ function promptUserLogIn() {
   
 function launchLoginForm() {
     createUserContainer.innerHTML = `
-        <div style="text-align:center" id="login-form-container">
+        <div class="login-signup-form" style="text-align:center" id="login-form-container">
+
             <form id="login-form">
-            <h4>Log In</h4>
+            <h4>Log In</h4><br>
             <div class="form-group">
                 <h5>Username</h5>
-                <input type="text" class="form-control" id="login-username">
+                <input type="text" class="form-control" id="login-username" required>
             </div>
             <div class="form-group">
                 <h5>Password</h5>
-                <input type="password" class="form-control" id="login-password">
-            </div>
+                <input type="password" class="form-control" id="login-password" required>
+            </div><br>
             <input id= 'login-submit' type="submit" name="submit" value="Log In" class="submit">
             </form><br><br>
             <p class="go-sign-up">Don't have an account? Sign Up Here</p>
@@ -83,17 +84,17 @@ function launchLoginForm() {
 
 function launchSignupForm(){
     createUserContainer.innerHTML = `
-        <div style="text-align:center" id="signup-form-container">
+        <div class="login-signup-form" style="text-align:center" id="signup-form-container">
             <form id="signup-form">
-            <h4>Signup</h4>
+            <h4>Signup</h4><br>
             <div class="form-group">
                 <h5>Username</h5>
-                <input type="text" class="form-control" id="signup-username">
+                <input type="text" class="form-control" id="signup-username" required>
             </div>
             <div class="form-group">
                 <h5>Password</h5>
-                <input type="password" class="form-control" id="signup-password">
-            </div>
+                <input type="password" class="form-control" id="signup-password" required>
+            </div><br>
             <input id='signup-submit' type="submit" name="submit" value="Sign Up" class="submit">
             </form><br><br>
             <p class="go-log-in">Already have an account? Log In Here</p>
@@ -345,6 +346,7 @@ function getExpenses(){
                 expenseAmount = expenseRow.insertCell(1)
                 expenseAmount.innerHTML =  `$${expense.amount}`
                 expenseButtons = expenseRow.insertCell(2)
+                expenseButtons.style = "text-align: right"
                 expenseButtons.innerHTML =  `
                     <button class="edit-expense" data-id="${expense.id}" type="button"onclick="document.getElementById('edit-expense-form').style.display='block'; updateExpense(${expense.id})"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                     <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
@@ -380,7 +382,6 @@ function createExpenseFetch(category, name, amount, notes){
     })
     .then(response => response.json())
     .then(json => {
-        // debugger
         expenseId = json.data.id
         expenseCategory = json.data.attributes.category.name;
         expenseName = json.data.attributes.name;
@@ -400,6 +401,7 @@ function displayExpense(category, name, amount, notes, id){
     expenseAmount = expenseRow.insertCell(1)
     expenseAmount.innerHTML =  `$${amount}`
     expenseButtons = expenseRow.insertCell(2)
+    expenseButtons.style = "text-align: right"
     expenseButtons.innerHTML =  `
         <button class="edit-expense" data-id="${id}" type="button"onclick="document.getElementById('edit-expense-form').style.display='block'; updateExpense(${id})"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
         <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
