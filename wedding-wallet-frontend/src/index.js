@@ -294,9 +294,10 @@ function displayCategories(){
         let table = document.createElement('table');
         id = category.replace(/[^A-Z0-9]/ig, "")
         table.id = `${id}`
+        table.classList.add("table", "table-hover", "table-danger", "table-striped");
         table.style = "width:100%"
         table.innerHTML = `
-            <caption style="text-align:left"><b><i>${category}</b></i></caption>
+            <caption class="caption-top"><b><i>${category}</b></i></caption>
             <tr>
                 <th style="width:35%">Expense Item</th>
                 <th style="width:35%">Expense Cost</th>
@@ -335,15 +336,17 @@ function getExpenses(){
             category.then((categoryName) => {
                 const id = categoryName.replace(/[^A-Z0-9]/ig, "")
                 table = document.querySelector(`#${id}`)
-                const expenseRow = document.createElement("tr")
+                expenseRow = table.insertRow(-1);
                 expenseRow.id = `expense-${expense.id}`
-                expenseRow.innerHTML = `
-                    <td>${expense.name}</td> 
-                    <td>${expense.amount}</td> 
-                    <td><button class="edit-expense" data-id="${expense.id}" type="button"onclick="document.getElementById('edit-expense-form').style.display='block'; updateExpense(${expense.id})">Edit</button> 
-                    <button class="delete-expense" data-id="${expense.id}" type="button" onclick="return confirm('Are you sure you want to delete?')?deleteExpense(${expense.id}):''">Delete</button></td>    
-    `
-                table.appendChild(expenseRow);
+                expenseName = expenseRow.insertCell(0)
+                expenseName.innerHTML =  `${expense.name}`
+                expenseAmount = expenseRow.insertCell(1)
+                expenseAmount.innerHTML =  `${expense.amount}`
+                expenseButtons = expenseRow.insertCell(2)
+                expenseButtons.innerHTML =  `
+                    <button class="edit-expense" data-id="${expense.id}" type="button"onclick="document.getElementById('edit-expense-form').style.display='block'; updateExpense(${expense.id})">Edit</button> 
+                    <button class="delete-expense" data-id="${expense.id}" type="button" onclick="return confirm('Are you sure you want to delete?')?deleteExpense(${expense.id}):''">Delete</button>
+                `
             })
         })
     })
@@ -384,15 +387,17 @@ function createExpenseFetch(category, name, amount, notes){
 function displayExpense(category, name, amount, notes, id){
     categoryId = category.replace(/[^A-Z0-9]/ig, "")
     table = document.querySelector(`#${categoryId}`)
-    const expenseRow = document.createElement("tr")
+    expenseRow = table.insertRow(-1);
     expenseRow.id = `expense-${id}`
-    expenseRow.innerHTML = `
-        <td>${name}</td> 
-        <td>${amount}</td> 
-        <td><button class="edit-expense" data-id="${id}" type="button" onclick="document.getElementById('edit-expense-form').style.display='block'; updateExpense(${id})">Edit</button> 
-        <button class="delete-expense" data-id="${id}" type="button" onclick="return confirm('Are you sure you want to delete?')?deleteExpense(${id}):''">Delete</button></td>    
-    `
-    table.appendChild(expenseRow);
+    expenseName = expenseRow.insertCell(0)
+    expenseName.innerHTML =  `${name}`
+    expenseAmount = expenseRow.insertCell(1)
+    expenseAmount.innerHTML =  `${amount}`
+    expenseButtons = expenseRow.insertCell(2)
+    expenseButtons.innerHTML =  `
+        <button class="edit-expense" data-id="${id}" type="button"onclick="document.getElementById('edit-expense-form').style.display='block'; updateExpense(${id})">Edit</button> 
+        <button class="delete-expense" data-id="${id}" type="button" onclick="return confirm('Are you sure you want to delete?')?deleteExpense(${id}):''">Delete</button>
+        `
     totalExpense();
     showBalance();
 }
