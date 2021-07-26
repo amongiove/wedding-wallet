@@ -233,6 +233,8 @@ function displayBudget(){
     });
     document.querySelector("#expense-header").removeAttribute("hidden");
     totalExpense();
+    showBalance();
+
 }
 
 function editBudgetHandler(e){
@@ -261,6 +263,7 @@ function editBudgetFetch(newAmount){
             // display.removeChild(display.firstElementChild)
             budgetAmount.textContent = newBudget;
         })
+        showBalance();
     }); 
 }
 
@@ -385,12 +388,15 @@ function displayExpense(category, name, amount, notes){
     `
     table.appendChild(expenseRow);
     totalExpense();
+    showBalance();
 }
 
 function totalExpense(){
+    console.log("total Expense")
     let total = 0;
-    getUser.then((user) => {
+    getUserData().then((user) => {
         expenses = user.data.attributes.expenses;
+        console.log(expenses)
         if(expenses.length >0){
             total = expenses.reduce(function(acc,curr){
                 acc += parseInt(curr.amount);
@@ -401,3 +407,36 @@ function totalExpense(){
         return total;
     })
 }
+
+//balance
+
+function showBalance(){
+    //why doesnt this work? can we make it work when calling totalExpense() ???
+    // const expenseTotal = totalExpense();
+    getUserData().then((user) => {
+        expenses = user.data.attributes.expenses;
+        console.log(expenses)
+        if(expenses.length >0){
+            expenseTotal = expenses.reduce(function(acc,curr){
+                acc += parseInt(curr.amount);
+                return acc;
+            }, 0)
+        }
+        budget = parseInt(user.data.attributes.budget.amount)
+        console.log(budget)
+        const total = budget - expenseTotal
+        balanceAmount.textContent = total;
+        return total;
+    })
+    // if want to add balance color styling later on
+    // if(total < 0){
+    //   this.balance.classList.remove('showGreen', 'showBlack');
+    //   this.balance.classList.add('showRed');
+    // } else if(total > 0){
+    //   this.balance.classList.remove('showRed', 'showBlack');
+    //   this.balance.classList.add('showGreen');
+    // } else if(total === 0){
+    //   this.balance.classList.remove('showRed', 'showGreen');
+    //   this.balance.classList.add('showBlack');
+    // }
+  }
