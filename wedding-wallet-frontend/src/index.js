@@ -400,12 +400,3 @@ function totalExpense(){
         return total;
     })
 }
-
-//     if(expenses.length > 0){
-//       total = expenses.reduce(function(acc, curr){
-//         acc += curr.amount;
-//         return acc;
-//       }, 0)
-//     } 
-//     this.expenseAmount.textContent = total;
-//     return total;
