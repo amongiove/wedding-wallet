@@ -10,6 +10,14 @@ class Api::V1::ExpensesController < ApplicationController
         end
     end
 
+    def show
+        puts "show expense"
+        puts params[:id]
+        expense = Expense.find(params[:id])
+        puts expense.name
+        render json: { expense: ExpenseSerializer.new(expense) }, status: :accepted
+    end
+
     def update
     end
     

@@ -340,7 +340,8 @@ function getExpenses(){
                 expenseRow.innerHTML = `
                     <td>${expense.name}</td> 
                     <td>${expense.amount}</td> 
-                    <td><button class="edit-expense" data-id="${expense.id}" type="button">Edit</button> <button class="delete-expense" data-id="${expense.id}" type="button" onclick="return confirm('Are you sure you want to delete?')?deleteExpense(${expense.id}):''">Delete</button></td>    
+                    <td><button class="edit-expense" data-id="${expense.id}" type="button"onclick="document.getElementById('edit-expense-form').style.display='block'; updateExpense(${expense.id})">Edit</button> 
+                    <button class="delete-expense" data-id="${expense.id}" type="button" onclick="return confirm('Are you sure you want to delete?')?deleteExpense(${expense.id}):''">Delete</button></td>    
     `
                 table.appendChild(expenseRow);
             })
@@ -388,7 +389,8 @@ function displayExpense(category, name, amount, notes, id){
     expenseRow.innerHTML = `
         <td>${name}</td> 
         <td>${amount}</td> 
-        <td><button class="edit-expense" data-id="${id}" type="button">Edit</button> <button class="delete-expense" data-id="${id}" type="button" onclick="return confirm('Are you sure you want to delete?')?deleteExpense(${id}):''">Delete</button></td>    
+        <td><button class="edit-expense" data-id="${id}" type="button" onclick="document.getElementById('edit-expense-form').style.display='block'; updateExpense(${id})">Edit</button> 
+        <button class="delete-expense" data-id="${id}" type="button" onclick="return confirm('Are you sure you want to delete?')?deleteExpense(${id}):''">Delete</button></td>    
     `
     table.appendChild(expenseRow);
     totalExpense();
@@ -410,6 +412,19 @@ function totalExpense(){
     })
 }
 
+// function updateExpense(id){
+//     console.log("update expense")
+//     editExpenseForm = document.querySelector("#edit-expense-form")
+//     expense = fetch(`http://localhost:3000/api/v1/expenses/${id}`, {
+//         method: "GET",
+//         headers: {
+//             "Content-Type": "application/json",
+//             Authorization: `Bearer ${localStorage.getItem('jwt_token')}`
+//         },
+//         })
+//         .then(response => response.json())
+// }
+
 function deleteExpense(id){
     bodyData = {id}
     fetch(`http://localhost:3000/api/v1/expenses/${id}`, {
@@ -422,6 +437,8 @@ function deleteExpense(id){
         })
     row = document.querySelector(`#expense-${id}`)
     row.remove();
+    totalExpense();
+    showBalance();
 }
 
 //balance
