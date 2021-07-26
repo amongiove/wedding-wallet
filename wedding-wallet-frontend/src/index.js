@@ -1,6 +1,6 @@
 const createUserContainer = document.querySelector("#login-or-signup-form").parentElement;
 let budgetAmount = document.getElementById("display-budget-amount");
-let expenseAmount = document.getElementById("display-expense-amount");
+let totalExpenseAmount = document.getElementById("display-expense-amount");
 let balanceAmount = document.getElementById("balance-amount");
 let getUser
 let categories=[]
@@ -233,23 +233,6 @@ function displayBudget(){
     document.querySelector("#expense-header").removeAttribute("hidden");
 }
 
-// function editBudget(){
-//     const budgetDisplay = document.querySelector("#budget-display")
-//     const editBudgetForm = document.createElement("div")
-//     editBudgetForm.id = "edit-budget-form"
-//     //this should be a modal
-//     //need option to x out of form
-//     editBudgetForm.innerHTML = `
-//         <form id="edit-budget-form">
-//             <h4>Please Enter Your New Budget.</h4>
-//             <input id='budget-amount' type="number" step=.01 name="budget-amount" value="" placeholder="Enter desired budget.">
-//             <input id= 'budget-submit' type="submit" name="submit" value="Save" class="submit"><br><br>
-//         </form>
-//     `
-//     budgetDisplay.insertAdjacentElement("afterbegin", editBudgetForm)
-//     editBudgetForm.addEventListener("submit", (e) => editBudgetHandler(e))
-// }
-
 function editBudgetHandler(e){
     e.preventDefault()
     //need catch for if submitted without value
@@ -401,3 +384,28 @@ function displayExpense(category, name, amount, notes){
     table.appendChild(expenseRow);
 }
 
+function totalExpense(){
+    console.log(totalExpenseAmount)
+    let total = 0;
+    getUser.then((user) => {
+        expenses = user.data.attributes.expenses;
+        if(expenses.length >0){
+            total = expenses.reduce(function(acc,curr){
+                acc += parseInt(curr.amount);
+                return acc;
+            }, 0)
+        }
+        console.log(total);
+        totalExpenseAmount.textContent = total;
+        return total;
+    })
+}
+
+//     if(expenses.length > 0){
+//       total = expenses.reduce(function(acc, curr){
+//         acc += curr.amount;
+//         return acc;
+//       }, 0)
+//     } 
+//     this.expenseAmount.textContent = total;
+//     return total;
