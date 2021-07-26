@@ -17,7 +17,7 @@
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
         <span class="navbar-brand mb-0 h1">Wedding Wallet</span>
-        <buton id="logout-btn" class="btn-outline-danger" style="text-align: right" onclick="logout()" hidden>Log Out</buton>
+        <buton id="logout-btn" class="btn btn-outline-danger" style="text-align: right" onclick="logout()" hidden>Log Out</buton>
       </div>
     </nav>
 
@@ -35,13 +35,17 @@
       <!-- budget balances -->
       <div id="budget-display" hidden>
         <table style="width:100%" class="col-md-7">
-          <div class="row my-3">
+          <div class="row gx-5">
             <tr>
               <!--budget-->
               <th id="show-budget" class="col-4 text-center mb-2">
-                  <h5>Budget</h5>
-                  <h4 id="budget"><span>$ </span><span id="display-budget-amount">0</span></h4>
-                  <button id="edit-budget" type="button" onclick="document.getElementById('edit-budget-form').style.display='block'">Edit Budget</button>
+                <div class="card display-card">
+                  <h5 class="card-title">Budget</h5>
+                  <h4 id="budget" class="text-muted"><span>$ </span><span id="display-budget-amount">0</span></h4>
+                  <button id="edit-budget" class="btn btn-outline-danger" type="button" onclick="document.getElementById('edit-budget-form').style.display='block'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                  </svg></button>
+                </div>
               </th>
 
               <!--edit budget modal-->
@@ -59,10 +63,15 @@
               </div>    
 
               <!--expenses-->
-              <th id="show-expense" class="col-4 text-center">
-                  <h5>Expenses</h5>
-                  <h4 id="expense"><span>$ </span><span id="display-expense-amount">0</span></h4>
-                  <button id="add-expense" type="button" onclick="document.getElementById('add-expense-modal').style.display='block'">Add Expense</button>
+              <th id="show-expense" class=" display col-4 text-center">
+                <div class="card display-card">
+                  <h5 class="card-title">Expenses</h5>
+                  <h4 id="expense" class="text-muted"><span>$ </span><span id="display-expense-amount">0</span></h4>
+                  <button id="add-expense" class="btn btn-outline-danger" type="button" onclick="document.getElementById('add-expense-modal').style.display='block'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                    <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+                  </svg></button>
+                </div>
+              </th>
 
                   <!--add expense modal-->
                   <div id="add-expense-modal" class="modal" style="display:none">
@@ -99,12 +108,14 @@
                       </div>
                     </div>
                   </div>
-              </th>
+              
 
               <!--balance-->
-              <th id="show-balance" class="col-4 text-center">
-                  <h5>Balance</h5>
-                  <h4 id="balance"> <span>$ </span><span id="balance-amount">0</span></h4>
+              <th id="show-balance" class="display col-4 text-center">
+                <div class="card display-card">
+                  <h5 class="card-title">Balance</h5>
+                  <h4 id="balance" class="text-muted"> <span>$ </span><span id="balance-amount">0</span></h4>
+                </div>
               </th>
             </tr>
           </div>
