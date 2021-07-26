@@ -169,9 +169,15 @@ function renderUserProfile() {
     });
 }
 
+//logout
+function logout() {
+    console.log("logout")
+    localStorage.removeItem('jwt_token');
+    location = window.location
+}
+
 //budget
 function renderBudgetForm(){
-    //modal?
     createBudgetForm = document.createElement("div")
     createBudgetForm.id = "create-budget-form-container"
     createBudgetForm.innerHTML = `
@@ -226,6 +232,8 @@ function createBudgetFetch(amount){
 function displayBudget(){
     const budgetDisplay = document.querySelector("#budget-display");
     budgetDisplay.removeAttribute("hidden");
+    const logOutBtn = document.querySelector("#logout-btn");
+    logOutBtn.removeAttribute("hidden");
     displayCategories();
     getExpenses();
     getUserData().then((user) => {
