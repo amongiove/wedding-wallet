@@ -336,6 +336,7 @@ function getExpenses(){
                 const id = categoryName.replace(/[^A-Z0-9]/ig, "")
                 table = document.querySelector(`#${id}`)
                 const expenseRow = document.createElement("tr")
+                expenseRow.id = `expense-${expense.id}`
                 expenseRow.innerHTML = `
                     <td>${expense.name}</td> 
                     <td>${expense.amount}</td> 
@@ -383,6 +384,7 @@ function displayExpense(category, name, amount, notes, id){
     categoryId = category.replace(/[^A-Z0-9]/ig, "")
     table = document.querySelector(`#${categoryId}`)
     const expenseRow = document.createElement("tr")
+    expenseRow.id = `expense-${id}`
     expenseRow.innerHTML = `
         <td>${name}</td> 
         <td>${amount}</td> 
@@ -409,8 +411,6 @@ function totalExpense(){
 }
 
 function deleteExpense(id){
-    console.log("delete")
-    console.log(id)
     bodyData = {id}
     fetch(`http://localhost:3000/api/v1/expenses/${id}`, {
         method: "DELETE",
@@ -420,11 +420,8 @@ function deleteExpense(id){
         },
         body: JSON.stringify(bodyData)
         })
-        .then(response => response.json())
-        .then(json => {
-            console.log(json)
-        })
-    
+    row = document.querySelector(`#expense-${id}`)
+    row.remove();
 }
 
 //balance
