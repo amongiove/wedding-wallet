@@ -228,7 +228,6 @@ function displayBudget(){
     getExpenses();
     getUserData().then((user) => {
         budget = user.data.attributes.budget.amount
-        console.log(budget)
         budgetAmount.textContent = budget;
     });
     document.querySelector("#expense-header").removeAttribute("hidden");
@@ -253,7 +252,6 @@ function displayBudget(){
 
 function editBudgetHandler(e){
     e.preventDefault()
-    console.log(e.target)
     //need catch for if submitted without value
     const newAmount = e.target[0].value
     editBudgetFetch(newAmount)
