@@ -52,7 +52,7 @@
               <div id="edit-budget-form" class="modal" style="display:none">
                 <div class="modal-content">
                   <div class="modal-container">
-                    <span onclick="document.getElementById('edit-budget-form').style.display='none'" class="button display-topright">&times;</span>
+                    <span onclick="document.getElementById('edit-budget-form').style.display='none'" class="btn display-topright">&times;</span>
                     <form id="edit-budget-form">
                       <h4>Please Enter Your New Budget.</h4>
                       <input id='budget-amount' type="number" step=.01 name="budget-amount" value="" placeholder="Enter desired budget.">
@@ -63,21 +63,21 @@
               </div>    
 
               <!--expenses-->
-              <th id="show-expense" class=" display col-4 text-center">
+              <th id="show-expense" class="display col-4 text-center">
                 <div class="card display-card">
                   <h5 class="card-title">Expenses</h5>
                   <h4 id="expense" class="text-muted"><span>$ </span><span id="display-expense-amount">0</span></h4>
-                  <button id="add-expense" class="btn btn-outline-danger" type="button" onclick="document.getElementById('add-expense-modal').style.display='block'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                  <button id="add-expense" class="btn btn-outline-danger" type="button" onclick="document.getElementById('add-expense-form').style.display='block'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                     <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
                   </svg></button>
                 </div>
               </th>
 
                   <!--add expense modal-->
-                  <div id="add-expense-modal" class="modal" style="display:none">
+                  <div id="add-expense-form" class="modal" style="display:none">
                     <div class="modal-content">
                       <div class="modal-container">
-                        <span onclick="document.getElementById('add-expense-form').style.display='none'" class="button display-topright">&times;</span>
+                        <span onclick="document.getElementById('add-expense-form').style.display='none'" class="btn display-topright">&times;</span>
                         <form id="add-expense-form">
                           <h4>Please Enter Your Expense Details.</h4>
                           <select id="expense-category" name= "category-dropdown required" palceholder="Select A Category.">
