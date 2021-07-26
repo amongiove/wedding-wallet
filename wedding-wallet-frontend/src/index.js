@@ -221,6 +221,7 @@ function createBudgetFetch(amount){
     })
 }
 
+//should all the extras be moved?
 function displayBudget(){
     const budgetDisplay = document.querySelector("#budget-display");
     budgetDisplay.removeAttribute("hidden");
@@ -231,6 +232,7 @@ function displayBudget(){
         budgetAmount.textContent = budget;
     });
     document.querySelector("#expense-header").removeAttribute("hidden");
+    totalExpense();
 }
 
 function editBudgetHandler(e){
@@ -382,10 +384,10 @@ function displayExpense(category, name, amount, notes){
         <td>edit/delete icons</td>    
     `
     table.appendChild(expenseRow);
+    totalExpense();
 }
 
 function totalExpense(){
-    console.log(totalExpenseAmount)
     let total = 0;
     getUser.then((user) => {
         expenses = user.data.attributes.expenses;
@@ -395,7 +397,6 @@ function totalExpense(){
                 return acc;
             }, 0)
         }
-        console.log(total);
         totalExpenseAmount.textContent = total;
         return total;
     })
