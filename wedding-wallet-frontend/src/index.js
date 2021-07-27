@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     renderedProfile = document.querySelector("#user-rendered-container");
     checkIfLoggedIn();
     categories = getCategories();
-    document.querySelector("#add-expense-form").addEventListener("submit", (e) => addExpenseHandler(e));
-    document.querySelector("#edit-budget-form-form").addEventListener("submit", (e) => editBudgetHandler(e));
+    document.querySelector("#add-expense-modal-form").addEventListener("submit", (e) => addExpenseHandler(e));
+    document.querySelector("#edit-budget-modal-form").addEventListener("submit", (e) => editBudgetHandler(e));
 })
 
 function clearField(element){
@@ -248,8 +248,6 @@ function displayBudget(){
 
 function editBudgetHandler(e){
     e.preventDefault()
-    console.log("edit budget")
-    console.log(e)
     //need catch for if submitted without value
     const newAmount = e.target[1].value
     editBudgetFetch(newAmount)
@@ -372,11 +370,11 @@ function getExpenses(){
 
 function addExpenseHandler(e){
     e.preventDefault()
-    const expenseCategory = e.target[0].value
-    const expenseName = e.target[1].value 
-    const expenseAmount = e.target[2].value
-    const expenseNotes = e.target.childNodes[12].value
-
+    
+    const expenseCategory = e.target[1].value
+    const expenseName = e.target[2].value 
+    const expenseAmount = e.target[3].value
+    const expenseNotes = document.querySelector("#expense-notes").value
     createExpenseFetch(expenseCategory, expenseName, expenseAmount, expenseNotes)
 }
 
