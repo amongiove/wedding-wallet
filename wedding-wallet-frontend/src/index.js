@@ -305,22 +305,29 @@ function displayCategories(){
     console.log("display")
     categoryList = document.querySelector('#expense-list-categories');
     categories.forEach( (category) => {
-        let table = document.createElement('table');
         id = category.replace(/[^A-Z0-9]/ig, "")
-        table.id = `${id}`
-        table.classList.add("table", "table-striped", "table-hover")
-        table.style = "width:100%"
-        table.innerHTML = `
-            <caption class="caption-top"><b><i>${category}</b></i></caption>
-            <thead>
-                <tr class="table table-danger table-sm head-row">
-                    <th class="fw-light" style="width:35%">Expense Item</th>
-                    <th class="fw-light" style="width:35%">Expense Cost</th>
-                    <th class="fw-light" style="width:20%"></th>
-                </tr>
-            </thead>
-        `
-        categoryList.appendChild(table);
+        let accordian = document.createElement('div');
+        accordian.classList.add('accoridan-item');
+        accordian.innerHTML= `
+            <h2 class="accordion-header" id="flush-heading">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-${id}" aria-expanded="false" aria-controls="flush-collapse">
+                    ${category}
+                </button>
+            </h2>
+            <div id="flush-collapse-${id}" class="accordion-collapse collapse" aria-labelledby="flush-heading">
+                <div class="accordion-body">
+                    <table id="${id}" class="table table-striped table-hover" style="width:100%">
+                        <thead>
+                            <tr class="table table-danger table-sm head-row">
+                                <th class="fw-light" style="width:35%">Expense Item</th>
+                                <th class="fw-light" style="width:35%">Expense Cost</th>
+                                <th class="fw-light" style="width:20%"></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>`
+        categoryList.appendChild(accordian);
     });        
 }
 
@@ -469,7 +476,7 @@ function totalExpense(){
     getUserData().then((user) => {
         expenses = user.data.attributes.expenses;
         console.log(expenses.length)
-        
+
         if(expenses.length >0){
             expenseTotal = expenses.reduce(function(acc,curr){
                 acc += parseInt(curr.amount);
