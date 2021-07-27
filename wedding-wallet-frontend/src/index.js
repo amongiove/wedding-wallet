@@ -188,7 +188,7 @@ function renderBudgetForm(){
         <div class="create-budget-container">
             <form id="create-budget-form">
                 <h4>Please Enter Your Budget.</h4><br>
-                <span class="input-group-text form-control" style="display:inline-block">$</span><input id='budget-amount' type="number" step=.01 name="budget-amount" value="" style="display:inline-block" placeholder="Enter desired budget." aria-label="Amount"><br><br>
+                <span class="input-group-text " style="display:inline-block">$</span><input class ="form-contron" id='budget-amount' type="number" min="1" name="budget-amount" value="" style="display:inline-block" placeholder="Enter desired budget." aria-label="Amount"><br><br>
                 <input id= 'budget-submit' type="submit" name="submit" value="Save Budget" class="submit btn btn-danger"><br><br>
             </form>
         </div>`
@@ -199,19 +199,12 @@ function renderBudgetForm(){
 function createBudgetHandler(e){
     e.preventDefault()
     const budgetAmount = e.target.querySelector("#budget-amount").value
-    //account for empty submit here
-    //   if(budgetAmount === '' || budgetAmount < 0){
-    //     this.budgetFeedback.classList.add('showItem');
-    //     this.budgetFeedback.innerHTML = `<p>value cannot be empty or negative</p>`;
-    //     const self = this;
-    //     setTimeout(function(){
-    //       self.budgetFeedback.classList.remove('showItem');
-    //     }, 3000);
-    //   } else {
-    //     this.budgetAmount.textContent = value;
-    //     this.budgetInput.value = '';
-    //     this.showBalance();
-    createBudgetFetch(budgetAmount)
+    if(budgetAmount === '' || budgetAmount < 0){
+        alert("value cannot be empty or negative.") ;
+    } 
+    else {
+        createBudgetFetch(budgetAmount)
+    }
 }
 
 function createBudgetFetch(amount){ 
@@ -254,9 +247,14 @@ function displayBudget(){
 
 function editBudgetHandler(e){
     e.preventDefault()
-    //need catch for if submitted without value
+    //set timeout for the alert
     const newAmount = e.target[1].value
-    editBudgetFetch(newAmount)
+    if(newAmount === '' || newAmount < 0){
+        alert("value cannot be empty or negative.") ;
+    } 
+    else {
+        editBudgetFetch(newAmount)
+    } 
 }
 
 function editBudgetFetch(newAmount){
@@ -382,11 +380,16 @@ function getExpenses(){
 
 function addExpenseHandler(e){
     e.preventDefault()
-    const expenseCategory = e.target[1].value
-    const expenseName = e.target[2].value 
     const expenseAmount = e.target[3].value
-    const expenseNotes = document.querySelector("#expense-notes").value
-    createExpenseFetch(expenseCategory, expenseName, expenseAmount, expenseNotes)
+    if(expenseAmount === '' || expenseAmount < 0){
+        alert("Expense amount cannot be empty or negative.") ;
+    } 
+    else {
+        const expenseCategory = e.target[1].value
+        const expenseName = e.target[2].value 
+        const expenseNotes = document.querySelector("#expense-notes").value
+        createExpenseFetch(expenseCategory, expenseName, expenseAmount, expenseNotes)
+    } 
 }
 
 function createExpenseFetch(category, name, amount, notes){ 
@@ -504,9 +507,9 @@ function showBalance(){
                 acc += parseInt(curr.amount);
                 return acc;
             }, 0)
+            budget = parseInt(user.data.attributes.budget.amount)
+            balance = budget - expenseTotal
         }
-        budget = parseInt(user.data.attributes.budget.amount)
-        balance = budget - expenseTotal
         balanceAmount.textContent = balance;
         return balance;
     })
