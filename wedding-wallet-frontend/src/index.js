@@ -247,12 +247,12 @@ function displayBudget(){
 
 function editBudgetHandler(e){
     e.preventDefault()
-    //set timeout for the alert
     const newAmount = e.target[1].value
     if(newAmount === '' || newAmount < 0){
         alert("value cannot be empty or negative.") ;
     } 
     else {
+        //hide modal
         editBudgetFetch(newAmount)
     } 
 }
@@ -385,6 +385,7 @@ function addExpenseHandler(e){
         alert("Expense amount cannot be empty or negative.") ;
     } 
     else {
+        //hide modal
         const expenseCategory = e.target[1].value
         const expenseName = e.target[2].value 
         const expenseNotes = document.querySelector("#expense-notes").value
