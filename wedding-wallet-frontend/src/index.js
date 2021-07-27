@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     checkIfLoggedIn();
     categories = getCategories();
     document.querySelector("#add-expense-form").addEventListener("submit", (e) => addExpenseHandler(e));
-    document.querySelector("#edit-budget-form").addEventListener("submit", (e) => editBudgetHandler(e));
+    document.querySelector("#edit-budget-form-form").addEventListener("submit", (e) => editBudgetHandler(e));
 })
 
 function clearField(element){
@@ -248,8 +248,10 @@ function displayBudget(){
 
 function editBudgetHandler(e){
     e.preventDefault()
+    console.log("edit budget")
+    console.log(e)
     //need catch for if submitted without value
-    const newAmount = e.target[0].value
+    const newAmount = e.target[1].value
     editBudgetFetch(newAmount)
 }
 
