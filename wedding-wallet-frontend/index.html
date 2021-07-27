@@ -140,15 +140,18 @@
         </table>
       </div><br><br>
 
-      <!-- edit expense modal
-      <div id="edit-expense-form" class="modal" style="display:none">
-        <div class="modal-content">
-          <div class="modal-container">
-            <span onclick="document.getElementById('edit-expense-form').style.display='none'" class="button display-topright">&times;</span>
-            <form id="edit-expense-form">
-              <h4>Edit Expense.</h4>
-              <!--want to have selected value be expense category-->
-              <!-- <select id="expense-category" name= "category-dropdown required" palceholder="Select A Category.">
+      <!-- edit expense modal -->
+      <div class="modal fade" id="edit-expense-form" tabindex="-1" aria-labelledby="editExpenseForm" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form id="add-expense-modal-form">
+              <div class="modal-header">
+                <h5 class="modal-title" id="editExpenseFormTitle">Expense Name</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body ">
+                <select id="expense-category" class="form-control" name= "category-dropdown required" palceholder="Select A Category.">
+                  <option disabled selected value="">expense category selected</option>
                   <option value="Accomodation">Accomodation</option>
                   <option value="Attire">Attire</option>
                   <option value="Bachelor/Bachelorette Party">Bachelor/Bachelorette Party</option>
@@ -166,18 +169,19 @@
                   <option value="Venue">Venue</option>
                   <option value="Wedding Morning">Wedding Morning</option>
                   <option value="Additional Expenses">Additional Expenses</option>
-              </select><br> -->
-              <!--filled in with name-->
-              <!-- <input id= 'expense-item' type="text" name="expense-item" value=""required><br> -->
-              <!--filled in with amount-->
-              <!-- <input id= 'expense-amount' type="number" step=.01 name="expense-amount" value=""required><br> -->
-              <!--filled in with notes-->
-              <!-- <textarea rows="4" cols="50" id="expense-notes" name="expense-notes" form="edit-expense-form" value=""></textarea><br>
-              <input id= 'edit-expense-submit' type="submit" name="submit" value="Save Chances" class="submit" onclick="document.getElementById('edit-expense-form').style.display='none'"><br><br>
+                </select><br>
+                <span class="input-group-text" style="display:inline-block" class="form-control">$</span>
+                <input id= 'expense-amount' type="number" step=.01 name="expense-amount" style="display:inline-block" value="100" placeholder="Item amount" required><br><br>
+                <textarea rows="4" cols="50" id="expense-notes" name="expense-notes" class="form-control" form="add-expense-form" onclick="clearField(this)">expense notes</textarea><br>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <input id="expense-submit" type="submit" value="Save Changes" class="submit btn btn-danger" data-bs-dismiss="modal">
+              </div>
             </form>
           </div>
         </div>
-      </div> -->
+      </div>
 
       <!--expense list-->
       <div id="expense-list-categories">
