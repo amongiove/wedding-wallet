@@ -181,11 +181,13 @@ function renderBudgetForm(){
     createBudgetForm = document.createElement("div")
     createBudgetForm.id = "create-budget-form-container"
     createBudgetForm.innerHTML = `
-        <form id="create-budget-form">
-            <h4>Please Enter Your Budget.</h4>
-            <input id='budget-amount' type="number" step=.01 name="budget-amount" value="" placeholder="Enter desired budget.">
-            <input id= 'budget-submit' type="submit" name="submit" value="Save Budget" class="submit"><br><br>
-        </form>`
+        <div class="create-budget-container">
+            <form id="create-budget-form">
+                <h4>Please Enter Your Budget.</h4><br>
+                <span class="input-group-text" style="display:inline-block">$</span><input id='budget-amount' type="number" step=.01 name="budget-amount" value="" style="display:inline-block" placeholder="Enter desired budget." aria-label="Amount"><br><br>
+                <input id= 'budget-submit' type="submit" name="submit" value="Save Budget" class="submit btn btn-danger"><br><br>
+            </form>
+        </div>`
     renderedProfile.appendChild(createBudgetForm)
     document.querySelector("#create-budget-form").addEventListener("submit", (e) => createBudgetHandler(e))
 }
