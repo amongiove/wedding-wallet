@@ -1,0 +1,51 @@
+/* body */
+BODY {
+    background-color: rgb(250, 243, 244);
+}
+/* navbar */
+.navbar {
+    background-color: rgb(254,213, 217)
+}
+/* log in/sign up /create budget*/
+#login-or-signup-container,
+.login-signup-form, .create-budget-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column; 
+    justify-content: center;
+    width: 100%;
+    min-height: 100%;
+    padding: 20px;
+}
+
+.go-log-in, .go-sign-up {
+    color: rgb(237, 0, 52);
+}
+
+/* user container */
+.user-container {
+    padding: 3%;
+}
+
+/* display */
+.display-card {
+    background-color: rgb(254,213, 217);
+    display: flex;
+    align-items: center;
+    flex-direction: column; 
+    justify-content: center;
+    width: 100%;
+    height: 120px;
+    padding: 60px;
+}
+
+.top-display{
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(250, 243, 244);
+}
+/* expense table */
+.caption-top {
+    background: rgb(254,213, 217);
+    height: 30px;
+}  
