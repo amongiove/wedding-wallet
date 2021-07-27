@@ -72,7 +72,7 @@ function launchLoginForm() {
                 <h5>Password</h5>
                 <input type="password" class="form-control" id="login-password" required>
             </div><br>
-            <input id= 'login-submit' type="submit" name="submit" value="Log In" class="submit">
+            <input id= 'login-submit' type="submit" name="submit" value="Log In" class="btn btn-outline-danger submit">
             </form><br><br>
             <p class="go-sign-up">Don't have an account? Sign Up Here</p>
         </div>`
@@ -95,7 +95,7 @@ function launchSignupForm(){
                 <h5>Password</h5>
                 <input type="password" class="form-control" id="signup-password" required>
             </div><br>
-            <input id='signup-submit' type="submit" name="submit" value="Sign Up" class="submit">
+            <input id='signup-submit' type="submit" name="submit" value="Sign Up" class="btn btn-outline-danger submit">
             </form><br><br>
             <p class="go-log-in">Already have an account? Log In Here</p>
         </div>`

@@ -17,7 +17,7 @@
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
         <span class="navbar-brand mb-0 h1">Wedding Wallet</span>
-        <buton id="logout-btn" class="btn btn-outline-danger" style="text-align: right" onclick="logout()" hidden>Log Out</buton>
+        <buton id="logout-btn" class="btn btn-outline-danger" style="text-align: right" onclick="return confirm('Are you sure you want to log out?')?logout():''" hidden>Log Out</buton>
       </div>
     </nav>
 
