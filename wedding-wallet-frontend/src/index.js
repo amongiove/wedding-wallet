@@ -12,19 +12,22 @@ document.addEventListener('DOMContentLoaded', () => {
     categories = getCategories();
     document.querySelector("#add-expense-modal-form").addEventListener("submit", (e) => addExpenseHandler(e));
     document.querySelector("#edit-budget-modal-form").addEventListener("submit", (e) => editBudgetHandler(e));
-    document.getElementById('#edit-expense-form').addEventListener('show.bs.modal', (e) => editExpenseModal(e));
-
+    //edit exp event listener
+    // document.getElementById("#edit-expense-form").addEventListener('show.bs.modal', (e) => editExpenseModal(e));
+    // document.getElementById("#editExpenseForm").on('show.bs.modal', function () {
+        // alert('The modal is displayed completely!');
+    //   });
 })
+
 function clearField(element){
     element.value = '';
 }
 
 //user data
 function getUserData() {
-    if (getUser !== undefined) {
-        return getUser
-    }
-
+    // if (getUser !== undefined) {
+    //     return getUser
+    // }
     getUser = 
     fetch('http://localhost:3000/api/v1/profile', {
         method: 'GET',
@@ -299,6 +302,7 @@ function getCategories(){
 }
 
 function displayCategories(){
+    console.log("display")
     categoryList = document.querySelector('#expense-list-categories');
     categories.forEach( (category) => {
         let table = document.createElement('table');
@@ -422,25 +426,10 @@ function displayExpense(category, name, amount, notes, id){
     showBalance();
 }
 
-function totalExpense(){
-    let total = 0;
-    getUserData().then((user) => {
-        expenses = user.data.attributes.expenses;
-        if(expenses.length >0){
-            total = expenses.reduce(function(acc,curr){
-                acc += parseInt(curr.amount);
-                return acc;
-            }, 0)
-        }
-        totalExpenseAmount.textContent = total;
-        return total;
-    })
-}
-
-function editExpenseModal(e){
-    console.log("edit expense");
-    console.log(e);
-}
+// function editExpenseModal(e){
+//     console.log("edit expense");
+//     console.log(e);
+// }
 
 // function updateExpense(id){
 //     console.log("update expense")
@@ -456,6 +445,7 @@ function editExpenseModal(e){
 // }
 
 function deleteExpense(id){
+    console.log("delete")
     bodyData = {id}
     fetch(`http://localhost:3000/api/v1/expenses/${id}`, {
         method: "DELETE",
@@ -467,36 +457,51 @@ function deleteExpense(id){
         })
     row = document.querySelector(`#expense-${id}`)
     row.remove();
-    totalExpense();
+    
     showBalance();
+    totalExpense();
 }
 
-//balance
-function showBalance(){
-    //why doesnt this work? can we make it work when calling totalExpense() ???
-    // const expenseTotal = totalExpense();
+//expense total
+function totalExpense(){
+    console.log("total expense")
+    let expenseTotal = 0;
     getUserData().then((user) => {
         expenses = user.data.attributes.expenses;
+        console.log(expenses.length)
+        
         if(expenses.length >0){
             expenseTotal = expenses.reduce(function(acc,curr){
                 acc += parseInt(curr.amount);
                 return acc;
             }, 0)
         }
-        budget = parseInt(user.data.attributes.budget.amount)
-        const total = budget - expenseTotal
-        balanceAmount.textContent = total;
-        return total;
+        totalExpenseAmount.textContent = expenseTotal;
+        return expenseTotal;
     })
+    return expenseTotal;
 }
-    // if want to add balance color styling later on
-    // if(total < 0){
-    //   this.balance.classList.remove('showGreen', 'showBlack');
-    //   this.balance.classList.add('showRed');
-    // } else if(total > 0){
-    //   this.balance.classList.remove('showRed', 'showBlack');
-    //   this.balance.classList.add('showGreen');
-    // } else if(total === 0){
-    //   this.balance.classList.remove('showRed', 'showGreen');
-    //   this.balance.classList.add('showBlack');
-    // }
+
+//balance
+function showBalance(){
+    console.log("show balance")
+    //why doesnt this work? can we make it work when calling totalExpense() ???
+    // const expenseTotal = totalExpense();
+    let balance = 0
+    getUserData().then((user) => {
+        expenses = user.data.attributes.expenses;
+        console.log(expenses.length)
+
+        if(expenses.length > 0){
+            expenseTotal = expenses.reduce(function(acc,curr){
+                acc += parseInt(curr.amount);
+                return acc;
+            }, 0)
+        }
+        budget = parseInt(user.data.attributes.budget.amount)
+        balance = budget - expenseTotal
+        balanceAmount.textContent = balance;
+        return balance;
+    })
+    return balance;
+}

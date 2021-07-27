@@ -11,10 +11,7 @@ class Api::V1::ExpensesController < ApplicationController
     end
 
     def show
-        puts "show expense"
-        puts params[:id]
         expense = Expense.find(params[:id])
-        puts expense.name
         render json: { expense: ExpenseSerializer.new(expense) }, status: :accepted
     end
 
@@ -22,11 +19,10 @@ class Api::V1::ExpensesController < ApplicationController
     end
     
     def destroy
-        puts "inside destroy"
-        puts params
-        puts params[:id]
         expense = Expense.find(params[:id])
         expense.destroy
+        expenses = Expense.all
+        render json: ExpenseSerializer.new(expenses), status: :accepted
     end
 
     private
