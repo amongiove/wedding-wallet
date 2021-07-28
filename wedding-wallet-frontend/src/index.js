@@ -296,7 +296,7 @@ function getCategories(){
     .then(json => {return json.category.data})
     .then((list) => {
         list.forEach(category => {
-            let newCategory = new Category(category.id, category.attributes)
+            let newCategory = new Category(category, category.attributes)
         })
     })
 }

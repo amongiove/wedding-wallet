@@ -2,8 +2,8 @@ console.log("cat js")
 
 class Category {
 
-    constructor(id, categoryAttributes) {
-        this.id = id;
+    constructor(category, categoryAttributes) {
+        this.id = category.id;
         this.name = categoryAttributes.name;
         Category.all.push(this);
       }
