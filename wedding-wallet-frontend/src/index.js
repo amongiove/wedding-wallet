@@ -406,19 +406,17 @@ function deleteExpense(id){
         },
         body: JSON.stringify(bodyData)
         })
-    // const expense = Expense.findById(id)
-    // debugger
-    // Expense.all.remove(expense);
+    currentExpense = Expense.findById(id)
+    Expense.all.filter(expense => expense !== currentExpense)
+
     row = document.querySelector(`#expense-${id}`)
     row.remove();
     
-    window.location.reload()
-
     showBalance();
     totalExpense();
 }
 
-//expense total
+// expense total
 function totalExpense(){
     console.log("total expense")
     let expenseTotal = 0;
@@ -437,6 +435,8 @@ function totalExpense(){
     })
     return expenseTotal;
 }
+
+
 
 //------------------------------------------balance--------------------------------------------------------------
 function showBalance(){

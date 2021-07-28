@@ -1,7 +1,7 @@
 class Expense {
 
     constructor(id, category, expense) {
-        this.id = id;
+        this.id = parseInt(id);
         this.name = expense.name;
         this.amount = expense.amount;
         this.category = category;
