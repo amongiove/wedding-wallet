@@ -6,7 +6,6 @@ let getUser
 
 //DOM loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // getCategories();
     renderedProfile = document.querySelector("#user-rendered-container");
     checkIfLoggedIn();
     
@@ -181,8 +180,6 @@ function logout() {
     location = window.location
 }
 
-//----------------------------------------end users------------------------------------------------
-
 //----------------------------------------budget---------------------------------------------------
 function renderBudgetForm(){
     createBudgetForm = document.createElement("div")
@@ -281,8 +278,6 @@ function editBudgetFetch(newAmount){
     }); 
 }
 
-//-------------------------------------------------end budget------------------------------------------------
-
 //------------------------------------------------categories-------------------------------------------------
 function getCategories(){
     return fetch('http://localhost:3000/api/v1/categories', {
@@ -302,7 +297,6 @@ function getCategories(){
     })
 }
 
-//potential for dynamically coding categories into form
 function renderDropdown(){
     categories = Category.all
     const select = document.querySelector(".new-expense-category-dropdown")
@@ -310,8 +304,6 @@ function renderDropdown(){
         select.innerHTML += category.renderDropdownOption()
     })    
 }
-
-//-----------------------------------------------------end categories--------------------------------------
 
 //-----------------------------------------------------expenses----------------------------------------------
 
@@ -448,8 +440,6 @@ function totalExpense(){
     return expenseTotal;
 }
 
-//------------------------------------------end expense---------------------------------------------------------
-
 //------------------------------------------balance--------------------------------------------------------------
 function showBalance(){
     console.log("show balance")
@@ -476,4 +466,3 @@ function showBalance(){
     return balance;
     
 }
-//-----------------------------------------------end balance-----------------------------------------------
