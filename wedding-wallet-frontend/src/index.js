@@ -297,39 +297,21 @@ function getCategories(){
         list.forEach(category => {
             const newCategory = new Category(category, category.attributes)
 
-            displayCategory(newCategory)
+            categoryList = document.querySelector('#expense-list-categories').innerHTML += newCategory.displayCategory()
         })
     })
 }
 
-function displayCategory(category){
-    categoryList = document.querySelector('#expense-list-categories');
+// function displayCategory(category){
+//     categoryList = document.querySelector('#expense-list-categories');
+//     let accordian = document.createElement('div');
+//     accordian.classList.add('accoridan-item');
+//     accordian.innerHTML += Category.renderCategoryTable(category)
+    
 
-    let accordian = document.createElement('div');
-    accordian.classList.add('accoridan-item');
-    accordian.innerHTML= `
-        <h2 class="accordion-header" id="flush-heading">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-${category.id}" aria-expanded="false" aria-controls="flush-collapse">
-                ${category.name}
-            </button>
-        </h2>
-        <div id="flush-collapse-${category.id}" class="accordion-collapse collapse" aria-labelledby="flush-heading">
-            <div class="accordion-body">
-                <table id="category-${category.id}" class="table table-striped table-hover" style="width:100%">
-                    <thead>
-                        <tr class="table table-danger table-sm head-row">
-                            <th class="fw-light" style="width:35%">Expense Item</th>
-                            <th class="fw-light" style="width:35%">Expense Cost</th>
-                            <th class="fw-light" style="width:20%"></th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
-        </div>`
+//     categoryList.appendChild(accordian);
 
-    categoryList.appendChild(accordian);
-
-}
+// }
 
 // function displayCategories(){
 //     categoryList = document.querySelector('#expense-list-categories');
