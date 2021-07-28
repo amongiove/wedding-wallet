@@ -129,7 +129,7 @@ function signupFetch(username, password) {
     .then(json => {
         localStorage.setItem('jwt_token', json.jwt)
         json.jwt ? createUserContainer.innerHTML = "" : null;
-        renderNewUserProfile()
+        renderUserProfile()
     })
 }
 
@@ -158,21 +158,37 @@ function loginFetch(username, password) {
 }
 
 //render profiles (these are essentially the same... can we make them one method??)
-function renderNewUserProfile() {
-    renderedProfile.removeAttribute("hidden");
+// function renderNewUserProfile() {
+//     renderedProfile.removeAttribute("hidden");
+//     getUserData().then((user) => {
+//         user ? alert(`Welcome ${user.data.attributes.username}`) : alert("Unable to create account. Please try again.");
+//     });
+// }
+
+// function renderUserProfile() {
+//     renderedProfile.removeAttribute("hidden");
+//     getUserData().then((user) => {
+//         !user.data.attributes.budget ? renderBudgetForm() : displayBudget();
+//         user ? '' : alert("Unable to login. Please try again");
+        
+//         document.querySelector("#logout-btn").removeAttribute("hidden");
+//     });
+    
+// }
+
+function renderUserProfile() { 
+    //this has a lot of bugs -- make errors more specific 
     getUserData().then((user) => {
-        user ? alert(`Welcome ${user.data.attributes.username}`) : alert("Unable to create account. Please try again.");
+        if (user){
+            renderedProfile.removeAttribute("hidden");
+            document.querySelector("#logout-btn").removeAttribute("hidden");
+            !user.data.attributes.budget ? renderBudgetForm() : displayBudget();
+        }
+        else{
+            user ? '' : alert("Unable to login. Please try again");
+        }
     });
 }
-
-function renderUserProfile() {
-    renderedProfile.removeAttribute("hidden");
-    getUserData().then((user) => {
-        !user.data.attributes.budget ? renderBudgetForm() : displayBudget();
-        user ? alert(`Welcome back ${user.data.attributes.username}`) : alert("Incorrect username or password.");
-    });
-}
-
 //logout
 function logout() {
     console.log("logout")
@@ -231,8 +247,6 @@ function createBudgetFetch(amount){
 function displayBudget(){
     const budgetDisplay = document.querySelector("#budget-display");
     budgetDisplay.removeAttribute("hidden");
-    const logOutBtn = document.querySelector("#logout-btn");
-    logOutBtn.removeAttribute("hidden");
     getCategories();
     getUserData().then((user) => {
         budget = user.data.attributes.budget.amount
@@ -314,13 +328,6 @@ function getExpenses(){
             id = expense.id
             category = expense.category_id
             let newExpense = new Expense(id, category, expense)
-            //gives inconsistent loading error
-            // expenseCategoryId = expense.category_id
-            // expenseName = expense.name
-            // expenseAmount = expense.amount
-            // expenseNotes = expense.notes
-            // expenseId = expense.id
-            // displayExpense(expenseCategoryId, expenseName, expenseAmount, expenseNotes, expenseId)
             displayExpense(newExpense)
         })
     })
@@ -367,13 +374,13 @@ function createExpenseFetch(category, name, amount, notes){
 
 function displayExpense(expense){
     document.querySelector(`#category-${expense.category}`).innerHTML += expense.renderExpense()
-    // document.querySelectorAll(".edit-expense").forEach((element) => {element.addEventListener("click", (e) => editExpenseHandler(e) )})
+    document.querySelectorAll(".edit-expense").forEach((element) => {element.addEventListener("click", (e) => editExpenseHandler(e) )})
 }
 
-// function editExpenseHandler(e){
-//     console.log("edit expense");
-//     console.log(e);
-// }
+function editExpenseHandler(e){
+    console.log("edit expense");
+    console.log(e);
+}
 
 // function updateExpense(id){
 //     console.log("update expense")
@@ -399,8 +406,13 @@ function deleteExpense(id){
         },
         body: JSON.stringify(bodyData)
         })
+    // const expense = Expense.findById(id)
+    // debugger
+    // Expense.all.remove(expense);
     row = document.querySelector(`#expense-${id}`)
     row.remove();
+    
+    window.location.reload()
 
     showBalance();
     totalExpense();
