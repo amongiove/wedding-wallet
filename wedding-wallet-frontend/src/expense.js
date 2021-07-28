@@ -1,4 +1,3 @@
-console.log("expense class file")
 class Expense {
 
     constructor(id, expenseAttributes) {

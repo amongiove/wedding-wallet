@@ -21,8 +21,10 @@ class Api::V1::ExpensesController < ApplicationController
     def destroy
         expense = Expense.find(params[:id])
         expense.destroy
-        expenses = Expense.all
-        render json: ExpenseSerializer.new(expenses), status: :accepted
+        # current_user.reload
+
+        # expenses = Expense.all
+        # render json: ExpenseSerializer.new(expenses), status: :accepted
     end
 
     private

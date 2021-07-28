@@ -3,15 +3,15 @@ let budgetAmount = document.getElementById("display-budget-amount");
 let totalExpenseAmount = document.getElementById("display-expense-amount");
 let balanceAmount = document.getElementById("balance-amount");
 let getUser
-let categories=[]
 
 //DOM loaded
 document.addEventListener('DOMContentLoaded', () => {
     renderedProfile = document.querySelector("#user-rendered-container");
     checkIfLoggedIn();
-    categories = getCategories();
+    getCategories();
     document.querySelector("#add-expense-modal-form").addEventListener("submit", (e) => addExpenseHandler(e));
     document.querySelector("#edit-budget-modal-form").addEventListener("submit", (e) => editBudgetHandler(e));
+
     //edit exp event listener
     // document.getElementById("#edit-expense-form").addEventListener('show.bs.modal', (e) => editExpenseModal(e));
     // document.getElementById("#editExpenseForm").on('show.bs.modal', function () {
@@ -295,27 +295,23 @@ function getCategories(){
     .then(response => response.json())
     .then(json => {return json.category.data})
     .then((list) => {
-        let localCategories = []
         list.forEach(category => {
-            localCategories.push(category.attributes.name)
+            let newCategory = new Category(category.id, category.attributes)
         })
-        return localCategories
     })
 }
 
 function displayCategories(){
-    console.log("display")
     categoryList = document.querySelector('#expense-list-categories');
-    // return Promise.resolve(getCategories())
-    return Promise.resolve(categories)
-    .then(categories => categories.forEach( (category) => {
-        id = category.replace(/[^A-Z0-9]/ig, "")
+    let categories = Category.all
+    categories.forEach( (category) => {
+        id = category.name.replace(/[^A-Z0-9]/ig, "")
         let accordian = document.createElement('div');
         accordian.classList.add('accoridan-item');
         accordian.innerHTML= `
             <h2 class="accordion-header" id="flush-heading">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-${id}" aria-expanded="false" aria-controls="flush-collapse">
-                    ${category}
+                    ${category.name}
                 </button>
             </h2>
             <div id="flush-collapse-${id}" class="accordion-collapse collapse" aria-labelledby="flush-heading">
@@ -332,19 +328,19 @@ function displayCategories(){
                 </div>
             </div>`
         categoryList.appendChild(accordian);
-    }));        
+    });        
 }
 
 //potential for dynamically coding categories into form
-function addCategories(){
-    categories = getCategories()
-    const select = document.querySelector("#expense-category")
-    categories.forEach (category => {
-        let option = document.createElement('option');
-        option.text = option.value = category;
-        select.add(option, 0); 
-    })    
-}
+// function addCategories(){
+//     categories = getCategories()
+//     const select = document.querySelector("#expense-category")
+//     categories.forEach (category => {
+//         let option = document.createElement('option');
+//         option.text = option.value = category;
+//         select.add(option, 0); 
+//     })    
+// }
 
 //-----------------------------------------------------end categories--------------------------------------
 
@@ -470,7 +466,7 @@ function deleteExpense(id){
         })
     row = document.querySelector(`#expense-${id}`)
     row.remove();
-    
+
     showBalance();
     totalExpense();
 }
@@ -503,6 +499,7 @@ function showBalance(){
     //why doesnt this work? can we make it work when calling totalExpense() ???
     // const expenseTotal = totalExpense();
     let balance = 0
+    //repeat of total epxense call----------------
     getUserData().then((user) => {
         expenses = user.data.attributes.expenses;
         console.log(expenses.length)
@@ -512,6 +509,7 @@ function showBalance(){
                 acc += parseInt(curr.amount);
                 return acc;
             }, 0)
+    //end repeat---------------------
             budget = parseInt(user.data.attributes.budget.amount)
             balance = budget - expenseTotal
         }
@@ -519,5 +517,6 @@ function showBalance(){
         return balance;
     })
     return balance;
+    
 }
 //-----------------------------------------------end balance-----------------------------------------------
