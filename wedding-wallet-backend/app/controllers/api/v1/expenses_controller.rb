@@ -1,7 +1,7 @@
 class Api::V1::ExpensesController < ApplicationController
 
     def create
-        category = Category.find_by(name: params[:category])
+        category = Category.find(params[:category])
         expense = Expense.create(user: current_user, name: params[:name], amount: params[:amount], category: category, notes: params[:notes])
         if expense.save
             render json: ExpenseSerializer.new(expense), status: :accepted

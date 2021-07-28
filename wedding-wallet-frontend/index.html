@@ -75,7 +75,7 @@
                 <div class="card display-card">
                   <h5 class="card-title">Expenses</h5>
                   <h4 id="expense" class="text-muted"><span>$ </span><span id="display-expense-amount">0</span></h4>
-                  <button id="add-expense" class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#add-expense-form"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                  <button id="add-expense" class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#add-expense-form" onclick="renderDropdown()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                     <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
                   </svg></button>
                 </div>
@@ -91,9 +91,9 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body ">
-                            <select id="expense-category" class="form-control" name= "category-dropdown required" palceholder="Select A Category.">
+                            <select id="expense-category" class="form-control new-expense-category-dropdown" name= "category-dropdown required" palceholder="Select A Category.">
                               <option disabled selected value="">--Select Item Category--</option>
-                              <option value="Accomodation">Accomodation</option>
+                              <!-- <option value="Accomodation">Accomodation</option>
                               <option value="Attire">Attire</option>
                               <option value="Bachelor/Bachelorette Party">Bachelor/Bachelorette Party</option>
                               <option value="Ceremony">Ceremony</option>
@@ -109,7 +109,7 @@
                               <option value="Transportation">Transportation</option>
                               <option value="Venue">Venue</option>
                               <option value="Wedding Morning">Wedding Morning</option>
-                              <option value="Additional Expenses">Additional Expenses</option>
+                              <option value="Additional Expenses">Additional Expenses</option> -->
                             </select><br>
                             <input id= 'expense-item' class="form-control" type="text" name="expense-item" value="" placeholder="Item name" required><br>
                             <span class="input-group-text" style="display:inline-block" class="form-control">$</span>

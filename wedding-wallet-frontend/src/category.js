@@ -30,6 +30,10 @@ class Category {
         </div>`
         
     }
+
+    renderDropdownOption(){
+        return `<option value="${this.id}">${this.name}</option>`
+    }
 }
 
 Category.all = [];

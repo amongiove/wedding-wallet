@@ -302,58 +302,14 @@ function getCategories(){
     })
 }
 
-// function displayCategory(category){
-//     categoryList = document.querySelector('#expense-list-categories');
-//     let accordian = document.createElement('div');
-//     accordian.classList.add('accoridan-item');
-//     accordian.innerHTML += Category.renderCategoryTable(category)
-    
-
-//     categoryList.appendChild(accordian);
-
-// }
-
-// function displayCategories(){
-//     categoryList = document.querySelector('#expense-list-categories');
-//     let categories = Category.all
-//     categories.forEach( (category) => {
-//         // id = category.name.replace(/[^A-Z0-9]/ig, "")
-//         let accordian = document.createElement('div');
-//         accordian.classList.add('accoridan-item');
-//         accordian.innerHTML= `
-//             <h2 class="accordion-header" id="flush-heading">
-//                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-${category.id}" aria-expanded="false" aria-controls="flush-collapse">
-//                     ${category.name}
-//                 </button>
-//             </h2>
-//             <div id="flush-collapse-${category.id}" class="accordion-collapse collapse" aria-labelledby="flush-heading">
-//                 <div class="accordion-body">
-//                     <table id="category-${category.id}" class="table table-striped table-hover" style="width:100%">
-//                         <thead>
-//                             <tr class="table table-danger table-sm head-row">
-//                                 <th class="fw-light" style="width:35%">Expense Item</th>
-//                                 <th class="fw-light" style="width:35%">Expense Cost</th>
-//                                 <th class="fw-light" style="width:20%"></th>
-//                             </tr>
-//                         </thead>
-//                     </table>
-//                 </div>
-//             </div>`
-//         categoryList.appendChild(accordian);
-//     });  
-    // getExpenses();      
-// }
-
 //potential for dynamically coding categories into form
-// function addCategories(){
-//     categories = getCategories()
-//     const select = document.querySelector("#expense-category")
-//     categories.forEach (category => {
-//         let option = document.createElement('option');
-//         option.text = option.value = category;
-//         select.add(option, 0); 
-//     })    
-// }
+function renderDropdown(){
+    categories = Category.all
+    const select = document.querySelector(".new-expense-category-dropdown")
+    categories.forEach (category => {
+        select.innerHTML += category.renderDropdownOption()
+    })    
+}
 
 //-----------------------------------------------------end categories--------------------------------------
 
@@ -369,21 +325,6 @@ function getExpenses(){
             expenseAmount = expense.amount
             expenseNotes = expense.notes
             expenseId = expense.id
-            // fetch(`http://localhost:3000/api/v1/categories/${expense.category_id}`, {
-            //         method: 'GET',
-            //         headers: {
-            //         Authorization: `Bearer ${localStorage.getItem('jwt_token')}`
-            //     }
-            // })
-            // .then(response => response.json())
-            // .then(json => { return json.category.data.attributes.name})
-            // .then (category => {
-            //     expenseCategory = category
-            //     expenseName = expense.name
-            //     expenseAmount = expense.amount
-            //     expenseNotes = expense.notes
-            //     expenseId = expense.id
-            // })    
             displayExpense(expenseCategoryId, expenseName, expenseAmount, expenseNotes, expenseId)
         })
     })
@@ -417,12 +358,12 @@ function createExpenseFetch(category, name, amount, notes){
     .then(response => response.json())
     .then(json => {
         expenseId = json.data.id
-        expenseCategory = json.data.attributes.category.name;
+        expenseCategoryId = json.data.attributes.category.id;
         expenseName = json.data.attributes.name;
         expenseAmount = json.data.attributes.amount;
         expenseNotes = json.data.attributes.notes;
 
-        displayExpense(expenseCategory, expenseName, expenseAmount, expenseNotes, expenseId)
+        displayExpense(expenseCategoryId, expenseName, expenseAmount, expenseNotes, expenseId)
         
         totalExpense();
         showBalance();
@@ -430,7 +371,6 @@ function createExpenseFetch(category, name, amount, notes){
 }
 
 function displayExpense(category, name, amount, notes, id){
-    // categoryId = category.replace(/[^A-Z0-9]/ig, "")
     table = document.querySelector(`#category-${category}`)
     expenseRow = table.insertRow(-1);
     expenseRow.id = `expense-${id}`
