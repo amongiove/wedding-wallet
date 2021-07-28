@@ -6,9 +6,10 @@ let getUser
 
 //DOM loaded
 document.addEventListener('DOMContentLoaded', () => {
+    // getCategories();
     renderedProfile = document.querySelector("#user-rendered-container");
     checkIfLoggedIn();
-    getCategories();
+    
     document.querySelector("#add-expense-modal-form").addEventListener("submit", (e) => addExpenseHandler(e));
     document.querySelector("#edit-budget-modal-form").addEventListener("submit", (e) => editBudgetHandler(e));
 
@@ -235,15 +236,13 @@ function displayBudget(){
     budgetDisplay.removeAttribute("hidden");
     const logOutBtn = document.querySelector("#logout-btn");
     logOutBtn.removeAttribute("hidden");
-    Promise.resolve(displayCategories())
-    .then(getExpenses());
-    // getExpenses();
+    getCategories();
     getUserData().then((user) => {
         budget = user.data.attributes.budget.amount
         budgetAmount.textContent = budget;
     });
     document.querySelector("#expense-header").removeAttribute("hidden");
-
+    getExpenses();
     totalExpense();
     showBalance();
 
@@ -296,40 +295,72 @@ function getCategories(){
     .then(json => {return json.category.data})
     .then((list) => {
         list.forEach(category => {
-            let newCategory = new Category(category, category.attributes)
+            const newCategory = new Category(category, category.attributes)
+
+            displayCategory(newCategory)
         })
     })
 }
 
-function displayCategories(){
+function displayCategory(category){
     categoryList = document.querySelector('#expense-list-categories');
-    let categories = Category.all
-    categories.forEach( (category) => {
-        id = category.name.replace(/[^A-Z0-9]/ig, "")
-        let accordian = document.createElement('div');
-        accordian.classList.add('accoridan-item');
-        accordian.innerHTML= `
-            <h2 class="accordion-header" id="flush-heading">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-${id}" aria-expanded="false" aria-controls="flush-collapse">
-                    ${category.name}
-                </button>
-            </h2>
-            <div id="flush-collapse-${id}" class="accordion-collapse collapse" aria-labelledby="flush-heading">
-                <div class="accordion-body">
-                    <table id="${id}" class="table table-striped table-hover" style="width:100%">
-                        <thead>
-                            <tr class="table table-danger table-sm head-row">
-                                <th class="fw-light" style="width:35%">Expense Item</th>
-                                <th class="fw-light" style="width:35%">Expense Cost</th>
-                                <th class="fw-light" style="width:20%"></th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-            </div>`
-        categoryList.appendChild(accordian);
-    });        
+
+    let accordian = document.createElement('div');
+    accordian.classList.add('accoridan-item');
+    accordian.innerHTML= `
+        <h2 class="accordion-header" id="flush-heading">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-${category.id}" aria-expanded="false" aria-controls="flush-collapse">
+                ${category.name}
+            </button>
+        </h2>
+        <div id="flush-collapse-${category.id}" class="accordion-collapse collapse" aria-labelledby="flush-heading">
+            <div class="accordion-body">
+                <table id="category-${category.id}" class="table table-striped table-hover" style="width:100%">
+                    <thead>
+                        <tr class="table table-danger table-sm head-row">
+                            <th class="fw-light" style="width:35%">Expense Item</th>
+                            <th class="fw-light" style="width:35%">Expense Cost</th>
+                            <th class="fw-light" style="width:20%"></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>`
+
+    categoryList.appendChild(accordian);
+
 }
+
+// function displayCategories(){
+//     categoryList = document.querySelector('#expense-list-categories');
+//     let categories = Category.all
+//     categories.forEach( (category) => {
+//         // id = category.name.replace(/[^A-Z0-9]/ig, "")
+//         let accordian = document.createElement('div');
+//         accordian.classList.add('accoridan-item');
+//         accordian.innerHTML= `
+//             <h2 class="accordion-header" id="flush-heading">
+//                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-${category.id}" aria-expanded="false" aria-controls="flush-collapse">
+//                     ${category.name}
+//                 </button>
+//             </h2>
+//             <div id="flush-collapse-${category.id}" class="accordion-collapse collapse" aria-labelledby="flush-heading">
+//                 <div class="accordion-body">
+//                     <table id="category-${category.id}" class="table table-striped table-hover" style="width:100%">
+//                         <thead>
+//                             <tr class="table table-danger table-sm head-row">
+//                                 <th class="fw-light" style="width:35%">Expense Item</th>
+//                                 <th class="fw-light" style="width:35%">Expense Cost</th>
+//                                 <th class="fw-light" style="width:20%"></th>
+//                             </tr>
+//                         </thead>
+//                     </table>
+//                 </div>
+//             </div>`
+//         categoryList.appendChild(accordian);
+//     });  
+    // getExpenses();      
+// }
 
 //potential for dynamically coding categories into form
 // function addCategories(){
@@ -350,24 +381,28 @@ function getExpenses(){
     getUser.then((user) => {
         expenses = user.data.attributes.expenses
         expenses.forEach (expense => {
-            //expense.category_id -- will need to get name here (category.js??)
-            fetch(`http://localhost:3000/api/v1/categories/${expense.category_id}`, {
-                    method: 'GET',
-                    headers: {
-                    Authorization: `Bearer ${localStorage.getItem('jwt_token')}`
-                }
-            })
-            .then(response => response.json())
-            .then(json => { return json.category.data.attributes.name})
-            .then (category => {
-                expenseCategory = category
-                expenseName = expense.name
-                expenseAmount = expense.amount
-                expenseNotes = expense.notes
-                expenseId = expense.id
-                
-                displayExpense(expenseCategory, expenseName, expenseAmount, expenseNotes, expenseId)
-            })
+            //gives inconsistent loading error
+            expenseCategoryId = expense.category_id
+            expenseName = expense.name
+            expenseAmount = expense.amount
+            expenseNotes = expense.notes
+            expenseId = expense.id
+            // fetch(`http://localhost:3000/api/v1/categories/${expense.category_id}`, {
+            //         method: 'GET',
+            //         headers: {
+            //         Authorization: `Bearer ${localStorage.getItem('jwt_token')}`
+            //     }
+            // })
+            // .then(response => response.json())
+            // .then(json => { return json.category.data.attributes.name})
+            // .then (category => {
+            //     expenseCategory = category
+            //     expenseName = expense.name
+            //     expenseAmount = expense.amount
+            //     expenseNotes = expense.notes
+            //     expenseId = expense.id
+            // })    
+            displayExpense(expenseCategoryId, expenseName, expenseAmount, expenseNotes, expenseId)
         })
     })
 }
@@ -413,8 +448,8 @@ function createExpenseFetch(category, name, amount, notes){
 }
 
 function displayExpense(category, name, amount, notes, id){
-    categoryId = category.replace(/[^A-Z0-9]/ig, "")
-    table = document.querySelector(`#${categoryId}`)
+    // categoryId = category.replace(/[^A-Z0-9]/ig, "")
+    table = document.querySelector(`#category-${category}`)
     expenseRow = table.insertRow(-1);
     expenseRow.id = `expense-${id}`
     expenseName = expenseRow.insertCell(0)
