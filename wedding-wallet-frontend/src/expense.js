@@ -29,6 +29,19 @@ class Expense {
         return this.all.find(expense => expense.id === id);
     }
 
+    static totalExpense(){
+        let amounts = []
+        let total = 0
+        Expense.all.forEach((expense) => {
+            amounts.push(expense)
+        })
+        total = amounts.reduce(function(acc,curr){
+            acc += parseInt(curr.amount);
+            return acc;
+        }, 0)
+        return total
+    }
+
 
 }
 

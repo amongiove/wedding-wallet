@@ -254,7 +254,7 @@ function displayBudget(){
     });
     document.querySelector("#expense-header").removeAttribute("hidden");
     getExpenses();
-    totalExpense();
+    // totalExpense();
     showBalance();
 
 }
@@ -328,8 +328,9 @@ function getExpenses(){
             id = expense.id
             category = expense.category_id
             let newExpense = new Expense(id, category, expense)
-            displayExpense(newExpense)
+            displayExpense(newExpense);
         })
+        totalExpense();
     })
 }
 
@@ -419,24 +420,23 @@ function deleteExpense(id){
 // expense total
 function totalExpense(){
     console.log("total expense")
-    let expenseTotal = 0;
-    getUserData().then((user) => {
-        expenses = user.data.attributes.expenses;
-        console.log(expenses.length)
+    //use static method?
+    totalExpenseAmount.textContent = Expense.totalExpense();
+    // let expenseTotal = 0;
+    // getUserData().then((user) => {
+    //     expenses = user.data.attributes.expenses;
+    //     console.log(expenses.length)
 
-        if(expenses.length >0){
-            expenseTotal = expenses.reduce(function(acc,curr){
-                acc += parseInt(curr.amount);
-                return acc;
-            }, 0)
-        }
-        totalExpenseAmount.textContent = expenseTotal;
-        return expenseTotal;
-    })
-    return expenseTotal;
+    //     if(expenses.length >0){
+    //         expenseTotal = expenses.reduce(function(acc,curr){
+    //             acc += parseInt(curr.amount);
+    //             return acc;
+    //         }, 0)
+    //     }
+        // return expenseTotal;
+    // })
+    // return expenseTotal;
 }
-
-
 
 //------------------------------------------balance--------------------------------------------------------------
 function showBalance(){
