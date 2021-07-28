@@ -16,7 +16,7 @@ class Category {
             </h2>
             <div id="flush-collapse-${this.id}" class="accordion-collapse collapse" aria-labelledby="flush-heading">
                 <div class="accordion-body">
-                    <table id="category-${this.id}" class="table table-striped table-hover" style="width:100%">
+                    <table id="category-${this.id}" class="table table-hover" style="width:100%">
                         <thead>
                             <tr class="table table-danger table-sm head-row">
                                 <th class="fw-light" style="width:35%">Expense Item</th>
