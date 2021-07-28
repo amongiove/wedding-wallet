@@ -243,6 +243,7 @@ function displayBudget(){
         budgetAmount.textContent = budget;
     });
     document.querySelector("#expense-header").removeAttribute("hidden");
+
     totalExpense();
     showBalance();
 
@@ -353,6 +354,7 @@ function getExpenses(){
     getUser.then((user) => {
         expenses = user.data.attributes.expenses
         expenses.forEach (expense => {
+            //expense.category_id -- will need to get name here (category.js??)
             fetch(`http://localhost:3000/api/v1/categories/${expense.category_id}`, {
                     method: 'GET',
                     headers: {
@@ -373,7 +375,6 @@ function getExpenses(){
         })
     })
 }
-// data-bs-toggle="modal" data-bs-target="#edit-expense-form"
 
 function addExpenseHandler(e){
     e.preventDefault()
@@ -407,7 +408,11 @@ function createExpenseFetch(category, name, amount, notes){
         expenseName = json.data.attributes.name;
         expenseAmount = json.data.attributes.amount;
         expenseNotes = json.data.attributes.notes;
+
         displayExpense(expenseCategory, expenseName, expenseAmount, expenseNotes, expenseId)
+        
+        totalExpense();
+        showBalance();
     });
 }
 
@@ -430,9 +435,8 @@ function displayExpense(category, name, amount, notes, id){
         <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
       </svg></button>
     `
-    document.querySelectorAll(".edit-expense").forEach((element) => {element.addEventListener("click", (e) => editExpenseHandler(e) )})
-    totalExpense();
-    showBalance();
+    // document.querySelectorAll(".edit-expense").forEach((element) => {element.addEventListener("click", (e) => editExpenseHandler(e) )})
+
 }
 
 // function editExpenseHandler(e){
