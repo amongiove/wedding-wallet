@@ -399,7 +399,7 @@ function editExpenseHandler(e){
 function deleteExpense(id){
     console.log("delete")
     bodyData = {id}
-    fetch(`http://localhost:3000/api/v1/expenses/${id}`, {
+    let result = fetch(`http://localhost:3000/api/v1/expenses/${id}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
@@ -407,35 +407,44 @@ function deleteExpense(id){
         },
         body: JSON.stringify(bodyData)
         })
-    currentExpense = Expense.findById(id)
-    Expense.all.filter(expense => expense !== currentExpense)
-
-    row = document.querySelector(`#expense-${id}`)
-    row.remove();
+    .then(deleteResult => {
+        currentExpense = Expense.findById(id)
+        Expense.all.filter(expense => expense !== currentExpense)
     
-    showBalance();
-    totalExpense();
+        row = document.querySelector(`#expense-${id}`)
+        row.remove();
+
+        console.log('show balance')
+        
+        showBalance();
+        totalExpense();
+    })
+
+    
 }
 
 // expense total
 function totalExpense(){
     console.log("total expense")
     //use static method?
-    totalExpenseAmount.textContent = Expense.totalExpense();
-    // let expenseTotal = 0;
-    // getUserData().then((user) => {
-    //     expenses = user.data.attributes.expenses;
-    //     console.log(expenses.length)
+    // totalExpenseAmount.textContent = Expense.totalExpense();
+    let expenseTotal = 0;
+    getUserData().then((user) => {
+        expenses = user.data.attributes.expenses;
+        console.log(expenses.length)
 
-    //     if(expenses.length >0){
-    //         expenseTotal = expenses.reduce(function(acc,curr){
-    //             acc += parseInt(curr.amount);
-    //             return acc;
-    //         }, 0)
-    //     }
-        // return expenseTotal;
-    // })
-    // return expenseTotal;
+        if(expenses.length >0){
+            expenseTotal = expenses.reduce(function(acc,curr){
+                acc += parseInt(curr.amount);
+                return acc;
+            }, 0)
+        }
+        totalExpenseAmount.textContent = expenseTotal
+
+        return expenseTotal;
+
+    })
+    return expenseTotal;
 }
 
 //------------------------------------------balance--------------------------------------------------------------
@@ -444,7 +453,7 @@ function showBalance(){
     //why doesnt this work? can we make it work when calling totalExpense() ???
     // const expenseTotal = totalExpense();
     let balance = 0
-    //repeat of total epxense call----------------
+    //og totalexpense call----------------
     getUserData().then((user) => {
         expenses = user.data.attributes.expenses;
         console.log(expenses.length)
@@ -454,7 +463,7 @@ function showBalance(){
                 acc += parseInt(curr.amount);
                 return acc;
             }, 0)
-    //end repeat---------------------
+    //end totalexpense call---------------------
             budget = parseInt(user.data.attributes.budget.amount)
             balance = budget - expenseTotal
         }
