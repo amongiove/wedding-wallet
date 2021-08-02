@@ -232,7 +232,6 @@ function createBudgetFetch(amount){
     .then(response => response.json())
     .then(json => {
         budget = json.data.attributes.amount
-        //is there a more graceful way to do this??
         document.querySelector("#create-budget-form-container").style.visibility="hidden"     
         budgetAmount.textContent = budget;
         displayBudget();
@@ -383,8 +382,6 @@ function editExpenseHandler(e){
 
 function editExpense(e){
     e.preventDefault()
-    console.log("inside edit function")
-    console.log(e)
    
     let amount = e.target[1].value
     let notes = document.getElementById("edit-expense-notes").value
@@ -393,7 +390,6 @@ function editExpense(e){
 }
 
 function editExpenseFetch(amount, notes, expenseId){
-    console.log("edit expense fetch")
         bodyData = {amount, notes}
         fetch(`http://localhost:3000/api/v1/expenses/${expenseId}`, {
         method: "PATCH",
@@ -405,32 +401,19 @@ function editExpenseFetch(amount, notes, expenseId){
         })
         .then(response => response.json())
         .then(json => {
-            console.log(json)
-            const newAmount = json.data.attributes.amount;
-            const newNotes = json.data.attributes.notes;
-            let expense = Expense.findById(parseInt(expenseId));
-            expense.amount = newAmount;
-            expense.notes = newNotes;
-            row = document.querySelector(`#expense-${id}`)
-            row.querySelector(`#expense-amount`).innerHTML = `${newAmount}`
+            const newAmount = json.data.attributes.amount
+            const newNotes = json.data.attributes.notes
+            let expense = Expense.findById(parseInt(expenseId))
+            expense.amount = newAmount
+            expense.notes = newNotes
+            document.querySelector(`#expense-${expenseId}-amount`).innerHTML = `${newAmount}`;
+
+            //hide modal
 
             showCalculations();
         })
         // showBalance();
-         
 }
-// function updateExpense(id){
-//     console.log("update expense")
-//     editExpenseForm = document.querySelector("#edit-expense-form")
-//     expense = fetch(`http://localhost:3000/api/v1/expenses/${id}`, {
-//         method: "GET",
-//         headers: {
-//             "Content-Type": "application/json",
-//             Authorization: `Bearer ${localStorage.getItem('jwt_token')}`
-//         },
-//         })
-//         .then(response => response.json())
-// }
 
 function deleteExpense(id){
     bodyData = {id}
