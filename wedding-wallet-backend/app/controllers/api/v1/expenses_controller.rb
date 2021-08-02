@@ -16,6 +16,12 @@ class Api::V1::ExpensesController < ApplicationController
     end
 
     def update
+        puts "UPDATE"
+        puts params
+        expense = Expense.find(params[:id])
+        expense.update(amount: params[:amount], notes: params[:notes])
+        puts expense.amount
+        render json: ExpenseSerializer.new(expense), status: :accepted
     end
     
     def destroy
