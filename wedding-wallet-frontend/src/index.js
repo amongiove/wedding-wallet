@@ -262,6 +262,9 @@ function editBudgetHandler(e){
     } 
     else {
         //hide modal
+        $('#edit-budget-form').modal('hide');
+        $('#edit-budget-form form')[0].reset();
+
         editBudgetFetch(newAmount)
     } 
 }
@@ -335,11 +338,15 @@ function addExpenseHandler(e){
         alert("Expense amount cannot be empty or negative.") ;
     } 
     else {
-        //hide modal
         const expenseCategory = e.target[1].value
         const expenseName = e.target[2].value 
         const expenseNotes = document.querySelector("#expense-notes").value;
         createExpenseFetch(expenseCategory, expenseName, expenseAmount, expenseNotes)
+
+        //hide modal
+        $('#add-expense-form').modal('hide');
+        $('#add-expense-form form')[0].reset();
+        $('#expense-notes').val('Add notes about payments, dates, options, etc.');
     } 
 }
 
@@ -386,6 +393,12 @@ function editExpense(e){
     let amount = e.target[1].value
     let notes = document.getElementById("edit-expense-notes").value
     let expenseId = parseInt(e.target[3].id)
+
+    //hide modal
+    $('#edit-expense-form').modal('hide');
+    $('#edit-expense-form form')[0].reset();
+    $('#edit-expense-notes').val('Add notes about payments, dates, options, etc.');
+
     editExpenseFetch(amount, notes, expenseId)
 }
 
