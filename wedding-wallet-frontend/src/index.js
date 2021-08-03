@@ -338,7 +338,7 @@ function addExpenseHandler(e){
         //hide modal
         const expenseCategory = e.target[1].value
         const expenseName = e.target[2].value 
-        const expenseNotes = document.querySelector("#expense-notes").value
+        const expenseNotes = document.querySelector("#expense-notes").value;
         createExpenseFetch(expenseCategory, expenseName, expenseAmount, expenseNotes)
     } 
 }
