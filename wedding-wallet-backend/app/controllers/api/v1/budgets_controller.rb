@@ -1,7 +1,6 @@
 class Api::V1::BudgetsController < ApplicationController
     
     def create
-        #user should only have one budget -- check if present and if so edit?
         budget = Budget.create(user: current_user, amount: params[:amount])
         if budget.save
             render json: BudgetSerializer.new(budget), status: :accepted

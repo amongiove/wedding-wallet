@@ -22,9 +22,6 @@ function clearField(element){
 
 //user data
 function getUserData() {
-    // if (getUser !== undefined) {
-    //     return getUser
-    // }
     getUser = 
     fetch('http://localhost:3000/api/v1/profile', {
         method: 'GET',
@@ -249,8 +246,6 @@ function displayBudget(){
     });
     document.querySelector("#expense-header").removeAttribute("hidden");
     getExpenses();
-    // totalExpense();
-    // showBalance();
     showCalculations();
 }
 
@@ -286,7 +281,6 @@ function editBudgetFetch(newAmount){
             newBudget = json.data.attributes.amount;
             budgetAmount.textContent = newBudget;
         })
-        // showBalance();
         showCalculations();
     }); 
 }
@@ -343,7 +337,6 @@ function addExpenseHandler(e){
         const expenseNotes = document.querySelector("#expense-notes").value;
         createExpenseFetch(expenseCategory, expenseName, expenseAmount, expenseNotes)
 
-        //hide modal
         $('#add-expense-form').modal('hide');
         $('#add-expense-form form')[0].reset();
         $('#expense-notes').val('Add notes about payments, dates, options, etc.');
@@ -369,8 +362,6 @@ function createExpenseFetch(category, name, amount, notes){
         let newExpense = new Expense(expenseId, expenseCategoryId, expenseAttributes)
         displayExpense(newExpense);
 
-        // totalExpense();
-        // showBalance();
         showCalculations();
     });
 }
@@ -394,7 +385,6 @@ function editExpense(e){
     let notes = document.getElementById("edit-expense-notes").value
     let expenseId = parseInt(e.target[3].id)
 
-    //hide modal
     $('#edit-expense-form').modal('hide');
     $('#edit-expense-form form')[0].reset();
     $('#edit-expense-notes').val('Add notes about payments, dates, options, etc.');
@@ -421,11 +411,8 @@ function editExpenseFetch(amount, notes, expenseId){
             expense.notes = newNotes
             document.querySelector(`#expense-${expenseId}-amount`).innerHTML = `${newAmount}`;
 
-            //hide modal
-
             showCalculations();
         })
-        // showBalance();
 }
 
 function deleteExpense(id){
@@ -444,38 +431,14 @@ function deleteExpense(id){
         row = document.querySelector(`#expense-${id}`)
         row.remove();  
 
-        // showBalance();
-        // totalExpense();
         showCalculations();
     })
 }
 
-// expense total
-// function totalExpense(){
-//     let expenseTotal = 0;
-//     getUserData().then((user) => {
-//         expenses = user.data.attributes.expenses;
-//         if(expenses.length >0){
-//             expenseTotal = expenses.reduce(function(acc,curr){
-//                 acc += parseInt(curr.amount);
-//                 return acc;
-//             }, 0)
-//         }
-//         totalExpenseAmount.textContent = expenseTotal
-//         return expenseTotal;
-//     })
-//     return expenseTotal;
-// }
-
-//------------------------------------------balance--------------------------------------------------------------
-//does this need to be 2? (balance and total?)
-// function showBalance(){
-    function showCalculations(){
-    //why doesnt this work? can we make it work when calling totalExpense() ???
-    // const expenseTotal = totalExpense();
+//------------------------------------------calculations--------------------------------------------------------------
+function showCalculations(){
     let balance = 0
     let expenseTotal = 0
-    //repeat totalexpense call----------------
     getUserData().then((user) => {
         expenses = user.data.attributes.expenses;
         if(expenses.length > 0){
@@ -484,13 +447,9 @@ function deleteExpense(id){
                 return acc;
             }, 0)
             totalExpenseAmount.textContent = expenseTotal
-    //end totalexpense call---------------------
             budget = parseInt(user.data.attributes.budget.amount)
             balance = budget - expenseTotal
         }
         balanceAmount.textContent = balance;
-        // return balance;
-    })
-    // return balance;
-    
+    })    
 }
