@@ -120,9 +120,14 @@ function signupFetch(username, password) {
     })
     .then(response => response.json())
     .then(json => {
-        localStorage.setItem('jwt_token', json.jwt)
-        json.jwt ? createUserContainer.innerHTML = "" : null;
-        renderUserProfile()
+        if (json.jwt){
+            createUserContainer.innerHTML = "";
+            localStorage.setItem('jwt_token', json.jwt);
+            renderUserProfile()
+        }
+        else{
+            alert(`${json.error[0]}`);
+        }        
     })
 }
 
@@ -144,9 +149,14 @@ function loginFetch(username, password) {
     })
     .then(response => response.json())
     .then(json => {
-        localStorage.setItem('jwt_token', json.jwt)
-        json.jwt ? createUserContainer.innerHTML = "" : null;
-        renderUserProfile();
+        if (json.jwt) {
+            localStorage.setItem('jwt_token', json.jwt);
+            createUserContainer.innerHTML = "";
+            renderUserProfile();
+        }
+        else{
+            alert(`Incorrect username and/or password.`);
+        }
     })
 }
 
@@ -159,7 +169,7 @@ function renderUserProfile() {
             !user.data.attributes.budget ? renderBudgetForm() : displayBudget();
         }
         else{
-            user ? '' : alert("Unable to login. Please try again");
+            user ? '' : null;
         }
     });
 }
