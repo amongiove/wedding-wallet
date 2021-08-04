@@ -150,25 +150,6 @@ function loginFetch(username, password) {
     })
 }
 
-//render profiles (these are essentially the same... can we make them one method??)
-// function renderNewUserProfile() {
-//     renderedProfile.removeAttribute("hidden");
-//     getUserData().then((user) => {
-//         user ? alert(`Welcome ${user.data.attributes.username}`) : alert("Unable to create account. Please try again.");
-//     });
-// }
-
-// function renderUserProfile() {
-//     renderedProfile.removeAttribute("hidden");
-//     getUserData().then((user) => {
-//         !user.data.attributes.budget ? renderBudgetForm() : displayBudget();
-//         user ? '' : alert("Unable to login. Please try again");
-        
-//         document.querySelector("#logout-btn").removeAttribute("hidden");
-//     });
-    
-// }
-
 function renderUserProfile() { 
     //this has a lot of bugs -- make errors more specific 
     getUserData().then((user) => {
@@ -280,8 +261,10 @@ function editBudgetFetch(newAmount){
         .then(json => {
             newBudget = json.data.attributes.amount;
             budgetAmount.textContent = newBudget;
+
+            showCalculations();
         })
-        showCalculations();
+       
     }); 
 }
 
