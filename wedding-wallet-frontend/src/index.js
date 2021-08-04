@@ -199,7 +199,7 @@ function createBudgetHandler(e){
     e.preventDefault()
     const budgetAmount = e.target.querySelector("#budget-amount").value
     if(budgetAmount === '' || budgetAmount < 0){
-        alert("value cannot be empty or negative.") ;
+        alert("Please enter a positive value.") ;
     } 
     else {
         createBudgetFetch(budgetAmount)
@@ -225,7 +225,6 @@ function createBudgetFetch(amount){
     })
 }
 
-//should all the extras be moved?
 function displayBudget(){
     const budgetDisplay = document.querySelector("#budget-display");
     budgetDisplay.removeAttribute("hidden");
@@ -243,7 +242,7 @@ function editBudgetHandler(e){
     e.preventDefault()
     const newAmount = e.target[1].value
     if(newAmount === '' || newAmount < 0){
-        alert("value cannot be empty or negative.") ;
+        alert("Please enter a positive value.") ;
     } 
     else {
         $('#edit-budget-form').modal('hide');
