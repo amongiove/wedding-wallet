@@ -34,7 +34,7 @@ class Expense {
             <div class="modal-body ">
                 <span class="input-group-text" style="display:inline-block" class="form-control">$</span>
                 <input id= 'expense-amount' type="number" min="1" name="expense-amount" style="display:inline-block" value="${this.amount}" placeholder="Item amount" required><br><br>
-                <textarea rows="4" cols="50" id="edit-expense-notes" name="edit-expense-notes" class="form-control" form="add-expense-form" value="${this.notes}">${this.notes}</textarea><br>
+                <textarea rows="4" cols="50" id="edit-expense-notes" name="edit-expense-notes" class="form-control" form="add-expense-form" placeholder="Add notes about payments, dates, options, etc. (optional)" value="${this.notes}">${this.notes}</textarea><br>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -15,9 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 })
 
-function clearField(element){
-    element.value = '';
-}
 //-------------------------------------------users---------------------------------------------------
 
 //user data
