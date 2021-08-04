@@ -126,7 +126,7 @@ function signupFetch(username, password) {
             renderUserProfile()
         }
         else{
-            alert(`${json.error[0]}`);
+            alert(`${json.error}`);
         }        
     })
 }
