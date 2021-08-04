@@ -45,9 +45,9 @@ function checkIfLoggedIn(){
 
 function promptUserLogIn() {
     const loginButton = createUserContainer.firstElementChild.cloneNode(true);
-    loginButton.innerHTML = '<button class="btn btn-outline-secondary btn-lg" style="text-align:center">Login</button><br><br>'
+    loginButton.innerHTML = '<button class="translate-middle btn btn-outline-secondary btn-lg" style="text-align:center">Login</button><br><br>'
     const signupButton = createUserContainer.firstElementChild.cloneNode(true);
-    signupButton.innerHTML = '<button class="btn btn-outline-secondary btn-lg" style="text-align:center">Sign Up</button><br>'
+    signupButton.innerHTML = '<button class="translate-middle btn btn-outline-secondary btn-lg" style="text-align:center">Sign Up</button><br>'
 
     createUserContainer.firstElementChild.append(loginButton, signupButton)
 
