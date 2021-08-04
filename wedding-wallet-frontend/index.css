@@ -22,6 +22,9 @@ BODY {
     color: rgb(237, 0, 52);
 }
 
+.go-log-in:hover, .go-sign-up:hover {
+    color: blue;
+}
 /* user container */
 .user-container {
     padding: 3%;
