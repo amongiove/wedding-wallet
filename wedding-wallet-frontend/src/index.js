@@ -161,7 +161,6 @@ function loginFetch(username, password) {
 }
 
 function renderUserProfile() { 
-    //this has a lot of bugs -- make errors more specific 
     getUserData().then((user) => {
         if (user){
             renderedProfile.removeAttribute("hidden");
@@ -247,7 +246,6 @@ function editBudgetHandler(e){
         alert("value cannot be empty or negative.") ;
     } 
     else {
-        //hide modal
         $('#edit-budget-form').modal('hide');
         $('#edit-budget-form form')[0].reset();
 
@@ -274,7 +272,6 @@ function editBudgetFetch(newAmount){
 
             showCalculations();
         })
-       
     }); 
 }
 
@@ -368,7 +365,6 @@ function editExpenseHandler(e){
     const currentExpenseId = e.currentTarget.id
     let expense = Expense.findById(parseInt(currentExpenseId))
     document.querySelector(`#edit-expense-modal-form`).innerHTML = expense.renderEditExpense()
-
 }
 
 function editExpense(e){
@@ -386,26 +382,26 @@ function editExpense(e){
 }
 
 function editExpenseFetch(amount, notes, expenseId){
-        bodyData = {amount, notes}
-        fetch(`http://localhost:3000/api/v1/expenses/${expenseId}`, {
+    bodyData = {amount, notes}
+    fetch(`http://localhost:3000/api/v1/expenses/${expenseId}`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem('jwt_token')}`
         },
         body: JSON.stringify(bodyData)
-        })
-        .then(response => response.json())
-        .then(json => {
-            const newAmount = json.data.attributes.amount
-            const newNotes = json.data.attributes.notes
-            let expense = Expense.findById(parseInt(expenseId))
-            expense.amount = newAmount
-            expense.notes = newNotes
-            document.querySelector(`#expense-${expenseId}-amount`).innerHTML = `${newAmount}`;
+    })
+    .then(response => response.json())
+    .then(json => {
+        const newAmount = json.data.attributes.amount
+        const newNotes = json.data.attributes.notes
+        let expense = Expense.findById(parseInt(expenseId))
+        expense.amount = newAmount
+        expense.notes = newNotes
+        document.querySelector(`#expense-${expenseId}-amount`).innerHTML = `${newAmount}`;
 
-            showCalculations();
-        })
+        showCalculations();
+    })
 }
 
 function deleteExpense(id){
@@ -417,7 +413,7 @@ function deleteExpense(id){
             Authorization: `Bearer ${localStorage.getItem('jwt_token')}`
         },
         body: JSON.stringify(bodyData)
-        })
+    })
     .then(deleteResult => {
         currentExpense = Expense.findById(id)
         Expense.all.filter(expense => expense !== currentExpense)
