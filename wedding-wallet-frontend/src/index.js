@@ -188,7 +188,7 @@ function renderBudgetForm(){
                 <input id= 'budget-submit' type="submit" name="submit" value="Save Budget" class="submit btn btn-danger"><br><br>
             </form>
         </div>`
-    renderedProfile.appendChild(createBudgetForm)
+    document.querySelector("#create-budget-container").appendChild(createBudgetForm)
     document.querySelector("#create-budget-form").addEventListener("submit", (e) => createBudgetHandler(e))
 }
 
@@ -216,7 +216,7 @@ function createBudgetFetch(amount){
     .then(response => response.json())
     .then(json => {
         budget = json.data.attributes.amount
-        document.querySelector("#create-budget-form-container").style.visibility="hidden"     
+        document.querySelector("#create-budget-container").innerHTML = ""    
         budgetAmount.textContent = budget;
         displayBudget();
     })
@@ -426,14 +426,17 @@ function showCalculations(){
     let expenseTotal = 0
     getUserData().then((user) => {
         expenses = user.data.attributes.expenses;
+        budget = parseInt(user.data.attributes.budget.amount);
         if(expenses.length > 0){
             expenseTotal = expenses.reduce(function(acc,curr){
                 acc += parseInt(curr.amount);
                 return acc;
             }, 0)
             totalExpenseAmount.textContent = expenseTotal
-            budget = parseInt(user.data.attributes.budget.amount)
             balance = budget - expenseTotal
+        }
+        else{
+            balance = budget
         }
         balanceAmount.textContent = balance;
     })    
