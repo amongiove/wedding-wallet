@@ -325,7 +325,7 @@ function addExpenseHandler(e){
 
         $('#add-expense-form').modal('hide');
         $('#add-expense-form form')[0].reset();
-        $('#expense-notes').val('Add notes about payments, dates, options, etc.');
+        $('#expense-notes').val('');
     } 
 }
 
